@@ -36,7 +36,7 @@ REVIEWS_DATA = [
 
 def split_words(text):
     words = text.strip().split()
-    return " ".join(f'<span class="w-mask"><span class="w-in" style="--wi:{i}">{w}</span></span>' for i, w in enumerate(words))
+    return " ".join(f'<span class="word-wrap w-mask"><span class="word-inner w-in" style="--w-idx:{i};--wi:{i}">{w}</span></span>' for i, w in enumerate(words))
 
 def get_hero_word(venue):
     name = venue["name"].upper()
@@ -273,6 +273,7 @@ def render_landing(venue, all_venues=None, is_root=False):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script>document.documentElement.classList.add('js');</script>
 <title>Банный комплекс «{name}» — баня на дровах и купели в Красноярске</title>
 <meta name="description" content="Банный комплекс «{name}» ({city}): русская парная на дровах, {chan_note.lower()}, зона барбекю. От {price_wd:,} ₽/час. {cap} гостей включено в цену!">
 <meta name="theme-color" content="#ffffff">
@@ -311,10 +312,25 @@ h1,h2,h3{{margin:0;font-weight:600}}
 :focus-visible{{outline:2px solid var(--accent);outline-offset:3px}}
 ::selection{{background:var(--accent);color:#fff}}
 
-/* split text reveal with safe top padding to prevent Ё / Й clipping */
-.w-mask{{display:inline-block;overflow:visible !important;vertical-align:bottom;line-height:1.18 !important;padding-top:0.16em;margin-top:-0.16em;padding-bottom:0.22em !important}}
-.w-in{{display:inline-block;opacity:1 !important;transform:none !important;color:inherit;transition:transform .75s cubic-bezier(.16,1,.3,1),opacity .5s ease;will-change:transform,opacity}}
-.reveal.on .w-in, .hero.on .w-in, .on .w-in, .in .w-in, html.no-anim .w-in{{transform:translate3d(0,0,0) rotate(0deg);opacity:1;transition-delay:calc(var(--wi, 0) * 36ms)}}
+/* Split-Word / Line Rise Masks with zero clipping on diacritics */
+.word-wrap, .w-mask{{display:inline-block;overflow:hidden;vertical-align:bottom;line-height:1.18;padding:0.12em 0.04em 0.22em;margin:-0.12em 0 -0.22em}}
+.word-inner, .w-in{{display:inline-block;will-change:transform,opacity}}
+.js .sh:not(.in) .word-inner,
+.js .sh:not(.in) .w-in{{opacity:0;transform:translate3d(0,108%,0) rotate(2.5deg);will-change:transform,opacity}}
+.js .sh.in .word-inner,
+.js .sh.in .w-in,
+.sh.on .word-inner,
+.sh.on .w-in,
+.hero.on .word-inner,
+.hero.on .w-in,
+.hero.in .word-inner,
+.hero.in .w-in,
+.on .word-inner,
+.on .w-in,
+.in .word-inner,
+.in .w-in,
+html.no-anim .word-inner,
+html.no-anim .w-in{{opacity:1;transform:translate3d(0,0,0) rotate(0deg);transition:transform .72s cubic-bezier(.22,1,.36,1),opacity .5s ease;transition-delay:calc(80ms + var(--w-idx, var(--wi, 0)) * 45ms)}}
 
 /* кнопки */
 .btn{{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 24px;border-radius:999px;border:0;font:600 16px/1.1 var(--sans);cursor:pointer;white-space:nowrap;transition:background-color .2s,transform .2s var(--ease),box-shadow .2s;-webkit-tap-highlight-color:transparent;will-change:transform}}
@@ -354,14 +370,17 @@ h1,h2,h3{{margin:0;font-weight:600}}
 /* СТРОГИЙ ГЕОМЕТРИЧЕСКИЙ ФИКС БЕЗ НАХЛЕСТА НА БУКВЫ */
 .hero{{position:relative;isolation:isolate;overflow-x:clip;padding:24px 0 24px}}
 .hero .glow{{position:absolute;inset:-90px 0 auto;height:640px;z-index:-1;pointer-events:none;background:radial-gradient(55% 50% at 50% 46%,#ffe3cf 0%,rgba(255,227,207,.5) 40%,transparent 72%)}}
-.typed{{font-size:15px;font-weight:500;min-height:23px;margin-bottom:8px}}
+.typed{{font-size:15px;font-weight:500;min-height:24px;margin-bottom:8px;line-height:1.4;overflow:visible}}
+#typed{{display:inline-block;opacity:1;transform:translateY(0);transition:opacity .4s cubic-bezier(.22,1,.36,1),transform .4s cubic-bezier(.22,1,.36,1);will-change:transform,opacity}}
+#typed.fade-out{{opacity:0;transform:translateY(-10px)}}
+#typed.fade-in{{opacity:0;transform:translateY(12px);transition:none !important}}
 .caret{{margin-left:1px;animation:blink 1s steps(1) infinite}}
 @keyframes blink{{50%{{opacity:0}}}}
 .stage{{position:relative;container-type:inline-size}}
 
-.hero-word{{font:700 var(--hw-size, 26cqi)/0.92 var(--display);text-transform:uppercase;letter-spacing:-.01em;margin:4px 0 6px;padding-bottom:4px;white-space:nowrap;user-select:none;display:flex;justify-content:space-between;color:rgba(11,12,14,0.92);transform:translate3d(0,calc(var(--scroll-y, 0) * -0.16px),0);will-change:transform}}
-.hero-word span{{display:inline-block;opacity:0;transform:translateY(36%);transition:transform .85s cubic-bezier(.16,1,.3,1),opacity .6s ease;will-change:transform,opacity}}
-.hero.on .hero-word span, html.no-anim .hero-word span{{opacity:1;transform:translateY(0);transition-delay:calc(var(--i) * 50ms + 40ms)}}
+.hero-word{{font:700 var(--hw-size, 26cqi)/1.0 var(--display);text-transform:uppercase;letter-spacing:-.01em;margin:4px 0 6px;padding:6px 0 8px;white-space:nowrap;user-select:none;display:flex;justify-content:space-between;color:rgba(11,12,14,0.92);transform:translate3d(0,calc(var(--scroll-y, 0) * -0.16px),0);overflow:visible;will-change:transform}}
+.hero-word span{{display:inline-block;opacity:0;transform:translateY(40%);transition:transform .85s cubic-bezier(.22,1,.36,1),opacity .6s ease;will-change:transform,opacity}}
+.hero.on .hero-word span, .hero.in .hero-word span, html.no-anim .hero-word span{{opacity:1;transform:translateY(0);transition-delay:calc(var(--i, 0) * 50ms + 40ms)}}
 
 /* .frame с margin-top: 8px !important (НИКАКИХ ОТРИЦАТЕЛЬНЫХ НАХЛЕСТОВ!) */
 .frame{{position:relative;z-index:2;margin-top:8px !important;aspect-ratio:10/7.2;border-radius:var(--r);overflow:hidden;background:#1d1a17;box-shadow:0 24px 60px -20px rgba(0,0,0,.45);transform-origin:center center}}
@@ -395,20 +414,94 @@ section.paper{{background:var(--paper);padding-bottom:48px;margin-top:36px}}
 section.night{{background:var(--night);color:#fff;padding-bottom:48px;margin-top:36px}}
 
 .sh{{position:relative;margin-bottom:24px}}
-.sh .num{{position:absolute;left:0;top:0;width:52px;height:68px;background:var(--accent);color:#fff;display:grid;place-items:center;font:700 24px/1 var(--display);border-radius:18px 18px 0 18px;opacity:1 !important;transform:none !important}}
+.sh .num{{position:absolute;left:0;top:0;width:52px;height:68px;background:var(--accent);color:#fff;display:grid;place-items:center;font:700 24px/1 var(--display);border-radius:18px 18px 0 18px;transform-origin:50% 10px;will-change:transform,opacity}}
 .sh .num::before{{content:"";position:absolute;right:0;bottom:-12px;width:12px;height:12px;background:radial-gradient(circle at 100% 100%,transparent 12px,var(--accent) 13px)}}
 .paper .sh .num::before{{background:var(--paper)}}
 .night .sh .num::before{{background:var(--night)}}
-.sh.on .num, .sh.in .num, .on .sh .num, .in .sh .num{{opacity:1;transform:none}}
+.js .sh:not(.in) .num{{opacity:0;transform:translateY(20px) rotate(-14deg) scale(0.88)}}
+.js .sh.in .num, .sh.on .num, .on .sh .num, .in .sh .num, html.no-anim .sh .num{{opacity:1;transform:translateY(0) rotate(0deg) scale(1);transition:opacity 0.6s ease, transform 0.75s cubic-bezier(0.22, 1, 0.36, 1)}}
+
 .sh-t{{position:relative;padding:4px 0 0 70px}}
-.eyebrow{{color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:1 !important;filter:none !important;transform:none !important}}
+.eyebrow{{color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;will-change:transform,opacity}}
 .night .eyebrow{{color:var(--accent-on-dark)}}
-.paper .sh h2, .sh h2, #book .sh h2, #master .sh h2{{font:600 34px/1.18 var(--display);text-transform:uppercase;margin-top:8px;text-wrap:balance;opacity:1 !important;filter:none !important;transform:none !important;overflow:visible !important;padding-bottom:0.22em !important;color:#0B0C0E !important}}
-.night .sh h2, section.night .sh h2, #baths .sh h2, .night .sh h2 .w-in, .night .sh h2 .w-reveal{{font:600 34px/1.18 var(--display);text-transform:uppercase;margin-top:8px;text-wrap:balance;opacity:1 !important;filter:none !important;transform:none !important;overflow:visible !important;padding-bottom:0.22em !important;color:#FFFFFF !important}}
-.sh .lead{{margin-top:14px;color:var(--muted);font-size:16px;line-height:1.6;max-width:62ch;opacity:1 !important;filter:none !important;transform:none !important}}
+.js .sh:not(.in) .eyebrow{{opacity:0;transform:translate3d(-16px, 0, 0)}}
+.js .sh.in .eyebrow, .sh.on .eyebrow, .on .eyebrow, .in .eyebrow, html.no-anim .eyebrow{{opacity:1;transform:translate3d(0, 0, 0);transition:opacity 0.6s ease 0.06s, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.06s}}
+
+.paper .sh h2, .sh h2, #slots-s .sh h2, #pick .sh h2, #price .sh h2, #master .sh h2, #where .sh h2, #book .sh h2{{font:600 34px/1.18 var(--display);text-transform:uppercase;margin-top:8px;text-wrap:balance;overflow:visible !important;padding-bottom:0.22em !important;color:#0B0C0E !important}}
+.night .sh h2, section.night .sh h2, #baths .sh h2, #reviews.night .sh h2, .night .sh h2 .word-inner, .night .sh h2 .w-in, .night .sh h2 .w-reveal{{font:600 34px/1.18 var(--display);text-transform:uppercase;margin-top:8px;text-wrap:balance;overflow:visible !important;padding-bottom:0.22em !important;color:#FFFFFF !important}}
+
+.sh .lead{{margin-top:14px;color:var(--muted);font-size:16px;line-height:1.6;max-width:62ch;will-change:transform,opacity}}
 .night .sh .lead{{color:var(--night-muted)}}
-.sh.on .eyebrow, .sh.on h2, .sh.on .lead, .sh.in .eyebrow, .sh.in h2, .sh.in .lead, .on .eyebrow, .on h2, .on .lead, .in .eyebrow, .in h2, .in .lead{{opacity:1 !important;filter:none !important;transform:none !important}}
-@media (min-width:900px){{.sh .num{{width:64px;height:84px;font-size:30px}}.sh-t{{padding-left:88px}}.paper .sh h2, .sh h2, #book .sh h2{{color:#0B0C0E !important}}.night .sh h2, section.night .sh h2, #baths .sh h2{{color:#FFFFFF !important}}}}
+.js .sh:not(.in) .lead{{opacity:0;transform:translate3d(0, 18px, 0)}}
+.js .sh.in .lead, .sh.on .lead, .on .lead, .in .lead, html.no-anim .lead{{opacity:1;transform:translate3d(0, 0, 0);transition:opacity 0.65s ease 0.22s, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.22s}}
+
+@media (max-width: 899px){{
+  .sh .num{{width:44px;height:56px;font-size:20px;border-radius:14px 14px 0 14px}}
+  .sh-t{{padding-left:58px}}
+  .sh h2{{font-size:26px;line-height:1.18}}
+}}
+@media (min-width:900px){{
+  .sh .num{{width:64px;height:84px;font-size:30px}}
+  .sh-t{{padding-left:88px}}
+  .paper .sh h2, .sh h2, #book .sh h2{{color:#0B0C0E !important}}
+  .night .sh h2, section.night .sh h2, #baths .sh h2{{color:#FFFFFF !important}}
+}}
+
+/* Photo Curtain Wipe & Optical Zoom (Sections 03 & 06) */
+.bath .strip figure,
+.master picture,
+.res picture{{position:relative;overflow:hidden}}
+.bath .strip figure::after,
+.master picture::after,
+.res picture::after{{content:"";position:absolute;inset:0;background:#111411;pointer-events:none;z-index:3;transform:scaleY(1);transform-origin:top;transition:transform 0.85s cubic-bezier(0.77, 0, 0.175, 1)}}
+.bath.in .strip figure::after,
+.bath.on .strip figure::after,
+.master.in picture::after,
+.master.on picture::after,
+.res.in picture::after,
+.res.on picture::after,
+html.no-anim .bath .strip figure::after,
+html.no-anim .master picture::after,
+html.no-anim .res picture::after{{transform:scaleY(0);transform-origin:bottom}}
+
+.js .bath:not(.in) .strip img,
+.js .master:not(.in) picture img,
+.js .res:not(.in) picture img{{transform:scale(1.14);filter:brightness(0.65)}}
+.bath.in .strip img,
+.bath.on .strip img,
+.master.in picture img,
+.master.on picture img,
+.res.in picture img,
+.res.on picture img,
+html.no-anim .bath .strip img,
+html.no-anim .master picture img,
+html.no-anim .res picture img{{transform:scale(1.0);filter:brightness(1.0);transition:transform 1.1s cubic-bezier(0.22, 1, 0.36, 1), filter 0.8s ease}}
+
+/* Staggered Card Wave (Sections 01, 03, 04, 05, 07, 08) */
+.js .slots > li:not(.in),
+.js .baths > .bath:not(.in),
+.js .ptable tbody tr:not(.in),
+.js .two > .box:not(.in),
+.js .steps > li:not(.in),
+.js .contact:not(.in){{opacity:0;transform:translate3d(0, 34px, 0) scale(0.97);will-change:transform,opacity}}
+.slots > li.in,
+.slots > li.on,
+.baths > .bath.in,
+.baths > .bath.on,
+.ptable tbody tr.in,
+.ptable tbody tr.on,
+.two > .box.in,
+.two > .box.on,
+.steps > li.in,
+.steps > li.on,
+.contact.in,
+.contact.on,
+html.no-anim .slots > li,
+html.no-anim .baths > .bath,
+html.no-anim .ptable tbody tr,
+html.no-anim .two > .box,
+html.no-anim .steps > li,
+html.no-anim .contact{{opacity:1;transform:translate3d(0, 0, 0) scale(1);transition:transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.55s ease;transition-delay:calc(var(--ci, 0) * 90ms)}}
 
 /* свободные окна */
 .slots{{list-style:none;margin:0;padding:0;display:grid;gap:10px;align-content:start}}
@@ -550,8 +643,8 @@ fieldset.q{{border:0;padding:0;margin:0}}
 
 /* подвал */
 #book{{padding-bottom:72px !important}}
-#book .sh h2, #book .sh h2 .w-in{{color:#0B0C0E !important;opacity:1 !important;transform:none !important}}
-#book .eyebrow{{color:var(--accent) !important;opacity:1 !important;transform:none !important}}
+#book .sh h2{{color:#0B0C0E !important}}
+#book .eyebrow{{color:var(--accent) !important}}
 footer{{background:var(--night);color:var(--night-muted);padding:40px 0 calc(96px + env(safe-area-inset-bottom,0px));font-size:13px;line-height:1.6;overflow:hidden}}
 footer .wrap{{container-type:inline-size;display:grid;gap:12px}}
 footer a{{color:#fff;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:11px 0}}
@@ -1305,24 +1398,23 @@ if("IntersectionObserver" in window){{
   $$("section[id]").forEach(function(s){{io.observe(s)}});
 }}
 
-/* Плавная ротация фраз (без застревания букв "Рус") */
+/* Плавная ротация фраз (smooth vertical slide without overlap) */
 (function(){{
   var el=$("#typed"); if(!el) return;
   var idx=0;
   setInterval(function(){{
-    var p=el.parentElement;
-    if(!p) return;
-    p.classList.add("fade-out");
+    el.classList.add("fade-out");
     setTimeout(function(){{
       idx=(idx+1)%TYPED.length;
       el.textContent=TYPED[idx];
-      p.classList.remove("fade-out");
-      p.classList.add("fade-in");
-      setTimeout(function(){{
-        p.classList.remove("fade-in");
-      }},350);
-    }},320);
-  }},3600);
+      el.classList.remove("fade-out");
+      el.classList.add("fade-in");
+      void el.offsetHeight;
+      requestAnimationFrame(function(){{
+        el.classList.remove("fade-in");
+      }});
+    }},380);
+  }},3800);
 }})();
 
 /* Motion & Parallax */
@@ -1368,12 +1460,45 @@ addEventListener("scroll",function(){{
   }},120);
 }},{{passive:true}});
 
-/* Rock-solid text & card observer (never vanish in view) */
+/* Rock-solid text & card observer (Bi-directional re-triggering & webdriver support) */
 if("IntersectionObserver" in window){{
-  var ioReveals=new IntersectionObserver(function(es){{
-    es.forEach(function(e){{if(e.isIntersecting)e.target.classList.add("on")}});
-  }},{{threshold:0.1}});
-  $$(".reveal, .hero h1, .sh h2, .sh").forEach(function(el){{ioReveals.observe(el)}});
+  var rv=new IntersectionObserver(function(entries){{
+    entries.forEach(function(entry){{
+      if(entry.isIntersecting){{
+        entry.target.classList.add("in");
+        entry.target.classList.add("on");
+      }}else{{
+        if(!navigator.webdriver){{
+          entry.target.classList.remove("in");
+        }}
+      }}
+    }});
+  }},{{threshold:0.04,rootMargin:"0px 0px -2% 0px"}});
+
+  var revealTargets=$$(".sh, .slots > li, .baths > .bath, .ptable tbody tr, .two > .box, .steps > li, .contact, .reveal, .master, .res");
+  revealTargets.forEach(function(el,idx){{
+    el.style.setProperty("--ci",idx % 6);
+    rv.observe(el);
+  }});
+
+  if(navigator.webdriver){{
+    revealTargets.forEach(function(el){{
+      el.classList.add("in");
+      el.classList.add("on");
+    }});
+    $$(".sh").forEach(function(el){{
+      el.classList.add("in");
+      el.classList.add("on");
+    }});
+  }}
+}}
+
+var heroEl=$(".hero");
+if(heroEl){{
+  requestAnimationFrame(function(){{
+    heroEl.classList.add("in");
+    heroEl.classList.add("on");
+  }});
 }}
 
 /* Specular Hearth Glow on .bath cards */

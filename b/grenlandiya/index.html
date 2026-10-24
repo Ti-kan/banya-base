@@ -95,21 +95,11 @@ h1,h2,h3{margin:0;font-weight:600}
 
 /* .frame с margin-top: 8px !important (НИКАКИХ ОТРИЦАТЕЛЬНЫХ НАХЛЕСТОВ!) */
 .frame{position:relative;z-index:2;margin-top:8px !important;aspect-ratio:10/7.2;border-radius:var(--r);overflow:hidden;background:#1d1a17;box-shadow:0 24px 60px -20px rgba(0,0,0,.45);transform-origin:center center}
-.frame img{width:100%;height:100%;object-fit:cover;object-position:50% 50%;transform:scale(calc(1 + var(--scroll-y, 0) * 0.00035)) translate3d(0,calc(var(--scroll-y, 0) * 0.1px),0);will-change:transform;transition:transform .1s linear}
+.frame img{width:100%;height:100%;object-fit:cover;object-position:50% 50%}
 .frame .shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55),transparent 45%);pointer-events:none}
 .frame .cta{position:absolute;left:12px;right:12px;bottom:12px;z-index:4;display:flex;gap:10px;align-items:center;background:#fff;border-radius:999px;padding:6px;box-shadow:0 18px 40px -16px rgba(0,0,0,.45)}
 .frame .cta .btn{min-height:46px;padding:0 18px;flex:none}
 .frame .cta p{font-size:13px;line-height:1.25;color:var(--ink-2);padding-right:10px}
-
-/* THERMAL HEARTH LOUPE */
-.hearth-loupe{position:absolute;top:var(--ly, 50%);left:var(--lx, 50%);width:200px;height:200px;transform:translate3d(-50%,-50%,0);pointer-events:none;z-index:6;opacity:0;transition:opacity .25s ease}
-.frame.is-inspecting .hearth-loupe{opacity:1}
-.hearth-ring{position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(255,122,77,0.95);box-shadow:0 0 24px rgba(204,61,11,0.6),inset 0 0 22px rgba(255,150,50,0.3);-webkit-backdrop-filter:brightness(1.28) contrast(1.14) saturate(1.2);backdrop-filter:brightness(1.28) contrast(1.14) saturate(1.2);overflow:hidden}
-.hearth-hud{position:absolute;top:-30px;left:50%;transform:translateX(-50%);background:rgba(11,12,14,0.94);border:1px solid rgba(255,122,77,0.85);box-shadow:0 4px 16px rgba(0,0,0,0.6);color:#fff;font:700 12px/1 var(--sans);letter-spacing:.06em;padding:5px 12px;border-radius:999px;white-space:nowrap}
-.hearth-cross-v{position:absolute;top:10px;bottom:10px;left:50%;width:1px;background:rgba(255,122,77,0.45);transform:translateX(-50%)}
-.hearth-cross-h{position:absolute;left:10px;right:10px;top:50%;height:1px;background:rgba(255,122,77,0.45);transform:translateY(-50%)}
-.hearth-dot{position:absolute;top:50%;left:50%;width:6px;height:6px;border-radius:50%;background:#ff7a4d;box-shadow:0 0 10px #ff7a4d;transform:translate(-50%,-50%)}
-.hearth-flare{position:absolute;width:110px;height:110px;top:15px;left:15px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.4) 0%,rgba(255,160,80,0.15) 40%,transparent 70%);pointer-events:none}
 
 #steam{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;opacity:0;transition:opacity 1.6s ease}
 #steam.on{opacity:1}
@@ -124,7 +114,7 @@ h1,h2,h3{margin:0;font-weight:600}
 .answer{font-size:14px;color:var(--ink-2);line-height:1.45}
 
 /* marquee ribbon */
-.marquee-ribbon{overflow:hidden;background:var(--ink);color:var(--accent-on-dark);padding:14px 0;white-space:nowrap;user-select:none;position:relative;z-index:10;border-top:1px solid rgba(255,255,255,0.08);border-bottom:1px solid rgba(255,255,255,0.08);margin:24px 0 8px}
+.marquee-ribbon{overflow:hidden;background:var(--ink);color:var(--accent-on-dark);padding:14px 0;white-space:nowrap;user-select:none;position:relative;z-index:10;border-top:1px solid rgba(255,255,255,0.08);border-bottom:1px solid rgba(255,255,255,0.08);margin:32px 0 16px;clear:both}
 .marquee-track{display:flex;width:max-content;will-change:transform}
 .marquee-content{display:flex;align-items:center;gap:24px;font:700 15px/1 var(--display);text-transform:uppercase;letter-spacing:.12em;padding-right:24px}
 .marquee-content .dot{color:var(--muted);font-size:18px}
@@ -143,12 +133,12 @@ section.night{background:var(--night);color:#fff;padding-bottom:48px;margin-top:
 .sh-t{position:relative;padding:4px 0 0 70px}
 .eyebrow{color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:1 !important;filter:none !important;transform:none !important}
 .night .eyebrow{color:var(--accent-on-dark)}
-.sh h2{font:600 34px/1.18 var(--display);text-transform:uppercase;margin-top:8px;text-wrap:balance;opacity:1 !important;filter:none !important;transform:none !important;overflow:visible !important;padding-bottom:0.22em !important;color:#0B0C0E !important}
-.night .sh h2{font:600 34px/1.18 var(--display);text-transform:uppercase;margin-top:8px;text-wrap:balance;opacity:1 !important;filter:none !important;transform:none !important;overflow:visible !important;padding-bottom:0.22em !important;color:#0B0C0E !important}
+.paper .sh h2, .sh h2, #book .sh h2, #master .sh h2{font:600 34px/1.18 var(--display);text-transform:uppercase;margin-top:8px;text-wrap:balance;opacity:1 !important;filter:none !important;transform:none !important;overflow:visible !important;padding-bottom:0.22em !important;color:#0B0C0E !important}
+.night .sh h2, section.night .sh h2, #baths .sh h2, .night .sh h2 .w-in, .night .sh h2 .w-reveal{font:600 34px/1.18 var(--display);text-transform:uppercase;margin-top:8px;text-wrap:balance;opacity:1 !important;filter:none !important;transform:none !important;overflow:visible !important;padding-bottom:0.22em !important;color:#FFFFFF !important}
 .sh .lead{margin-top:14px;color:var(--muted);font-size:16px;line-height:1.6;max-width:62ch;opacity:1 !important;filter:none !important;transform:none !important}
 .night .sh .lead{color:var(--night-muted)}
 .sh.on .eyebrow, .sh.on h2, .sh.on .lead, .sh.in .eyebrow, .sh.in h2, .sh.in .lead, .on .eyebrow, .on h2, .on .lead, .in .eyebrow, .in h2, .in .lead{opacity:1 !important;filter:none !important;transform:none !important}
-@media (min-width:900px){.sh .num{width:64px;height:84px;font-size:30px}.sh-t{padding-left:88px}.sh h2{font:600 34px/1.18 var(--display);text-transform:uppercase;margin-top:8px;text-wrap:balance;opacity:1 !important;filter:none !important;transform:none !important;overflow:visible !important;padding-bottom:0.22em !important;color:#0B0C0E !important}}
+@media (min-width:900px){.sh .num{width:64px;height:84px;font-size:30px}.sh-t{padding-left:88px}.paper .sh h2, .sh h2, #book .sh h2{color:#0B0C0E !important}.night .sh h2, section.night .sh h2, #baths .sh h2{color:#FFFFFF !important}}
 
 /* свободные окна */
 .slots{list-style:none;margin:0;padding:0;display:grid;gap:10px;align-content:start}
@@ -458,17 +448,6 @@ dialog.sheet[open]{animation:up .32s var(--ease)}
           <source type="image/avif" srcset="/img/hero-480.avif 480w, /img/hero-720.avif 720w, /img/hero-1200.avif 1200w" sizes="(min-width: 1024px) 700px, calc(100vw - 32px)">
           <img src="/img/hero-720.jpg" srcset="/img/hero-480.jpg 480w, /img/hero-720.jpg 720w, /img/hero-1200.jpg 1200w" sizes="(min-width: 1024px) 700px, calc(100vw - 32px)" width="720" height="518" alt="Банный комплекс Гренландия: сруб на дровах, горячая купель и зона барбекю" fetchpriority="high">
         </picture>
-
-        <!-- Thermal Hearth Loupe -->
-        <div class="hearth-loupe" id="hearthLoupe" aria-hidden="true">
-          <div class="hearth-hud" id="hearthHud">ПАРНАЯ НА ДРОВАХ · МЯГКИЙ ПАР 85°C</div>
-          <div class="hearth-ring">
-            <div class="hearth-cross-v"></div>
-            <div class="hearth-cross-h"></div>
-            <div class="hearth-flare"></div>
-            <div class="hearth-dot"></div>
-          </div>
-        </div>
 
         <div class="shade"></div>
         <canvas id="steam" aria-hidden="true"></canvas>
@@ -1476,27 +1455,6 @@ $$(".bath").forEach(function(card){
     card.style.setProperty("--my",(e.clientY-r.top)+"px");
   });
 });
-
-/* THERMAL HEARTH LOUPE INTERACTION */
-(function initHearthLoupe(){
-  var frame=$("#heroFrame");
-  var hud=$("#hearthHud");
-  if(!frame||!hud)return;
-  function onMove(e){
-    var r=frame.getBoundingClientRect();
-    var x=e.clientX-r.left,y=e.clientY-r.top;
-    if(x<0||x>r.width||y<0||y>r.height){frame.classList.remove("is-inspecting");return;}
-    frame.classList.add("is-inspecting");
-    frame.style.setProperty("--lx",Math.round(x)+"px");
-    frame.style.setProperty("--ly",Math.round(y)+"px");
-    var rx=x/r.width,ry=y/r.height;
-    if(rx<0.38){hud.textContent="ПАРНАЯ НА ДРОВАХ · МЯГКИЙ ПАР 85°C"}
-    else if(ry>0.52){hud.textContent="ГОРЯЧИЙ СИБИРСКИЙ ЧАН · КЕДР И ПИХТА"}
-    else{hud.textContent="ЧИСТАЯ КУПЕЛЬ И КОМНАТА ОТДЫХА"}
-  }
-  frame.addEventListener("mousemove",onMove,{passive:true});
-  frame.addEventListener("mouseleave",function(){frame.classList.remove("is-inspecting")});
-})();
 
 /* WebGL steam shader */
 function steam(){

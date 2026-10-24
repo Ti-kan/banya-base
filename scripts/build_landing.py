@@ -312,8 +312,8 @@ h1,h2,h3{{margin:0;font-weight:600}}
 ::selection{{background:var(--accent);color:#fff}}
 
 /* split text reveal with safe top padding to prevent Ё / Й clipping */
-.w-mask{{display:inline-block;overflow:hidden;vertical-align:bottom;line-height:inherit;padding-top:0.16em;margin-top:-0.16em;padding-bottom:0.08em}}
-.w-in{{display:inline-block;transform:translate3d(0,105%,0) rotate(1.5deg);opacity:0;transition:transform .75s cubic-bezier(.16,1,.3,1),opacity .5s ease;will-change:transform,opacity}}
+.w-mask{{display:inline-block;overflow:visible !important;vertical-align:bottom;line-height:1.18 !important;padding-top:0.16em;margin-top:-0.16em;padding-bottom:0.22em !important}}
+.w-in{{display:inline-block;opacity:1 !important;transform:none !important;color:inherit;transition:transform .75s cubic-bezier(.16,1,.3,1),opacity .5s ease;will-change:transform,opacity}}
 .reveal.on .w-in, .hero.on .w-in, .on .w-in, .in .w-in, html.no-anim .w-in{{transform:translate3d(0,0,0) rotate(0deg);opacity:1;transition-delay:calc(var(--wi, 0) * 36ms)}}
 
 /* кнопки */
@@ -413,12 +413,12 @@ section.night{{background:var(--night);color:#fff;padding-bottom:48px;margin-top
 .sh-t{{position:relative;padding:4px 0 0 70px}}
 .eyebrow{{color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:1 !important;filter:none !important;transform:none !important}}
 .night .eyebrow{{color:var(--accent-on-dark)}}
-.sh h2{{font:600 34px/1.18 var(--display);text-transform:uppercase;margin-top:8px;text-wrap:balance;opacity:1 !important;filter:none !important;transform:none !important;overflow:visible !important;padding-bottom:0.22em !important;color:var(--ink)}}
-.night .sh h2{{color:#fff !important}}
+.sh h2{{font:600 34px/1.18 var(--display);text-transform:uppercase;margin-top:8px;text-wrap:balance;opacity:1 !important;filter:none !important;transform:none !important;overflow:visible !important;padding-bottom:0.22em !important;color:#0B0C0E !important}}
+.night .sh h2{{font:600 34px/1.18 var(--display);text-transform:uppercase;margin-top:8px;text-wrap:balance;opacity:1 !important;filter:none !important;transform:none !important;overflow:visible !important;padding-bottom:0.22em !important;color:#0B0C0E !important}}
 .sh .lead{{margin-top:14px;color:var(--muted);font-size:16px;line-height:1.6;max-width:62ch;opacity:1 !important;filter:none !important;transform:none !important}}
 .night .sh .lead{{color:var(--night-muted)}}
 .sh.on .eyebrow, .sh.on h2, .sh.on .lead, .sh.in .eyebrow, .sh.in h2, .sh.in .lead, .on .eyebrow, .on h2, .on .lead, .in .eyebrow, .in h2, .in .lead{{opacity:1 !important;filter:none !important;transform:none !important}}
-@media (min-width:900px){{.sh .num{{width:64px;height:84px;font-size:30px}}.sh-t{{padding-left:88px}}.sh h2{{font-size:54px;line-height:1.18;overflow:visible !important;padding-bottom:0.22em !important}}}}
+@media (min-width:900px){{.sh .num{{width:64px;height:84px;font-size:30px}}.sh-t{{padding-left:88px}}.sh h2{{font:600 34px/1.18 var(--display);text-transform:uppercase;margin-top:8px;text-wrap:balance;opacity:1 !important;filter:none !important;transform:none !important;overflow:visible !important;padding-bottom:0.22em !important;color:#0B0C0E !important}}}}
 
 /* свободные окна */
 .slots{{list-style:none;margin:0;padding:0;display:grid;gap:10px;align-content:start}}
@@ -466,8 +466,11 @@ fieldset.q{{border:0;padding:0;margin:0}}
 .res-none{{font-size:14px;color:var(--muted)}}
 
 /* бани */
-.baths{{display:grid;gap:16px}}
-.bath{{position:relative;background:var(--night-2);border-radius:var(--r);overflow:hidden;padding:12px 12px 20px;border:1px solid rgba(255,255,255,0.06);transition:border-color .3s var(--ease),box-shadow .3s var(--ease)}}
+.baths{{display:grid;gap:20px}}
+@media (min-width: 900px){{.baths{{grid-template-columns:repeat(3,1fr)}}}}
+.bath{{position:relative;background:#16181E !important;border-radius:28px !important;overflow:hidden;padding:16px 16px 22px !important;border:1px solid rgba(255,255,255,0.12) !important;box-shadow:0 16px 40px rgba(0,0,0,0.5) !important;display:flex !important;flex-direction:column !important;transition:border-color .3s var(--ease),box-shadow .3s var(--ease),transform .3s var(--ease)}}
+.bath-b{{display:flex !important;flex-direction:column !important;flex:1 1 auto;padding-top:14px}}
+.bath-b .btn{{margin-top:auto !important;width:100% !important}}
 .bath::before{{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(600px circle at var(--mx,50%) var(--my,50%),rgba(255,122,77,0.14),transparent 65%);opacity:0;pointer-events:none;transition:opacity .35s var(--ease)}}
 @media (hover:hover){{
   .bath:hover::before{{opacity:1}}

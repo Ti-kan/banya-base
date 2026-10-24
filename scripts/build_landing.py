@@ -283,7 +283,7 @@ def render_landing(venue, all_venues=None, is_root=False):
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b0c0e'/%3E%3Cpath d='M8 23h16M10 23V14l6-5 6 5v9' stroke='%23cc3d0b' stroke-width='2.6' fill='none' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preload" href="/fonts/oswald.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/onest.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" as="image" type="image/avif" imagesrcset="/img/hero-480.avif 480w, /img/hero-720.avif 720w, /img/hero-1200.avif 1200w" imagesizes="(min-width: 1024px) 700px, calc(100vw - 32px)" fetchpriority="high">
+<link rel="preload" as="image" type="image/avif" imagesrcset="{asset_prefix}img/hero-480.avif 480w, {asset_prefix}img/hero-720.avif 720w, {asset_prefix}img/hero-1200.avif 1200w" imagesizes="(min-width: 1024px) 700px, calc(100vw - 32px)" fetchpriority="high">
 <style>
 @font-face{{font-family:"Oswald";src:url(/fonts/oswald.woff2) format("woff2");font-weight:500 700;font-display:swap}}
 @font-face{{font-family:"Onest";src:url(/fonts/onest.woff2) format("woff2");font-weight:400 700;font-display:swap}}
@@ -404,19 +404,21 @@ section.s{{padding:48px 0 0}}
 section.paper{{background:var(--paper);padding-bottom:48px;margin-top:36px}}
 section.night{{background:var(--night);color:#fff;padding-bottom:48px;margin-top:36px}}
 
-.sh{{position:relative;margin-bottom:24px;perspective:800px}}
-.sh .num{{position:absolute;left:0;top:0;width:52px;height:68px;background:var(--accent);color:#fff;display:grid;place-items:center;font:700 24px/1 var(--display);border-radius:18px 18px 0 18px;transform-origin:top center;transform:rotateX(-75deg);opacity:0;transition:transform .8s var(--ease),opacity .8s ease;will-change:transform,opacity}}
+.sh{{position:relative;margin-bottom:24px}}
+.sh .num{{position:absolute;left:0;top:0;width:52px;height:68px;background:var(--accent);color:#fff;display:grid;place-items:center;font:700 24px/1 var(--display);border-radius:18px 18px 0 18px;opacity:1 !important;transform:none !important}}
 .sh .num::before{{content:"";position:absolute;right:0;bottom:-12px;width:12px;height:12px;background:radial-gradient(circle at 100% 100%,transparent 12px,var(--accent) 13px)}}
 .paper .sh .num::before{{background:var(--paper)}}
 .night .sh .num::before{{background:var(--night)}}
-.sh.on .num, .sh.in .num, .on .sh .num, .in .sh .num{{transform:rotateX(0deg);opacity:1}}
+.sh.on .num, .sh.in .num, .on .sh .num, .in .sh .num{{opacity:1;transform:none}}
 .sh-t{{position:relative;padding:4px 0 0 70px}}
-.eyebrow{{color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:0;filter:blur(6px);transform:translate3d(0,14px,0);transition:opacity .75s var(--ease),filter .75s var(--ease),transform .75s var(--ease);will-change:transform,opacity,filter}}
+.eyebrow{{color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:1 !important;filter:none !important;transform:none !important}}
 .night .eyebrow{{color:var(--accent-on-dark)}}
-.sh h2{{font:600 34px/1.14 var(--display);text-transform:uppercase;margin-top:8px;text-wrap:balance;opacity:0;filter:blur(6px);transform:translate3d(0,18px,0);transition:opacity .75s var(--ease),filter .75s var(--ease),transform .75s var(--ease);transition-delay:70ms;will-change:transform,opacity,filter}}
-.sh .lead{{margin-top:14px;color:var(--muted);font-size:16px;line-height:1.6;max-width:62ch;opacity:0;filter:blur(6px);transform:translate3d(0,18px,0);transition:opacity .75s var(--ease),filter .75s var(--ease),transform .75s var(--ease);transition-delay:140ms;will-change:transform,opacity,filter}}
-.sh.on .eyebrow, .sh.on h2, .sh.on .lead, .sh.in .eyebrow, .sh.in h2, .sh.in .lead, .on .eyebrow, .on h2, .on .lead, .in .eyebrow, .in h2, .in .lead{{opacity:1;filter:blur(0px);transform:translate3d(0,0,0)}}
-@media (min-width:900px){{.sh .num{{width:64px;height:84px;font-size:30px}}.sh-t{{padding-left:88px}}.sh h2{{font-size:54px;line-height:1.14}}}}
+.sh h2{{font:600 34px/1.18 var(--display);text-transform:uppercase;margin-top:8px;text-wrap:balance;opacity:1 !important;filter:none !important;transform:none !important;overflow:visible !important;padding-bottom:0.22em !important;color:var(--ink)}}
+.night .sh h2{{color:#fff !important}}
+.sh .lead{{margin-top:14px;color:var(--muted);font-size:16px;line-height:1.6;max-width:62ch;opacity:1 !important;filter:none !important;transform:none !important}}
+.night .sh .lead{{color:var(--night-muted)}}
+.sh.on .eyebrow, .sh.on h2, .sh.on .lead, .sh.in .eyebrow, .sh.in h2, .sh.in .lead, .on .eyebrow, .on h2, .on .lead, .in .eyebrow, .in h2, .in .lead{{opacity:1 !important;filter:none !important;transform:none !important}}
+@media (min-width:900px){{.sh .num{{width:64px;height:84px;font-size:30px}}.sh-t{{padding-left:88px}}.sh h2{{font-size:54px;line-height:1.18;overflow:visible !important;padding-bottom:0.22em !important}}}}
 
 /* свободные окна */
 .slots{{list-style:none;margin:0;padding:0;display:grid;gap:10px;align-content:start}}
@@ -554,6 +556,9 @@ fieldset.q{{border:0;padding:0;margin:0}}
 .cta2{{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}}
 
 /* подвал */
+#book{{padding-bottom:72px !important}}
+#book .sh h2, #book .sh h2 .w-in{{color:#0B0C0E !important;opacity:1 !important;transform:none !important}}
+#book .eyebrow{{color:var(--accent) !important;opacity:1 !important;transform:none !important}}
 footer{{background:var(--night);color:var(--night-muted);padding:40px 0 calc(96px + env(safe-area-inset-bottom,0px));font-size:13px;line-height:1.6;overflow:hidden}}
 footer .wrap{{container-type:inline-size;display:grid;gap:12px}}
 footer a{{color:#fff;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:11px 0}}
@@ -712,13 +717,13 @@ dialog.sheet[open]{{animation:up .32s var(--ease)}}
 <section class="hero on" aria-labelledby="h1">
   <div class="glow" aria-hidden="true"></div>
   <div class="wrap">
-    <p class="typed" aria-hidden="true"><span id="typed">Русская парная на дровах</span><span class="caret">|</span></p>
+    <p class="typed" aria-hidden="true"><span id="typed">Русская парная на дровах</span></p>
     <div class="stage">
       <p class="hero-word" aria-hidden="true">{hw_spans}</p>
       <div class="frame" id="heroFrame">
         <picture>
-          <source type="image/avif" srcset="/img/hero-480.avif 480w, /img/hero-720.avif 720w, /img/hero-1200.avif 1200w" sizes="(min-width: 1024px) 700px, calc(100vw - 32px)">
-          <img src="/img/hero-720.jpg" srcset="/img/hero-480.jpg 480w, /img/hero-720.jpg 720w, /img/hero-1200.jpg 1200w" sizes="(min-width: 1024px) 700px, calc(100vw - 32px)" width="720" height="518" alt="Банный комплекс {name}: сруб на дровах, горячая купель и зона барбекю" fetchpriority="high">
+          <source type="image/avif" srcset="{asset_prefix}img/hero-480.avif 480w, {asset_prefix}img/hero-720.avif 720w, {asset_prefix}img/hero-1200.avif 1200w" sizes="(min-width: 1024px) 700px, calc(100vw - 32px)">
+          <img src="{asset_prefix}img/hero-720.jpg" srcset="{asset_prefix}img/hero-480.jpg 480w, {asset_prefix}img/hero-720.jpg 720w, {asset_prefix}img/hero-1200.jpg 1200w" sizes="(min-width: 1024px) 700px, calc(100vw - 32px)" width="720" height="518" alt="Банный комплекс {name}: сруб на дровах, горячая купель и зона барбекю" fetchpriority="high">
         </picture>
 
         <!-- Thermal Hearth Loupe -->
@@ -842,9 +847,9 @@ dialog.sheet[open]{{animation:up .32s var(--ease)}}
     <div class="baths">
       <article class="bath reveal" id="bath-small">
         <div class="strip">
-          <figure><img src="/img/malaya-720.jpg" srcset="/img/malaya-480.jpg 480w, /img/malaya-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Парная на дровах {name}"><figcaption>Парная</figcaption></figure>
-          <figure><img src="/img/otdyh-720.jpg" srcset="/img/otdyh-480.jpg 480w, /img/otdyh-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Комната отдыха"><figcaption>Отдых</figcaption></figure>
-          <figure><img src="/img/terrasa-720.jpg" srcset="/img/terrasa-480.jpg 480w, /img/terrasa-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Терраса с мангалом"><figcaption>Терраса</figcaption></figure>
+          <figure><img src="{asset_prefix}img/malaya-720.jpg" srcset="{asset_prefix}img/malaya-480.jpg 480w, {asset_prefix}img/malaya-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Парная на дровах {name}"><figcaption>Парная</figcaption></figure>
+          <figure><img src="{asset_prefix}img/otdyh-720.jpg" srcset="{asset_prefix}img/otdyh-480.jpg 480w, {asset_prefix}img/otdyh-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Комната отдыха"><figcaption>Отдых</figcaption></figure>
+          <figure><img src="{asset_prefix}img/terrasa-720.jpg" srcset="{asset_prefix}img/terrasa-480.jpg 480w, {asset_prefix}img/terrasa-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Терраса с мангалом"><figcaption>Терраса</figcaption></figure>
         </div>
         <div class="bath-b">
           <h3>Сруб «{name}»</h3>
@@ -861,9 +866,9 @@ dialog.sheet[open]{{animation:up .32s var(--ease)}}
 
       <article class="bath reveal" id="bath-big">
         <div class="strip">
-          <figure><img src="/img/chan-720.jpg" srcset="/img/chan-480.jpg 480w, /img/chan-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Горячий чан под открытым небом"><figcaption>Горячий чан</figcaption></figure>
-          <figure><img src="/img/parnaya-b-720.jpg" srcset="/img/parnaya-b-480.jpg 480w, /img/parnaya-b-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Большая парная"><figcaption>Парная</figcaption></figure>
-          <figure><img src="/img/srub-720.jpg" srcset="/img/srub-480.jpg 480w, /img/srub-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Сруб из кедра"><figcaption>Сруб</figcaption></figure>
+          <figure><img src="{asset_prefix}img/chan-720.jpg" srcset="{asset_prefix}img/chan-480.jpg 480w, {asset_prefix}img/chan-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Горячий чан под открытым небом"><figcaption>Горячий чан</figcaption></figure>
+          <figure><img src="{asset_prefix}img/parnaya-b-720.jpg" srcset="{asset_prefix}img/parnaya-b-480.jpg 480w, {asset_prefix}img/parnaya-b-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Большая парная"><figcaption>Парная</figcaption></figure>
+          <figure><img src="{asset_prefix}img/srub-720.jpg" srcset="{asset_prefix}img/srub-480.jpg 480w, {asset_prefix}img/srub-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Сруб из кедра"><figcaption>Сруб</figcaption></figure>
         </div>
         <div class="bath-b">
           <h3>Большой сруб с чаном</h3>
@@ -880,9 +885,9 @@ dialog.sheet[open]{{animation:up .32s var(--ease)}}
 
       <article class="bath reveal" id="bath-house">
         <div class="strip">
-          <figure><img src="/img/domik-720.jpg" srcset="/img/domik-480.jpg 480w, /img/domik-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Гостевой домик с баней"><figcaption>Домик</figcaption></figure>
-          <figure><img src="/img/otdyh-720.jpg" srcset="/img/otdyh-480.jpg 480w, /img/otdyh-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Спальная зона"><figcaption>Спальня</figcaption></figure>
-          <figure><img src="/img/terrasa-720.jpg" srcset="/img/terrasa-480.jpg 480w, /img/terrasa-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Мангальная зона"><figcaption>Мангал</figcaption></figure>
+          <figure><img src="{asset_prefix}img/domik-720.jpg" srcset="{asset_prefix}img/domik-480.jpg 480w, {asset_prefix}img/domik-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Гостевой домик с баней"><figcaption>Домик</figcaption></figure>
+          <figure><img src="{asset_prefix}img/otdyh-720.jpg" srcset="{asset_prefix}img/otdyh-480.jpg 480w, {asset_prefix}img/otdyh-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Спальная зона"><figcaption>Спальня</figcaption></figure>
+          <figure><img src="{asset_prefix}img/terrasa-720.jpg" srcset="{asset_prefix}img/terrasa-480.jpg 480w, {asset_prefix}img/terrasa-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Мангальная зона"><figcaption>Мангал</figcaption></figure>
         </div>
         <div class="bath-b">
           <h3>Пакет «Таёжный вечер»</h3>
@@ -937,8 +942,8 @@ dialog.sheet[open]{{animation:up .32s var(--ease)}}
     <div class="sh reveal"><span class="num" aria-hidden="true">05</span><div class="sh-t"><p class="eyebrow">Традиции и ритуалы</p><h2 id="h-master">{h_master_text}</h2><p class="lead">Свежие дубовые, берёзовые и пихтовые веники, горячая купель на таёжных травах и самовар с алтайским мёдом.</p></div></div>
     <div class="master reveal" id="ritualsCard">
       <picture>
-        <source type="image/avif" srcset="/img/rituals-480.avif 480w, /img/rituals-800.avif 800w" sizes="(min-width:1024px) 420px, (min-width:760px) 360px, calc(100vw - 32px)">
-        <img src="/img/rituals-800.jpg" srcset="/img/rituals-480.jpg 480w, /img/rituals-800.jpg 800w" sizes="(min-width:1024px) 420px, (min-width:760px) 360px, calc(100vw - 32px)" width="800" height="600" loading="lazy" decoding="async" alt="Банные ритуалы, веники и сибирский чан на травах">
+        <source type="image/avif" srcset="{asset_prefix}img/rituals-480.avif 480w, {asset_prefix}img/rituals-800.avif 800w" sizes="(min-width:1024px) 420px, (min-width:760px) 360px, calc(100vw - 32px)">
+        <img src="{asset_prefix}img/rituals-800.jpg" srcset="{asset_prefix}img/rituals-480.jpg 480w, {asset_prefix}img/rituals-800.jpg 800w" sizes="(min-width:1024px) 420px, (min-width:760px) 360px, calc(100vw - 32px)" width="800" height="600" loading="lazy" decoding="async" alt="Банные ритуалы, веники и сибирский чан на травах">
       </picture>
       <div style="display:grid;gap:16px">
         <div class="exp">
@@ -1318,15 +1323,24 @@ if("IntersectionObserver" in window){{
   $$("section[id]").forEach(function(s){{io.observe(s)}});
 }}
 
-/* Печатная машинка */
+/* Плавная ротация фраз (без застревания букв "Рус") */
 (function(){{
-  var el=$("#typed"),idx=0,pos=TYPED[0].length,dir=-1;
-  setTimeout(function tick(){{
-    var w=TYPED[idx];
-    if(dir>0){{pos++;el.textContent=w.slice(0,pos);if(pos===w.length){{dir=-1;setTimeout(tick,2200);return}}}}
-    else{{pos--;el.textContent=w.slice(0,pos);if(pos===0){{dir=1;idx=(idx+1)%TYPED.length;setTimeout(tick,400);return}}}}
-    setTimeout(tick,dir>0?65:30);
-  }},2200);
+  var el=$("#typed"); if(!el) return;
+  var idx=0;
+  setInterval(function(){{
+    var p=el.parentElement;
+    if(!p) return;
+    p.classList.add("fade-out");
+    setTimeout(function(){{
+      idx=(idx+1)%TYPED.length;
+      el.textContent=TYPED[idx];
+      p.classList.remove("fade-out");
+      p.classList.add("fade-in");
+      setTimeout(function(){{
+        p.classList.remove("fade-in");
+      }},350);
+    }},320);
+  }},3600);
 }})();
 
 /* Motion & Parallax */
@@ -1458,11 +1472,12 @@ $("#cookieOk").addEventListener("click",function(){{$("#cookie").hidden=true;try
 </html>"""
     return html
 
-def render_politika(venue):
+def render_politika(venue, is_root=False):
     name = venue["name"]
     address = venue["address"]
     phone = venue["phone_display"]
     slug = venue["slug"]
+    asset_prefix = "" if is_root else "../../"
     return f"""<!doctype html>
 <html lang="ru">
 <head>
@@ -1514,7 +1529,7 @@ def main():
     print("Wrote root index.html (flagship: Тайга 82)")
 
     # 2. Write root politika.html
-    root_pol = render_politika(flagship)
+    root_pol = render_politika(flagship, is_root=True)
     with open(os.path.join(BASE_DIR, "politika.html"), "w", encoding="utf-8") as f:
         f.write(root_pol)
     print("Wrote root politika.html")
@@ -1533,7 +1548,7 @@ def main():
         with open(os.path.join(s_dir, "index.html"), "w", encoding="utf-8") as f:
             f.write(page_html)
 
-        pol_html = render_politika(b)
+        pol_html = render_politika(b, is_root=False)
         with open(os.path.join(s_dir, "politika.html"), "w", encoding="utf-8") as f:
             f.write(pol_html)
 

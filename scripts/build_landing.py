@@ -585,14 +585,19 @@ fieldset.q{{border:0;padding:0;margin:0}}
 
 /* цены */
 .ptable-wrap{{background:var(--paper);border-radius:24px;padding:4px 16px;overflow-x:auto;-webkit-overflow-scrolling:touch}}
-.ptable{{width:100%;border-collapse:collapse;font-size:15px}}
-@media (max-width: 767px){{
-  .ptable{{min-width:480px}}
-}}
+.ptable{{width:100%;min-width:0;border-collapse:collapse;font-size:15px}}
 .ptable th,.ptable td{{padding:14px 6px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}}
 .ptable th{{font:600 13px/1 var(--sans);color:var(--muted);text-transform:uppercase;letter-spacing:.08em}}
 .ptable td:first-child{{font-weight:600}}
 .ptable td .sub{{display:block;font-size:13px;color:var(--muted);font-weight:400;margin-top:2px}}
+@media (max-width: 600px){{
+  .ptable th:nth-child(4), .ptable td:nth-child(4),
+  .ptable th:nth-child(5), .ptable td:nth-child(5){{display:none}}
+  .ptable th:first-child, .ptable td:first-child{{white-space:normal;word-break:break-word;padding-right:8px;font-size:14px}}
+  .ptable th:nth-child(2), .ptable td:nth-child(2),
+  .ptable th:nth-child(3), .ptable td:nth-child(3){{white-space:nowrap;text-align:right;font-size:14px;padding:12px 4px}}
+  .ptable-wrap{{padding:4px 8px}}
+}}
 .example{{background:var(--paper);border-radius:20px;padding:16px 20px;font-size:15px;margin:18px 0 0}}
 .two{{display:grid;gap:16px;margin-top:20px}}
 .box{{background:var(--paper);border-radius:24px;padding:22px}}

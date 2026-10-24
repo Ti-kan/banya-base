@@ -133,7 +133,7 @@ h1{font:700 clamp(28px,3.8vw,44px)/1.1 var(--display);text-transform:uppercase;l
 
     <div class="base-url-bar">
       <label for="baseUrlInput">🌐 Live Base URL сайта:</label>
-      <input class="base-url-input" id="baseUrlInput" type="text" value="">
+      <input class="base-url-input" id="baseUrlInput" type="text" value="https://ti-kan.github.io/banya-base">
       <span style="font-size:12px;color:var(--night-muted)">Все ссылки и тексты обновляются на лету!</span>
     </div>
 
@@ -186,8 +186,8 @@ h1{font:700 clamp(28px,3.8vw,44px)/1.1 var(--display);text-transform:uppercase;l
   var allData = [];
   var activeFilter = "all";
 
-  // Set default Base URL
-  var initialBase = window.location.origin || "http://localhost:3008";
+  // Permanent 24/7 Production URL default
+  var initialBase = "https://ti-kan.github.io/banya-base";
   baseInput.value = initialBase;
 
   function showToast(text){

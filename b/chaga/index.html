@@ -32,7 +32,7 @@
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:126px}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:126px}
 body{margin:0;background:var(--white);color:var(--ink);font:16px/1.5 var(--sans);-webkit-font-smoothing:antialiased;padding-bottom:calc(84px + env(safe-area-inset-bottom,0px));overflow-x:clip}
 img{max-width:100%;display:block;height:auto}
 a{color:inherit;text-decoration:none}
@@ -1526,9 +1526,52 @@ if("IntersectionObserver" in window){
   var links={};$$("#tabs a, .topnav a").forEach(function(a){var id=a.getAttribute("href").slice(1);(links[id]=links[id]||[]).push(a)});
   var cur=[];
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){
-    var id=e.target.id;if(links[id]){cur.forEach(function(a){a.classList.remove("on")});cur=links[id];cur.forEach(function(a){a.classList.add("on");if(a.closest(".tabs")){a.scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"})}})}
+    var id=e.target.id;if(links[id]){
+      cur.forEach(function(a){a.classList.remove("on")});
+      cur=links[id];
+      cur.forEach(function(a){
+        a.classList.add("on");
+        if(a.closest(".tabs")){
+          var tabsWrap = document.querySelector('.tabs .wrap') || document.querySelector('.tabs') || document.getElementById('tabs');
+          if(tabsWrap){
+            var targetLeft = a.offsetLeft - (tabsWrap.clientWidth / 2) + (a.offsetWidth / 2);
+            tabsWrap.scrollTo({ left: Math.max(0, targetLeft), behavior: "smooth" });
+          }
+        }
+      });
+    }
   }})},{rootMargin:"-20% 0px -70% 0px"});
   $$("section[id]").forEach(function(s){io.observe(s)});
+
+  /* SMOOTH IN-PAGE ANCHOR SCROLLING (NO RUBBERBANDING) */
+  document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      var href = link.getAttribute('href');
+      if (!href || href === '#' || href === '#!') return;
+      if (href === '#top') {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (history.pushState) history.pushState(null, null, window.location.pathname + window.location.search);
+        return;
+      }
+      var target = document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        var rect = target.getBoundingClientRect();
+        var topY = window.scrollY + rect.top - 78;
+        window.scrollTo({ top: Math.max(0, topY), behavior: 'smooth' });
+        if (history.pushState) history.pushState(null, null, href);
+      }
+    });
+  });
+
+  document.querySelectorAll('.brand').forEach(function(brandLink) {
+    brandLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (history.pushState) history.pushState(null, null, window.location.pathname + window.location.search);
+    });
+  });
 }
 
 /* Плавная ротация фраз (smooth vertical slide without overlap) */
@@ -1626,6 +1669,7 @@ addEventListener("scroll",function(){
   function updateScrollChoreography() {
     var vh = window.innerHeight || document.documentElement.clientHeight;
     var atPageBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 40);
+    var isMobileOrTouch = (window.innerWidth < 900) || ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
     for (var i = 0; i < targets.length; i++) {
       var el = targets[i];
@@ -1637,7 +1681,7 @@ addEventListener("scroll",function(){
 
       if (isVisible) {
         if (!el.classList.contains('in')) el.classList.add('in');
-      } else if (isCompletelyOut) {
+      } else if (isCompletelyOut && !isMobileOrTouch) {
         if (el.classList.contains('in')) el.classList.remove('in');
       }
     }

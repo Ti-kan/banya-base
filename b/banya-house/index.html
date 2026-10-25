@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru">
+<html lang="ru" class="js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -43,22 +43,8 @@ h1,h2,h3{margin:0;font-weight:600}
 ::selection{background:var(--accent);color:#fff}
 
 /* Split-Word / Line Rise Masks with zero clipping on diacritics */
-.word-wrap, .w-mask{display:inline-block;overflow:hidden;vertical-align:bottom;line-height:1.18;padding:0.12em 0.04em 0.22em;margin:-0.12em 0 -0.22em}
-.word-inner, .w-in{display:inline-block;opacity:1 !important;transform:none !important;will-change:transform,opacity}
-.js .sh.in .word-inner,
-.js .sh.in .w-in,
-.sh.on .word-inner,
-.sh.on .w-in,
-.hero.on .word-inner,
-.hero.on .w-in,
-.hero.in .word-inner,
-.hero.in .w-in,
-.on .word-inner,
-.on .w-in,
-.in .word-inner,
-.in .w-in,
-html.no-anim .word-inner,
-html.no-anim .w-in{opacity:1 !important;transform:none !important}
+.word-wrap, .w-mask{display:inline-block;overflow:hidden;vertical-align:bottom;padding:0.12em 0.04em 0.22em;margin:-0.12em 0 -0.22em}
+.hero.on .word-inner, .hero.on .w-in, .hero.in .word-inner, .hero.in .w-in{opacity:1;transform:none}
 
 /* кнопки */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 24px;border-radius:999px;border:0;font:600 16px/1.1 var(--sans);cursor:pointer;white-space:nowrap;transition:background-color .2s,transform .2s var(--ease),box-shadow .2s;-webkit-tap-highlight-color:transparent;will-change:transform}
@@ -140,25 +126,144 @@ html.no-anim .w-in{opacity:1 !important;transform:none !important}
 section.s{padding:48px 0 0}
 section.paper{background:var(--paper);padding-bottom:48px;margin-top:36px}
 section.night{background:var(--night);color:#fff;padding-bottom:48px;margin-top:36px}
+#pick{padding-top:88px !important;scroll-margin-top:88px !important}
+@media (max-width: 899px){
+  #pick{padding-top:96px !important;scroll-margin-top:96px !important}
+}
 
 .sh{position:relative;margin-bottom:24px}
-.sh .num{position:absolute;left:0;top:0;width:52px;height:68px;background:var(--accent);color:#fff;display:grid;place-items:center;font:700 24px/1 var(--display);border-radius:18px 18px 0 18px;transform-origin:50% 10px;opacity:1 !important;transform:none !important}
+.sh-t{position:relative;padding:4px 0 0 70px}
+.eyebrow{color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.night .eyebrow{color:var(--accent-on-dark)}
+
+.sh .num{position:absolute;left:0;top:0;width:52px;height:68px;background:var(--accent);color:#fff;display:grid;place-items:center;font:700 24px/1 var(--display);border-radius:18px 18px 0 18px;transform-origin:50% 10px}
 .sh .num::before{content:"";position:absolute;right:0;bottom:-12px;width:12px;height:12px;background:radial-gradient(circle at 100% 100%,transparent 12px,var(--accent) 13px)}
 .paper .sh .num::before{background:var(--paper)}
 .night .sh .num::before{background:var(--night)}
-.sh .num, .js .sh.in .num, .sh.on .num, .on .sh .num, .in .sh .num, html.no-anim .sh .num{opacity:1 !important;transform:none !important}
 
-.sh-t{position:relative;padding:4px 0 0 70px}
-.eyebrow{color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:1 !important;transform:none !important}
-.night .eyebrow{color:var(--accent-on-dark)}
-.eyebrow, .js .sh.in .eyebrow, .sh.on .eyebrow, .on .eyebrow, .in .eyebrow, html.no-anim .eyebrow{opacity:1 !important;transform:none !important}
+.paper .sh h2, .sh h2, #slots-s .sh h2, #pick .sh h2, #price .sh h2, #master .sh h2, #where .sh h2, #book .sh h2{font:600 34px/1.18 var(--display);text-transform:uppercase;margin-top:8px;text-wrap:balance;overflow:visible !important;padding-bottom:0.22em !important;color:#0B0C0E !important}
+.night .sh h2, section.night .sh h2, #baths .sh h2, #reviews.night .sh h2, .night .sh h2 .word-inner{font:600 34px/1.18 var(--display);text-transform:uppercase;margin-top:8px;text-wrap:balance;overflow:visible !important;padding-bottom:0.22em !important;color:#FFFFFF !important}
 
-.paper .sh h2, .sh h2, #slots-s .sh h2, #pick .sh h2, #price .sh h2, #master .sh h2, #where .sh h2, #book .sh h2{font:600 34px/1.18 var(--display);text-transform:uppercase;margin-top:8px;text-wrap:balance;overflow:visible !important;padding-bottom:0.22em !important;color:#0B0C0E !important;opacity:1 !important;transform:none !important}
-.night .sh h2, section.night .sh h2, #baths .sh h2, #reviews.night .sh h2, .night .sh h2 .word-inner, .night .sh h2 .w-in, .night .sh h2 .w-reveal{font:600 34px/1.18 var(--display);text-transform:uppercase;margin-top:8px;text-wrap:balance;overflow:visible !important;padding-bottom:0.22em !important;color:#FFFFFF !important;opacity:1 !important;transform:none !important}
-
-.sh .lead{margin-top:14px;color:var(--muted);font-size:16px;line-height:1.6;max-width:62ch;opacity:1 !important;transform:none !important}
+.sh .lead{margin-top:14px;color:var(--muted);font-size:16px;line-height:1.6;max-width:62ch}
 .night .sh .lead{color:var(--night-muted)}
-.sh .lead, .js .sh.in .lead, .sh.on .lead, .on .lead, .in .lead, html.no-anim .lead{opacity:1 !important;transform:none !important}
+
+/* 1. Section Header Tag (.sh .num) — 3D Swing */
+.js .sh .num, .js .sh .sh-num {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0) rotate(-15deg) scale(0.85);
+  transform-origin: 50% 10px;
+  transition: opacity 0.55s ease, transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity;
+}
+.js .sh.in .num, .js .sh.in .sh-num {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+}
+
+/* 2. Eyebrow & Lead Glide */
+.js .sh .eyebrow {
+  opacity: 0;
+  transform: translate3d(-18px, 0, 0);
+  transition: opacity 0.55s ease 0.05s, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.05s;
+}
+.js .sh.in .eyebrow {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+.js .sh .lead {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+  transition: opacity 0.6s ease 0.22s, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.22s;
+}
+.js .sh.in .lead {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* 3. Split-Word Staggered Rise in Headings (h2) */
+.word-wrap {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding: 0.12em 0.04em 0.22em;
+  margin: -0.12em 0 -0.22em;
+}
+.js .sh .word-inner {
+  display: inline-block;
+  opacity: 0;
+  transform: translate3d(0, 110%, 0) rotate(3deg);
+  transition: transform 0.72s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease;
+  transition-delay: calc(70ms + var(--w-idx, 0) * 42ms);
+  will-change: transform, opacity;
+}
+.js .sh.in .word-inner {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) rotate(0deg);
+}
+
+/* 4. Photo Curtain Shutter & Optical Zoom (.bath figure, .master picture, .ba-slider, .pkg-img) */
+.js .photo-reveal {
+  position: relative;
+  overflow: hidden;
+}
+.js .photo-reveal::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #111411;
+  transform-origin: top center;
+  transform: scaleY(1);
+  transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1) calc(var(--ci, 0) * 90ms + 80ms);
+  z-index: 4;
+  pointer-events: none;
+}
+.js .photo-reveal.in::after, .js .in .photo-reveal::after, .js .in.photo-reveal::after {
+  transform: scaleY(0);
+}
+.js .photo-reveal img {
+  transform: scale(1.16);
+  filter: brightness(0.7);
+  transition: transform 1.15s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--ci, 0) * 90ms + 80ms),
+              filter 0.9s ease calc(var(--ci, 0) * 90ms + 80ms);
+}
+.js .photo-reveal.in img, .js .in .photo-reveal img, .js .in.photo-reveal img {
+  transform: scale(1);
+  filter: brightness(1);
+}
+
+/* 5. Staggered Card Wave (.reveal, .reveal-card, .slot, .bath, .box, .ptable-wrap, .contact, .steps li) */
+.js .reveal-item {
+  opacity: 0;
+  transform: translate3d(0, 38px, 0) scale(0.97);
+  transition: opacity 0.65s ease, transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--ci, 0) * 85ms);
+  will-change: transform, opacity;
+}
+.js .reveal-item.in {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+/* Test static mode fallback */
+html.no-anim .js .sh .num,
+html.no-anim .js .sh .sh-num,
+html.no-anim .js .sh .eyebrow,
+html.no-anim .js .sh .lead,
+html.no-anim .js .sh .word-inner,
+html.no-anim .js .reveal-item {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+html.no-anim .js .photo-reveal::after {
+  transform: scaleY(0) !important;
+  transition: none !important;
+}
+html.no-anim .js .photo-reveal img {
+  transform: scale(1) !important;
+  filter: brightness(1) !important;
+  transition: none !important;
+}
 
 @media (max-width: 767px){
   .sh .num{width:46px;height:60px;font-size:20px;border-radius:14px 14px 0 14px}
@@ -176,56 +281,6 @@ section.night{background:var(--night);color:#fff;padding-bottom:48px;margin-top:
   .paper .sh h2, .sh h2, #book .sh h2{color:#0B0C0E !important}
   .night .sh h2, section.night .sh h2, #baths .sh h2{color:#FFFFFF !important}
 }
-
-/* Photo Curtain Wipe & Optical Zoom (Sections 03 & 06) */
-.bath .strip figure,
-.master picture,
-.res picture{position:relative;overflow:hidden}
-.bath .strip figure::after,
-.master picture::after,
-.res picture::after{content:"";position:absolute;inset:0;background:#111411;pointer-events:none;z-index:3;transform:scaleY(1);transform-origin:top;transition:transform 0.85s cubic-bezier(0.77, 0, 0.175, 1)}
-.bath.in .strip figure::after,
-.bath.on .strip figure::after,
-.master.in picture::after,
-.master.on picture::after,
-.res.in picture::after,
-.res.on picture::after,
-html.no-anim .bath .strip figure::after,
-html.no-anim .master picture::after,
-html.no-anim .res picture::after{transform:scaleY(0);transform-origin:bottom}
-
-.js .bath:not(.in) .strip img,
-.js .master:not(.in) picture img,
-.js .res:not(.in) picture img{transform:scale(1.14);filter:brightness(0.65)}
-.bath.in .strip img,
-.bath.on .strip img,
-.master.in picture img,
-.master.on picture img,
-.res.in picture img,
-.res.on picture img,
-html.no-anim .bath .strip img,
-html.no-anim .master picture img,
-html.no-anim .res picture img{transform:scale(1.0);filter:brightness(1.0);transition:transform 1.1s cubic-bezier(0.22, 1, 0.36, 1), filter 0.8s ease}
-
-/* Staggered Card Wave (Sections 01, 03, 04, 05, 07, 08 - 100% OPAQUE) */
-.slots > li,
-.baths > .bath,
-.ptable tbody tr,
-.two > .box,
-.steps > li,
-.contact{opacity:1 !important;transform:none !important;transition:transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;transition-delay:calc(var(--ci, 0) * 60ms)}
-.slots > li.in,
-.slots > li.on,
-.baths > .bath.in,
-.baths > .bath.on,
-.ptable tbody tr.in,
-.ptable tbody tr.on,
-.two > .box.in,
-.two > .box.on,
-.steps > li.in,
-.steps > li.on,
-.contact.in,
-.contact.on{opacity:1 !important;transform:none !important}
 
 /* свободные окна */
 .slots{list-style:none;margin:0;padding:0;display:grid;gap:10px;align-content:start}
@@ -1538,58 +1593,62 @@ addEventListener("scroll",function(){
   },120);
 },{passive:true});
 
-/* FAIL-SAFE REVEAL ENGINE ON BANYA (SCROLL + TIMERS) */
-function revealInViewport() {
-  var vh = window.innerHeight || document.documentElement.clientHeight;
-  var targets = $$(".reveal, .sh, .reveal-card, .bath, .slot, .box, .steps, .steps > li, .ptable tbody tr, .contact, .master, .res");
-  for (var i = 0; i < targets.length; i++) {
-    var el = targets[i];
-    if (el.classList.contains("in")) continue;
-    var rect = el.getBoundingClientRect();
-    if (rect.top < vh + 80 && rect.bottom > -80) {
-      el.classList.add("in");
-      el.classList.add("on");
+/* EXACT DETERMINISTIC BI-DIRECTIONAL SCROLL ENGINE */
+(function initDeterministicScrollMotion() {
+  // 1. Auto-wrap words in all .sh h2 if not already wrapped
+  document.querySelectorAll('.sh h2').forEach(function(h2) {
+    if (h2.querySelector('.word-inner')) return;
+    var text = h2.textContent.trim();
+    var words = text.split(/\s+/);
+    h2.innerHTML = words.map(function(w, i) {
+      return '<span class="word-wrap"><span class="word-inner" style="--w-idx:' + i + '">' + w + '</span></span>';
+    }).join(' ');
+  });
+
+  // 2. Tag all cards and photos for reveal
+  document.querySelectorAll('.slots > li, .baths > .bath, .bath, .two > .box, .steps > li, .card, .ptable-wrap, .ptable tbody tr, .score, .contact, .slot').forEach(function(el) {
+    el.classList.add('reveal-item');
+    var sibIdx = Array.prototype.indexOf.call(el.parentNode ? el.parentNode.children : [], el);
+    el.style.setProperty('--ci', Math.max(0, sibIdx % 6));
+  });
+  document.querySelectorAll('.strip figure, .master picture, .res picture, .bath figure').forEach(function(el) {
+    el.classList.add('photo-reveal');
+  });
+
+  var targets = Array.prototype.slice.call(document.querySelectorAll('.sh, .reveal, .reveal-item, .photo-reveal'));
+
+  if (window.location.search.indexOf('test_static=1') !== -1) {
+    document.documentElement.classList.add('no-anim');
+    targets.forEach(function(el) { el.classList.add('in'); });
+    return;
+  }
+
+  function updateScrollChoreography() {
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    var atPageBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 40);
+
+    for (var i = 0; i < targets.length; i++) {
+      var el = targets[i];
+      var rect = el.getBoundingClientRect();
+      // Enter when top crosses 90% of viewport height (or if user reached very bottom of page)
+      var isVisible = (rect.top <= vh * 0.90 && rect.bottom >= 30) || (atPageBottom && rect.top <= vh);
+      // Reset when scrolled completely below viewport (rect.top > vh * 0.98) or completely above viewport (rect.bottom < -40)
+      var isCompletelyOut = (rect.top > vh * 0.98) || (rect.bottom < -40);
+
+      if (isVisible) {
+        if (!el.classList.contains('in')) el.classList.add('in');
+      } else if (isCompletelyOut) {
+        if (el.classList.contains('in')) el.classList.remove('in');
+      }
     }
   }
-}
 
-if ("IntersectionObserver" in window) {
-  var rv = new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if (entry.isIntersecting) {
-        entry.target.classList.add("in");
-        entry.target.classList.add("on");
-      }
-    });
-  }, { threshold: 0.01, rootMargin: "0px 0px 50px 0px" });
-
-  var revealTargets = $$(".reveal, .sh, .reveal-card, .bath, .slot, .box, .steps, .steps > li, .ptable tbody tr, .contact, .master, .res");
-  revealTargets.forEach(function(el, idx){
-    el.style.setProperty("--ci", idx % 6);
-    rv.observe(el);
-  });
-}
-
-window.addEventListener("scroll", function() {
-  if (!window._rvRaf) {
-    window._rvRaf = requestAnimationFrame(function() {
-      revealInViewport();
-      window._rvRaf = null;
-    });
-  }
-}, { passive: true });
-
-revealInViewport();
-setTimeout(revealInViewport, 300);
-setTimeout(revealInViewport, 600);
-setTimeout(revealInViewport, 1200);
-
-setTimeout(function() {
-  $$(".reveal, .sh, .reveal-card, .bath, .slot, .box, .steps, .steps > li, .ptable tbody tr, .contact, .master, .res").forEach(function(el){
-    el.classList.add("in");
-    el.classList.add("on");
-  });
-}, 1500);
+  window.addEventListener('scroll', function() {
+    requestAnimationFrame(updateScrollChoreography);
+  }, { passive: true });
+  window.addEventListener('resize', updateScrollChoreography, { passive: true });
+  requestAnimationFrame(updateScrollChoreography);
+})();
 
 var heroEl=$(".hero");
 if(heroEl){

@@ -929,9 +929,9 @@ dialog.sheet[open]{{animation:up .32s var(--ease)}}
     <div class="baths">
       <article class="bath reveal" id="bath-small">
         <div class="strip">
-          <figure><img src="{asset_prefix}img/malaya-720.jpg" srcset="{asset_prefix}img/malaya-480.jpg 480w, {asset_prefix}img/malaya-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Парная на дровах {name}"><figcaption>Парная</figcaption></figure>
-          <figure><img src="{asset_prefix}img/otdyh-720.jpg" srcset="{asset_prefix}img/otdyh-480.jpg 480w, {asset_prefix}img/otdyh-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Комната отдыха"><figcaption>Отдых</figcaption></figure>
-          <figure><img src="{asset_prefix}img/terrasa-720.jpg" srcset="{asset_prefix}img/terrasa-480.jpg 480w, {asset_prefix}img/terrasa-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Терраса с мангалом"><figcaption>Терраса</figcaption></figure>
+          <figure><img src="{asset_prefix}img/malaya-720.jpg" srcset="{asset_prefix}img/malaya-480.jpg 480w, {asset_prefix}img/malaya-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" alt="Парная на дровах {name}"><figcaption>Парная</figcaption></figure>
+          <figure><img src="{asset_prefix}img/otdyh-720.jpg" srcset="{asset_prefix}img/otdyh-480.jpg 480w, {asset_prefix}img/otdyh-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" alt="Комната отдыха"><figcaption>Отдых</figcaption></figure>
+          <figure><img src="{asset_prefix}img/terrasa-720.jpg" srcset="{asset_prefix}img/terrasa-480.jpg 480w, {asset_prefix}img/terrasa-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" alt="Терраса с мангалом"><figcaption>Терраса</figcaption></figure>
         </div>
         <div class="bath-b">
           <h3>Сруб «{name}»</h3>
@@ -948,9 +948,9 @@ dialog.sheet[open]{{animation:up .32s var(--ease)}}
 
       <article class="bath reveal" id="bath-big">
         <div class="strip">
-          <figure><img src="{asset_prefix}img/chan-720.jpg" srcset="{asset_prefix}img/chan-480.jpg 480w, {asset_prefix}img/chan-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Горячий чан под открытым небом"><figcaption>Горячий чан</figcaption></figure>
-          <figure><img src="{asset_prefix}img/parnaya-b-720.jpg" srcset="{asset_prefix}img/parnaya-b-480.jpg 480w, {asset_prefix}img/parnaya-b-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Большая парная"><figcaption>Парная</figcaption></figure>
-          <figure><img src="{asset_prefix}img/srub-720.jpg" srcset="{asset_prefix}img/srub-480.jpg 480w, {asset_prefix}img/srub-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Сруб из кедра"><figcaption>Сруб</figcaption></figure>
+          <figure><img src="{asset_prefix}img/chan-720.jpg" srcset="{asset_prefix}img/chan-480.jpg 480w, {asset_prefix}img/chan-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" alt="Горячий чан под открытым небом"><figcaption>Горячий чан</figcaption></figure>
+          <figure><img src="{asset_prefix}img/parnaya-b-720.jpg" srcset="{asset_prefix}img/parnaya-b-480.jpg 480w, {asset_prefix}img/parnaya-b-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" alt="Большая парная"><figcaption>Парная</figcaption></figure>
+          <figure><img src="{asset_prefix}img/srub-720.jpg" srcset="{asset_prefix}img/srub-480.jpg 480w, {asset_prefix}img/srub-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" alt="Сруб из кедра"><figcaption>Сруб</figcaption></figure>
         </div>
         <div class="bath-b">
           <h3>Большой сруб с чаном</h3>
@@ -967,9 +967,9 @@ dialog.sheet[open]{{animation:up .32s var(--ease)}}
 
       <article class="bath reveal" id="bath-house">
         <div class="strip">
-          <figure><img src="{asset_prefix}img/domik-720.jpg" srcset="{asset_prefix}img/domik-480.jpg 480w, {asset_prefix}img/domik-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Гостевой домик с баней"><figcaption>Домик</figcaption></figure>
-          <figure><img src="{asset_prefix}img/otdyh-720.jpg" srcset="{asset_prefix}img/otdyh-480.jpg 480w, {asset_prefix}img/otdyh-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Спальная зона"><figcaption>Спальня</figcaption></figure>
-          <figure><img src="{asset_prefix}img/terrasa-720.jpg" srcset="{asset_prefix}img/terrasa-480.jpg 480w, {asset_prefix}img/terrasa-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Мангальная зона"><figcaption>Мангал</figcaption></figure>
+          <figure><img src="{asset_prefix}img/domik-720.jpg" srcset="{asset_prefix}img/domik-480.jpg 480w, {asset_prefix}img/domik-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" alt="Гостевой домик с баней"><figcaption>Домик</figcaption></figure>
+          <figure><img src="{asset_prefix}img/otdyh-720.jpg" srcset="{asset_prefix}img/otdyh-480.jpg 480w, {asset_prefix}img/otdyh-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" alt="Спальная зона"><figcaption>Спальня</figcaption></figure>
+          <figure><img src="{asset_prefix}img/terrasa-720.jpg" srcset="{asset_prefix}img/terrasa-480.jpg 480w, {asset_prefix}img/terrasa-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" alt="Мангальная зона"><figcaption>Мангал</figcaption></figure>
         </div>
         <div class="bath-b">
           <h3>Пакет «Таёжный вечер»</h3>
@@ -1025,7 +1025,7 @@ dialog.sheet[open]{{animation:up .32s var(--ease)}}
     <div class="master reveal" id="ritualsCard">
       <picture>
         <source type="image/avif" srcset="{asset_prefix}img/rituals-480.avif 480w, {asset_prefix}img/rituals-800.avif 800w" sizes="(min-width:1024px) 420px, (min-width:760px) 360px, calc(100vw - 32px)">
-        <img src="{asset_prefix}img/rituals-800.jpg" srcset="{asset_prefix}img/rituals-480.jpg 480w, {asset_prefix}img/rituals-800.jpg 800w" sizes="(min-width:1024px) 420px, (min-width:760px) 360px, calc(100vw - 32px)" width="800" height="600" loading="lazy" decoding="async" alt="Банные ритуалы, веники и сибирский чан на травах">
+        <img src="{asset_prefix}img/rituals-800.jpg" srcset="{asset_prefix}img/rituals-480.jpg 480w, {asset_prefix}img/rituals-800.jpg 800w" sizes="(min-width:1024px) 420px, (min-width:760px) 360px, calc(100vw - 32px)" width="800" height="600" alt="Банные ритуалы, веники и сибирский чан на травах">
       </picture>
       <div style="display:grid;gap:16px">
         <div class="exp">
@@ -1338,7 +1338,7 @@ function render(){{
     var why=(!b.chan&&o.extras.indexOf("chan")>-1)?'<p class="why">Горячая купель установлена у большого комплекса «{name}».</p>':"";
     var perPerson=Math.round(p.sum/Math.max(1,o.guests));
     var perPersonPill='<span class="per-person-pill">по '+rub(perPerson)+' с человека на '+o.guests+' '+plural(o.guests,"гостя","гостей","гостей")+'</span>';
-    return '<div class="res"><picture><source type="image/avif" srcset="{asset_prefix}img/'+b.img+'-480.avif"><img src="{asset_prefix}img/'+b.img+'-480.jpg" width="88" height="66" alt="" loading="lazy"></picture><h3>'+b.name+'</h3><p class="calc">'+p.lines.join(" + ")+'</p><div class="sum-row"><p class="sum" data-sum-k="'+k+'">'+rub(p.sum)+'</p>'+perPersonPill+'</div>'+why+'<button class="btn btn-accent btn-wide" type="button" data-pick="'+k+'">Выбрать и забронировать</button><button class="btn btn-ghost btn-wide tg-share-btn" type="button" data-share="'+k+'">🤝 Скинуть расчёт компании в Telegram ↗</button></div>';
+    return '<div class="res"><picture><source type="image/avif" srcset="{asset_prefix}img/'+b.img+'-480.avif"><img src="{asset_prefix}img/'+b.img+'-480.jpg" width="88" height="66" alt=""></picture><h3>'+b.name+'</h3><p class="calc">'+p.lines.join(" + ")+'</p><div class="sum-row"><p class="sum" data-sum-k="'+k+'">'+rub(p.sum)+'</p>'+perPersonPill+'</div>'+why+'<button class="btn btn-accent btn-wide" type="button" data-pick="'+k+'">Выбрать и забронировать</button><button class="btn btn-ghost btn-wide tg-share-btn" type="button" data-share="'+k+'">🤝 Скинуть расчёт компании в Telegram ↗</button></div>';
   }}).join("");
   $("#results").innerHTML=(pk.note?'<p class="res-none">'+pk.note+'</p>':"")+out;
   $$("[data-pick]",form).forEach(function(btn){{btn.addEventListener("click",function(){{

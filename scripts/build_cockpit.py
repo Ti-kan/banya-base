@@ -306,7 +306,7 @@ h1{font:700 clamp(28px,3.8vw,44px)/1.1 var(--display);text-transform:uppercase;l
     render(filtered);
   }
 
-  fetch("/baths-krasnoyarsk.json")
+  fetch("baths-krasnoyarsk.json")
     .then(function(r){ return r.json(); })
     .then(function(d){
       allData = d;

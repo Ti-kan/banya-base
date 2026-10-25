@@ -17,8 +17,8 @@ HTML_CONTENT = """<!doctype html>
 <title>50 Банных комплексов Красноярска — Outreach Cockpit & Готовые сайты для отправки</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230B0C0E'/%3E%3Cpath d='M8 23h16M10 23V14l6-5 6 5v9' stroke='%23cc3d0b' stroke-width='2.6' fill='none' stroke-linejoin='round'/%3E%3C/svg%3E">
 <style>
-@font-face{font-family:"Oswald";src:url("/fonts/oswald.woff2") format("woff2");font-weight:600 700;font-display:swap}
-@font-face{font-family:"Onest";src:url("/fonts/onest.woff2") format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Oswald";src:url("fonts/oswald.woff2") format("woff2");font-weight:600 700;font-display:swap}
+@font-face{font-family:"Onest";src:url("fonts/onest.woff2") format("woff2");font-weight:400 700;font-display:swap}
 :root{
   --night:#0B0C0E;
   --night-2:#14161C;

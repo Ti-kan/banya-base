@@ -12,12 +12,12 @@
 <meta property="og:description" content="Парная на дровах, горячий чан, 6 гостей в цене. От 2,000 ₽/час.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b0c0e'/%3E%3Cpath d='M8 23h16M10 23V14l6-5 6 5v9' stroke='%23cc3d0b' stroke-width='2.6' fill='none' stroke-linejoin='round'/%3E%3C/svg%3E">
-<link rel="preload" href="/fonts/oswald.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fonts/onest.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" as="image" type="image/avif" imagesrcset="/img/hero-480.avif 480w, /img/hero-720.avif 720w, /img/hero-1200.avif 1200w" imagesizes="(min-width: 1024px) 700px, calc(100vw - 32px)" fetchpriority="high">
+<link rel="preload" href="../../fonts/oswald.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../fonts/onest.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" type="image/avif" imagesrcset="../../img/hero-480.avif 480w, ../../img/hero-720.avif 720w, ../../img/hero-1200.avif 1200w" imagesizes="(min-width: 1024px) 700px, calc(100vw - 32px)" fetchpriority="high">
 <style>
-@font-face{font-family:"Oswald";src:url(/fonts/oswald.woff2) format("woff2");font-weight:500 700;font-display:swap}
-@font-face{font-family:"Onest";src:url(/fonts/onest.woff2) format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Oswald";src:url("../../fonts/oswald.woff2") format("woff2");font-weight:500 700;font-display:swap}
+@font-face{font-family:"Onest";src:url("../../fonts/onest.woff2") format("woff2");font-weight:400 700;font-display:swap}
 :root{
   --ink:#0b0c0e; --ink-2:#2a2d33; --muted:#5f646d; --line:#e3e5e9; --paper:#f4f5f7; --white:#fff;
   --accent:#cc3d0b; --accent-hover:#b3350a; --accent-on-dark:#ff7a4d; --accent-soft:#fdf1ec;
@@ -44,9 +44,7 @@ h1,h2,h3{margin:0;font-weight:600}
 
 /* Split-Word / Line Rise Masks with zero clipping on diacritics */
 .word-wrap, .w-mask{display:inline-block;overflow:hidden;vertical-align:bottom;line-height:1.18;padding:0.12em 0.04em 0.22em;margin:-0.12em 0 -0.22em}
-.word-inner, .w-in{display:inline-block;will-change:transform,opacity}
-.js .sh:not(.in) .word-inner,
-.js .sh:not(.in) .w-in{opacity:0;transform:translate3d(0,108%,0) rotate(2.5deg);will-change:transform,opacity}
+.word-inner, .w-in{display:inline-block;opacity:1 !important;transform:none !important;will-change:transform,opacity}
 .js .sh.in .word-inner,
 .js .sh.in .w-in,
 .sh.on .word-inner,
@@ -60,7 +58,7 @@ h1,h2,h3{margin:0;font-weight:600}
 .in .word-inner,
 .in .w-in,
 html.no-anim .word-inner,
-html.no-anim .w-in{opacity:1;transform:translate3d(0,0,0) rotate(0deg);transition:transform .72s cubic-bezier(.22,1,.36,1),opacity .5s ease;transition-delay:calc(80ms + var(--w-idx, var(--wi, 0)) * 45ms)}
+html.no-anim .w-in{opacity:1 !important;transform:none !important}
 
 /* кнопки */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 24px;border-radius:999px;border:0;font:600 16px/1.1 var(--sans);cursor:pointer;white-space:nowrap;transition:background-color .2s,transform .2s var(--ease),box-shadow .2s;-webkit-tap-highlight-color:transparent;will-change:transform}
@@ -144,26 +142,23 @@ section.paper{background:var(--paper);padding-bottom:48px;margin-top:36px}
 section.night{background:var(--night);color:#fff;padding-bottom:48px;margin-top:36px}
 
 .sh{position:relative;margin-bottom:24px}
-.sh .num{position:absolute;left:0;top:0;width:52px;height:68px;background:var(--accent);color:#fff;display:grid;place-items:center;font:700 24px/1 var(--display);border-radius:18px 18px 0 18px;transform-origin:50% 10px;will-change:transform,opacity}
+.sh .num{position:absolute;left:0;top:0;width:52px;height:68px;background:var(--accent);color:#fff;display:grid;place-items:center;font:700 24px/1 var(--display);border-radius:18px 18px 0 18px;transform-origin:50% 10px;opacity:1 !important;transform:none !important}
 .sh .num::before{content:"";position:absolute;right:0;bottom:-12px;width:12px;height:12px;background:radial-gradient(circle at 100% 100%,transparent 12px,var(--accent) 13px)}
 .paper .sh .num::before{background:var(--paper)}
 .night .sh .num::before{background:var(--night)}
-.js .sh:not(.in) .num{opacity:0;transform:translateY(20px) rotate(-14deg) scale(0.88)}
-.js .sh.in .num, .sh.on .num, .on .sh .num, .in .sh .num, html.no-anim .sh .num{opacity:1;transform:translateY(0) rotate(0deg) scale(1);transition:opacity 0.6s ease, transform 0.75s cubic-bezier(0.22, 1, 0.36, 1)}
+.sh .num, .js .sh.in .num, .sh.on .num, .on .sh .num, .in .sh .num, html.no-anim .sh .num{opacity:1 !important;transform:none !important}
 
 .sh-t{position:relative;padding:4px 0 0 70px}
-.eyebrow{color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;will-change:transform,opacity}
+.eyebrow{color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:1 !important;transform:none !important}
 .night .eyebrow{color:var(--accent-on-dark)}
-.js .sh:not(.in) .eyebrow{opacity:0;transform:translate3d(-16px, 0, 0)}
-.js .sh.in .eyebrow, .sh.on .eyebrow, .on .eyebrow, .in .eyebrow, html.no-anim .eyebrow{opacity:1;transform:translate3d(0, 0, 0);transition:opacity 0.6s ease 0.06s, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.06s}
+.eyebrow, .js .sh.in .eyebrow, .sh.on .eyebrow, .on .eyebrow, .in .eyebrow, html.no-anim .eyebrow{opacity:1 !important;transform:none !important}
 
-.paper .sh h2, .sh h2, #slots-s .sh h2, #pick .sh h2, #price .sh h2, #master .sh h2, #where .sh h2, #book .sh h2{font:600 34px/1.18 var(--display);text-transform:uppercase;margin-top:8px;text-wrap:balance;overflow:visible !important;padding-bottom:0.22em !important;color:#0B0C0E !important}
-.night .sh h2, section.night .sh h2, #baths .sh h2, #reviews.night .sh h2, .night .sh h2 .word-inner, .night .sh h2 .w-in, .night .sh h2 .w-reveal{font:600 34px/1.18 var(--display);text-transform:uppercase;margin-top:8px;text-wrap:balance;overflow:visible !important;padding-bottom:0.22em !important;color:#FFFFFF !important}
+.paper .sh h2, .sh h2, #slots-s .sh h2, #pick .sh h2, #price .sh h2, #master .sh h2, #where .sh h2, #book .sh h2{font:600 34px/1.18 var(--display);text-transform:uppercase;margin-top:8px;text-wrap:balance;overflow:visible !important;padding-bottom:0.22em !important;color:#0B0C0E !important;opacity:1 !important;transform:none !important}
+.night .sh h2, section.night .sh h2, #baths .sh h2, #reviews.night .sh h2, .night .sh h2 .word-inner, .night .sh h2 .w-in, .night .sh h2 .w-reveal{font:600 34px/1.18 var(--display);text-transform:uppercase;margin-top:8px;text-wrap:balance;overflow:visible !important;padding-bottom:0.22em !important;color:#FFFFFF !important;opacity:1 !important;transform:none !important}
 
-.sh .lead{margin-top:14px;color:var(--muted);font-size:16px;line-height:1.6;max-width:62ch;will-change:transform,opacity}
+.sh .lead{margin-top:14px;color:var(--muted);font-size:16px;line-height:1.6;max-width:62ch;opacity:1 !important;transform:none !important}
 .night .sh .lead{color:var(--night-muted)}
-.js .sh:not(.in) .lead{opacity:0;transform:translate3d(0, 18px, 0)}
-.js .sh.in .lead, .sh.on .lead, .on .lead, .in .lead, html.no-anim .lead{opacity:1;transform:translate3d(0, 0, 0);transition:opacity 0.65s ease 0.22s, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.22s}
+.sh .lead, .js .sh.in .lead, .sh.on .lead, .on .lead, .in .lead, html.no-anim .lead{opacity:1 !important;transform:none !important}
 
 @media (max-width: 767px){
   .sh .num{width:46px;height:60px;font-size:20px;border-radius:14px 14px 0 14px}
@@ -212,13 +207,13 @@ html.no-anim .bath .strip img,
 html.no-anim .master picture img,
 html.no-anim .res picture img{transform:scale(1.0);filter:brightness(1.0);transition:transform 1.1s cubic-bezier(0.22, 1, 0.36, 1), filter 0.8s ease}
 
-/* Staggered Card Wave (Sections 01, 03, 04, 05, 07, 08) */
-.js .slots > li:not(.in),
-.js .baths > .bath:not(.in),
-.js .ptable tbody tr:not(.in),
-.js .two > .box:not(.in),
-.js .steps > li:not(.in),
-.js .contact:not(.in){opacity:0;transform:translate3d(0, 34px, 0) scale(0.97);will-change:transform,opacity}
+/* Staggered Card Wave (Sections 01, 03, 04, 05, 07, 08 - 100% OPAQUE) */
+.slots > li,
+.baths > .bath,
+.ptable tbody tr,
+.two > .box,
+.steps > li,
+.contact{opacity:1 !important;transform:none !important;transition:transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;transition-delay:calc(var(--ci, 0) * 60ms)}
 .slots > li.in,
 .slots > li.on,
 .baths > .bath.in,
@@ -230,13 +225,7 @@ html.no-anim .res picture img{transform:scale(1.0);filter:brightness(1.0);transi
 .steps > li.in,
 .steps > li.on,
 .contact.in,
-.contact.on,
-html.no-anim .slots > li,
-html.no-anim .baths > .bath,
-html.no-anim .ptable tbody tr,
-html.no-anim .two > .box,
-html.no-anim .steps > li,
-html.no-anim .contact{opacity:1;transform:translate3d(0, 0, 0) scale(1);transition:transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.55s ease;transition-delay:calc(var(--ci, 0) * 90ms)}
+.contact.on{opacity:1 !important;transform:none !important}
 
 /* свободные окна */
 .slots{list-style:none;margin:0;padding:0;display:grid;gap:10px;align-content:start}
@@ -556,8 +545,8 @@ dialog.sheet[open]{animation:up .32s var(--ease)}
       <p class="hero-word" aria-hidden="true"><span style="--i:0">Б</span><span style="--i:1">А</span><span style="--i:2">Н</span><span style="--i:3">Я</span></p>
       <div class="frame" id="heroFrame">
         <picture>
-          <source type="image/avif" srcset="/img/hero-480.avif 480w, /img/hero-720.avif 720w, /img/hero-1200.avif 1200w" sizes="(min-width: 1024px) 700px, calc(100vw - 32px)">
-          <img src="/img/hero-720.jpg" srcset="/img/hero-480.jpg 480w, /img/hero-720.jpg 720w, /img/hero-1200.jpg 1200w" sizes="(min-width: 1024px) 700px, calc(100vw - 32px)" width="720" height="518" alt="Банный комплекс Family par: сруб на дровах, горячая купель и зона барбекю" fetchpriority="high">
+          <source type="image/avif" srcset="../../img/hero-480.avif 480w, ../../img/hero-720.avif 720w, ../../img/hero-1200.avif 1200w" sizes="(min-width: 1024px) 700px, calc(100vw - 32px)">
+          <img src="../../img/hero-720.jpg" srcset="../../img/hero-480.jpg 480w, ../../img/hero-720.jpg 720w, ../../img/hero-1200.jpg 1200w" sizes="(min-width: 1024px) 700px, calc(100vw - 32px)" width="720" height="518" alt="Банный комплекс Family par: сруб на дровах, горячая купель и зона барбекю" fetchpriority="high">
         </picture>
 
         <div class="shade"></div>
@@ -670,9 +659,9 @@ dialog.sheet[open]{animation:up .32s var(--ease)}
     <div class="baths">
       <article class="bath reveal" id="bath-small">
         <div class="strip">
-          <figure><img src="/img/malaya-720.jpg" srcset="/img/malaya-480.jpg 480w, /img/malaya-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Парная на дровах Family par"><figcaption>Парная</figcaption></figure>
-          <figure><img src="/img/otdyh-720.jpg" srcset="/img/otdyh-480.jpg 480w, /img/otdyh-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Комната отдыха"><figcaption>Отдых</figcaption></figure>
-          <figure><img src="/img/terrasa-720.jpg" srcset="/img/terrasa-480.jpg 480w, /img/terrasa-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Терраса с мангалом"><figcaption>Терраса</figcaption></figure>
+          <figure><img src="../../img/malaya-720.jpg" srcset="../../img/malaya-480.jpg 480w, ../../img/malaya-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Парная на дровах Family par"><figcaption>Парная</figcaption></figure>
+          <figure><img src="../../img/otdyh-720.jpg" srcset="../../img/otdyh-480.jpg 480w, ../../img/otdyh-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Комната отдыха"><figcaption>Отдых</figcaption></figure>
+          <figure><img src="../../img/terrasa-720.jpg" srcset="../../img/terrasa-480.jpg 480w, ../../img/terrasa-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Терраса с мангалом"><figcaption>Терраса</figcaption></figure>
         </div>
         <div class="bath-b">
           <h3>Сруб «Family par»</h3>
@@ -689,9 +678,9 @@ dialog.sheet[open]{animation:up .32s var(--ease)}
 
       <article class="bath reveal" id="bath-big">
         <div class="strip">
-          <figure><img src="/img/chan-720.jpg" srcset="/img/chan-480.jpg 480w, /img/chan-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Горячий чан под открытым небом"><figcaption>Горячий чан</figcaption></figure>
-          <figure><img src="/img/parnaya-b-720.jpg" srcset="/img/parnaya-b-480.jpg 480w, /img/parnaya-b-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Большая парная"><figcaption>Парная</figcaption></figure>
-          <figure><img src="/img/srub-720.jpg" srcset="/img/srub-480.jpg 480w, /img/srub-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Сруб из кедра"><figcaption>Сруб</figcaption></figure>
+          <figure><img src="../../img/chan-720.jpg" srcset="../../img/chan-480.jpg 480w, ../../img/chan-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Горячий чан под открытым небом"><figcaption>Горячий чан</figcaption></figure>
+          <figure><img src="../../img/parnaya-b-720.jpg" srcset="../../img/parnaya-b-480.jpg 480w, ../../img/parnaya-b-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Большая парная"><figcaption>Парная</figcaption></figure>
+          <figure><img src="../../img/srub-720.jpg" srcset="../../img/srub-480.jpg 480w, ../../img/srub-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Сруб из кедра"><figcaption>Сруб</figcaption></figure>
         </div>
         <div class="bath-b">
           <h3>Большой сруб с чаном</h3>
@@ -708,9 +697,9 @@ dialog.sheet[open]{animation:up .32s var(--ease)}
 
       <article class="bath reveal" id="bath-house">
         <div class="strip">
-          <figure><img src="/img/domik-720.jpg" srcset="/img/domik-480.jpg 480w, /img/domik-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Гостевой домик с баней"><figcaption>Домик</figcaption></figure>
-          <figure><img src="/img/otdyh-720.jpg" srcset="/img/otdyh-480.jpg 480w, /img/otdyh-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Спальная зона"><figcaption>Спальня</figcaption></figure>
-          <figure><img src="/img/terrasa-720.jpg" srcset="/img/terrasa-480.jpg 480w, /img/terrasa-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Мангальная зона"><figcaption>Мангал</figcaption></figure>
+          <figure><img src="../../img/domik-720.jpg" srcset="../../img/domik-480.jpg 480w, ../../img/domik-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Гостевой домик с баней"><figcaption>Домик</figcaption></figure>
+          <figure><img src="../../img/otdyh-720.jpg" srcset="../../img/otdyh-480.jpg 480w, ../../img/otdyh-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Спальная зона"><figcaption>Спальня</figcaption></figure>
+          <figure><img src="../../img/terrasa-720.jpg" srcset="../../img/terrasa-480.jpg 480w, ../../img/terrasa-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" loading="lazy" alt="Мангальная зона"><figcaption>Мангал</figcaption></figure>
         </div>
         <div class="bath-b">
           <h3>Пакет «Таёжный вечер»</h3>
@@ -779,8 +768,8 @@ dialog.sheet[open]{animation:up .32s var(--ease)}
     <div class="sh reveal"><span class="num" aria-hidden="true">05</span><div class="sh-t"><p class="eyebrow">Традиции и ритуалы</p><h2 id="h-master"><span class="word-wrap w-mask"><span class="word-inner w-in" style="--w-idx:0;--wi:0">Банные</span></span> <span class="word-wrap w-mask"><span class="word-inner w-in" style="--w-idx:1;--wi:1">ритуалы,</span></span> <span class="word-wrap w-mask"><span class="word-inner w-in" style="--w-idx:2;--wi:2">веники</span></span> <span class="word-wrap w-mask"><span class="word-inner w-in" style="--w-idx:3;--wi:3">и</span></span> <span class="word-wrap w-mask"><span class="word-inner w-in" style="--w-idx:4;--wi:4">запарки</span></span></h2><p class="lead">Свежие дубовые, берёзовые и пихтовые веники, горячая купель на таёжных травах и самовар с алтайским мёдом.</p></div></div>
     <div class="master reveal" id="ritualsCard">
       <picture>
-        <source type="image/avif" srcset="/img/rituals-480.avif 480w, /img/rituals-800.avif 800w" sizes="(min-width:1024px) 420px, (min-width:760px) 360px, calc(100vw - 32px)">
-        <img src="/img/rituals-800.jpg" srcset="/img/rituals-480.jpg 480w, /img/rituals-800.jpg 800w" sizes="(min-width:1024px) 420px, (min-width:760px) 360px, calc(100vw - 32px)" width="800" height="600" loading="lazy" decoding="async" alt="Банные ритуалы, веники и сибирский чан на травах">
+        <source type="image/avif" srcset="../../img/rituals-480.avif 480w, ../../img/rituals-800.avif 800w" sizes="(min-width:1024px) 420px, (min-width:760px) 360px, calc(100vw - 32px)">
+        <img src="../../img/rituals-800.jpg" srcset="../../img/rituals-480.jpg 480w, ../../img/rituals-800.jpg 800w" sizes="(min-width:1024px) 420px, (min-width:760px) 360px, calc(100vw - 32px)" width="800" height="600" loading="lazy" decoding="async" alt="Банные ритуалы, веники и сибирский чан на травах">
       </picture>
       <div style="display:grid;gap:16px">
         <div class="exp">
@@ -1420,7 +1409,7 @@ function render(){
     var why=(!b.chan&&o.extras.indexOf("chan")>-1)?'<p class="why">Горячая купель установлена у большого комплекса «Family par».</p>':"";
     var perPerson=Math.round(p.sum/Math.max(1,o.guests));
     var perPersonPill='<span class="per-person-pill">по '+rub(perPerson)+' с человека на '+o.guests+' '+plural(o.guests,"гостя","гостей","гостей")+'</span>';
-    return '<div class="res"><picture><source type="image/avif" srcset="/img/'+b.img+'-480.avif"><img src="/img/'+b.img+'-480.jpg" width="88" height="66" alt="" loading="lazy"></picture><h3>'+b.name+'</h3><p class="calc">'+p.lines.join(" + ")+'</p><div class="sum-row"><p class="sum" data-sum-k="'+k+'">'+rub(p.sum)+'</p>'+perPersonPill+'</div>'+why+'<button class="btn btn-accent btn-wide" type="button" data-pick="'+k+'">Выбрать и забронировать</button><button class="btn btn-ghost btn-wide tg-share-btn" type="button" data-share="'+k+'">🤝 Скинуть расчёт компании в Telegram ↗</button></div>';
+    return '<div class="res"><picture><source type="image/avif" srcset="../../img/'+b.img+'-480.avif"><img src="../../img/'+b.img+'-480.jpg" width="88" height="66" alt="" loading="lazy"></picture><h3>'+b.name+'</h3><p class="calc">'+p.lines.join(" + ")+'</p><div class="sum-row"><p class="sum" data-sum-k="'+k+'">'+rub(p.sum)+'</p>'+perPersonPill+'</div>'+why+'<button class="btn btn-accent btn-wide" type="button" data-pick="'+k+'">Выбрать и забронировать</button><button class="btn btn-ghost btn-wide tg-share-btn" type="button" data-share="'+k+'">🤝 Скинуть расчёт компании в Telegram ↗</button></div>';
   }).join("");
   $("#results").innerHTML=(pk.note?'<p class="res-none">'+pk.note+'</p>':"")+out;
   $$("[data-pick]",form).forEach(function(btn){btn.addEventListener("click",function(){
@@ -1549,38 +1538,58 @@ addEventListener("scroll",function(){
   },120);
 },{passive:true});
 
-/* Rock-solid text & card observer (Bi-directional re-triggering & webdriver support) */
-if("IntersectionObserver" in window){
-  var rv=new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if(entry.isIntersecting){
-        entry.target.classList.add("in");
-        entry.target.classList.add("on");
-      }else{
-        if(!navigator.webdriver){
-          entry.target.classList.remove("in");
-        }
-      }
-    });
-  },{threshold:0.04,rootMargin:"0px 0px -2% 0px"});
-
-  var revealTargets=$$(".sh, .slots > li, .baths > .bath, .ptable tbody tr, .two > .box, .steps > li, .contact, .reveal, .master, .res");
-  revealTargets.forEach(function(el,idx){
-    el.style.setProperty("--ci",idx % 6);
-    rv.observe(el);
-  });
-
-  if(navigator.webdriver){
-    revealTargets.forEach(function(el){
+/* FAIL-SAFE REVEAL ENGINE ON BANYA (SCROLL + TIMERS) */
+function revealInViewport() {
+  var vh = window.innerHeight || document.documentElement.clientHeight;
+  var targets = $$(".reveal, .sh, .reveal-card, .bath, .slot, .box, .steps, .steps > li, .ptable tbody tr, .contact, .master, .res");
+  for (var i = 0; i < targets.length; i++) {
+    var el = targets[i];
+    if (el.classList.contains("in")) continue;
+    var rect = el.getBoundingClientRect();
+    if (rect.top < vh + 80 && rect.bottom > -80) {
       el.classList.add("in");
       el.classList.add("on");
-    });
-    $$(".sh").forEach(function(el){
-      el.classList.add("in");
-      el.classList.add("on");
-    });
+    }
   }
 }
+
+if ("IntersectionObserver" in window) {
+  var rv = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) {
+        entry.target.classList.add("in");
+        entry.target.classList.add("on");
+      }
+    });
+  }, { threshold: 0.01, rootMargin: "0px 0px 50px 0px" });
+
+  var revealTargets = $$(".reveal, .sh, .reveal-card, .bath, .slot, .box, .steps, .steps > li, .ptable tbody tr, .contact, .master, .res");
+  revealTargets.forEach(function(el, idx){
+    el.style.setProperty("--ci", idx % 6);
+    rv.observe(el);
+  });
+}
+
+window.addEventListener("scroll", function() {
+  if (!window._rvRaf) {
+    window._rvRaf = requestAnimationFrame(function() {
+      revealInViewport();
+      window._rvRaf = null;
+    });
+  }
+}, { passive: true });
+
+revealInViewport();
+setTimeout(revealInViewport, 300);
+setTimeout(revealInViewport, 600);
+setTimeout(revealInViewport, 1200);
+
+setTimeout(function() {
+  $$(".reveal, .sh, .reveal-card, .bath, .slot, .box, .steps, .steps > li, .ptable tbody tr, .contact, .master, .res").forEach(function(el){
+    el.classList.add("in");
+    el.classList.add("on");
+  });
+}, 1500);
 
 var heroEl=$(".hero");
 if(heroEl){

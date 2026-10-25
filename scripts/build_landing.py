@@ -16,6 +16,13 @@ import re
 
 DATA_PATH = "/Users/takanov/banya-base/baths-krasnoyarsk.json"
 BASE_DIR = "/Users/takanov/banya-base"
+CUSTOM_DATA_PATH = "/Users/takanov/banya-base/banya_custom_data_50.json"
+
+if os.path.exists(CUSTOM_DATA_PATH):
+    with open(CUSTOM_DATA_PATH, "r", encoding="utf-8") as f:
+        CUSTOM_DATA = json.load(f)
+else:
+    CUSTOM_DATA = {}
 
 REVIEWS_DATA = [
     # Row 1 (Moves Left)
@@ -128,62 +135,123 @@ def render_landing(venue, all_venues=None, is_root=False):
     wa_url = f"https://wa.me/{wa}"
     tg_plain_msg = f"Здравствуйте! Хочу забронировать комплекс «{name}». Подскажите свободное время на ближайшие дни."
 
-    if slug == "taiga-82":
-        small_name = "Комплекс «Тайга 82»"
-        small_cap = 8
-        small_max = 12
-        small_wd = 2750
-        small_we = 3250
-        big_name = "Большой комплекс «Тайга 1913»"
-        big_cap = 8
-        big_max = 15
-        big_wd = 3250
-        big_we = 3750
-        house_name = "Пакет «Таёжный вечер (5 часов)»"
+    c_data = CUSTOM_DATA.get(slug, {})
+    if c_data:
+        name = c_data.get("name", name)
+        address = c_data.get("address", address)
+        phone = c_data.get("phone", phone)
+        rating = c_data.get("rating", 5.0)
+        reviews_count = c_data.get("reviews_count", rev2gis)
+        halls = c_data.get("halls", [])
+        hall1 = halls[0] if len(halls) > 0 else {}
+        hall2 = halls[1] if len(halls) > 1 else {}
+        hall3 = halls[2] if len(halls) > 2 else {}
+
+        h1_imgs = hall1.get("images", [])
+        hall1_cap1 = h1_imgs[0].get("caption", "Парная") if len(h1_imgs) > 0 else "Парная"
+        hall1_cap2 = h1_imgs[1].get("caption", "Отдых") if len(h1_imgs) > 1 else "Отдых"
+        hall1_cap3 = h1_imgs[2].get("caption", "Терраса") if len(h1_imgs) > 2 else "Терраса"
+
+        h2_imgs = hall2.get("images", [])
+        hall2_cap1 = h2_imgs[0].get("caption", "Купель / чан") if len(h2_imgs) > 0 else "Купель / чан"
+        hall2_cap2 = h2_imgs[1].get("caption", "Парная") if len(h2_imgs) > 1 else "Парная"
+        hall2_cap3 = h2_imgs[2].get("caption", "Сруб") if len(h2_imgs) > 2 else "Сруб"
+
+        h3_imgs = hall3.get("images", [])
+        hall3_cap1 = h3_imgs[0].get("caption", "Чайная зона") if len(h3_imgs) > 0 else "Чайная зона"
+        hall3_cap2 = h3_imgs[1].get("caption", "Гостиная") if len(h3_imgs) > 1 else "Гостиная"
+        hall3_cap3 = h3_imgs[2].get("caption", "Мангал") if len(h3_imgs) > 2 else "Мангал"
+
+        small_name = "Комплекс «Тайга 82»" if slug == "taiga-82" else hall1.get("title", f"Сруб «{name}»")
+        small_cap = 8 if slug == "taiga-82" else hall1.get("cap", cap)
+        small_max = 12 if slug == "taiga-82" else hall1.get("cap_max", small_cap + 4)
+        small_wd = 2750 if slug == "taiga-82" else hall1.get("price_wd", price_wd)
+        small_we = 3250 if slug == "taiga-82" else hall1.get("price_we", price_we)
+        small_min = hall1.get("min_hours", "от 2 часов")
+        small_desc = hall1.get("desc", "Парная на дровах, комната отдыха, душ, мангал.")
+        small_btn = hall1.get("btn_text", "Забронировать сруб")
+
+        big_name = "Большой комплекс «Тайга 1913»" if slug == "taiga-82" else hall2.get("title", f"Большой комплекс с чаном")
+        big_cap = 8 if slug == "taiga-82" else hall2.get("cap", cap)
+        big_max = 15 if slug == "taiga-82" else hall2.get("cap_max", big_cap + 6)
+        big_wd = 3250 if slug == "taiga-82" else hall2.get("price_wd", price_wd + 500)
+        big_we = 3750 if slug == "taiga-82" else hall2.get("price_we", price_we + 500)
+        big_water = "Горячая купель 5 000 ₽ на всё время" if slug == "taiga-82" else hall2.get("water_note", "Горячий чан на дровах")
+        big_desc = hall2.get("desc", f"Просторная парная, {big_water.lower()}, трапезная, мангал.")
+        big_btn = hall2.get("btn_text", "Забронировать с чаном")
+
+        house_name = "Пакет «Таёжный вечер (5 часов)»" if slug == "taiga-82" else hall3.get("title", f"Пакет «Таёжный отдых в {name}»")
         house_cap = 6
         house_max = 6
-        house_wd = 11000
-        house_we = 15000
-        chan_val = 5000
-    elif slug == "kedrovy-log":
-        small_name = "Одноэтажная баня на Базаихе"
-        small_cap = 8
-        small_max = 8
-        small_wd = 2550
-        small_we = 3500
-        big_name = "Двухэтажная баня на дровах"
-        big_cap = 8
-        big_max = 8
-        big_wd = 3800
-        big_we = 5800
-        house_name = "Пакет «Таёжный вечер — Базаиха Релакс (3+1 час в подарок)»"
-        house_cap = 8
-        house_max = 8
-        house_wd = 2550 * 3
-        house_we = 3500 * 3
-        chan_val = 5500
+        house_wd = 11000 if slug == "taiga-82" else hall3.get("price_wd", small_wd * 4)
+        house_we = 15000 if slug == "taiga-82" else hall3.get("price_we", small_we * 4)
+        house_dur = "5 часов отдыха"
+        house_inc = "Мангал, чай, веник"
+        house_desc = "5 часов отдыха: растопленная парная, мангальная зона, сибирский травяной чай, веник в подарок."
+        house_btn = "Заказать пакет 5 часов" if slug == "taiga-82" else hall3.get("btn_text", "Выбрать таёжный пакет")
+
+        chan_note = "Горячая купель на дровах" if slug == "taiga-82" else c_data.get("chan_note", big_water)
+        chan_price_str = "5 000 ₽ / топка" if slug == "taiga-82" else c_data.get("chan_price", "3 000 ₽ / топка")
+        chan_val = 5000 if slug == "taiga-82" else (3000 if "3" in chan_price_str else 4000)
+        brooms_note = c_data.get("brooms_note", "Свежие таёжные веники (от 450 ₽)")
+        master_note = c_data.get("master_note", "Банный ритуал и парение от пармейстера (2 000 ₽)")
+        extra_guest_str = "1 000 ₽ / за всё время" if slug == "taiga-82" else c_data.get("extra_guest", "350 ₽ / час")
+        extra_guest = 1000 if slug == "taiga-82" else (500 if "500" in extra_guest_str else 350)
+        included_list = c_data.get("included_list", [
+            "Зона барбекю, решётки, шампуры и посуда",
+            "Таёжный чай с сибирским мёдом",
+            "Охраняемая парковка на территории",
+            "Банные простыни и шапочки"
+        ])
     else:
+        hall1_cap1, hall1_cap2, hall1_cap3 = "Парная", "Отдых", "Терраса"
+        hall2_cap1, hall2_cap2, hall2_cap3 = "Горячий чан", "Парная", "Сруб"
+        hall3_cap1, hall3_cap2, hall3_cap3 = "Домик", "Спальня", "Мангал"
+
         small_name = f"Сруб «{name}»"
         small_cap = cap
         small_max = cap + 4
         small_wd = price_wd
         small_we = price_we
+        small_min = "от 2 часов"
+        small_desc = "Парная на дровах, комната отдыха, душ, чайник, посуда, зона барбекю."
+        small_btn = "Забронировать сруб"
+
         big_name = f"Большой комплекс «{name}» с чаном"
         big_cap = cap
         big_max = cap + 7
         big_wd = price_wd + 500
         big_we = price_we + 500
+        big_water = chan_note
+        big_desc = "Кедровая парная, просторная трапезная, горячий уличный чан на дровах, мангал."
+        big_btn = "Забронировать с чаном"
+
         house_name = "Пакет «Таёжный вечер (5 часов)»"
         house_cap = 6
         house_max = 6
         house_wd = price_wd * 4
         house_we = price_we * 4
+        house_dur = "5 часов отдыха"
+        house_inc = "Мангал, чай, веник"
+        house_desc = "Полные 5 часов аренды комплекса, мангальная зона, сибирский травяной чай, банный веник в подарок."
+        house_btn = "Заказать пакет 5 часов"
+
+        chan_price_str = f"{chan_price:,} ₽ / топка"
         chan_val = chan_price
+        brooms_note = "Свежий пихтовый или дубовый веник (от 400 ₽ / шт)"
+        master_note = "Банный ритуал и таёжные запарки (2 000 ₽)"
+        extra_guest_str = f"{extra_guest:,} ₽ / за всё время"
+        included_list = [
+            "Зона барбекю, решётки, шампуры и посуда",
+            "Таёжный чай с сибирским мёдом",
+            "Охраняемая парковка на территории",
+            "Питьевая артезианская вода"
+        ]
 
     baths_json = json.dumps({
         "small": {
             "name": small_name,
-            "img": "malaya",
+            "img": f"venues/{slug}/hall1_1",
             "cap": small_cap,
             "max": small_max,
             "min": 2,
@@ -195,7 +263,7 @@ def render_landing(venue, all_venues=None, is_root=False):
         },
         "big": {
             "name": big_name,
-            "img": "parnaya-b",
+            "img": f"venues/{slug}/hall2_1",
             "cap": big_cap,
             "max": big_max,
             "min": 3,
@@ -207,7 +275,7 @@ def render_landing(venue, all_venues=None, is_root=False):
         },
         "house": {
             "name": house_name,
-            "img": "domik",
+            "img": f"venues/{slug}/hall3_1",
             "cap": house_cap,
             "max": house_max,
             "night": True,
@@ -231,46 +299,59 @@ def render_landing(venue, all_venues=None, is_root=False):
     h_where_text = split_words("Как добраться")
     h_book_text = split_words("Как забронировать")
 
-    if slug == "kedrovy-log":
-        ptable_rows = f"""
-          <tr><td>Одноэтажная баня на Базаихе<span class="sub">Русская парная на дровах, комната отдыха, мангал</span></td><td>{price_wd:,}&nbsp;₽</td><td>3 500&nbsp;₽</td><td>до {cap} гостей</td><td>2 часа</td></tr>
-          <tr><td>Двухэтажная баня на дровах<span class="sub">Просторная парная, гостиная, веранда у реки Базаиха</span></td><td>3 800&nbsp;₽</td><td>{price_we:,}&nbsp;₽</td><td>до {cap} гостей</td><td>3 часа</td></tr>
-          <tr><td>Пакет «Таёжный вечер — Базаиха Релакс»<span class="sub">В четверг при заказе 3 часов — 4-й час в подарок!</span></td><td>{price_wd * 3:,}&nbsp;₽</td><td>10 500&nbsp;₽</td><td>до {cap} гостей</td><td>4 часа</td></tr>
-        """
-        extra_services = f"""
-          <li><span>Тёплая купель на всё время пребывания</span><span>5&nbsp;500&nbsp;₽</span></li>
-          <li><span>Холодная купель на всё время пребывания</span><span>4&nbsp;500&nbsp;₽</span></li>
-          <li><span>Свежие веники (пихта, дуб, берёза)</span><span>550&nbsp;₽ / шт</span></li>
-          <li><span>Дополнительный гость (свыше {cap} человек)</span><span>{extra_guest:,}&nbsp;₽ / за всё время</span></li>
-        """
-        included_services = """
-          <li><span>Комплименты: мёд, джем, сушки, вода с лимоном и розмарином, травяной чай</span><span>0&nbsp;₽</span></li>
-          <li><span>Банный текстиль: полотенца, шапочки, тапочки</span><span>0&nbsp;₽</span></li>
-          <li><span>Мангальная зона, решётки и шампуры</span><span>0&nbsp;₽</span></li>
-          <li><span>Охраняемая парковка на Базаихе</span><span>0&nbsp;₽</span></li>
-        """
-    else:
-        ptable_rows = f"""
-          <tr><td>Сруб «{name}»<span class="sub">Русская парная на дровах, комната отдыха, мангал</span></td><td>{price_wd:,}&nbsp;₽</td><td>{price_we:,}&nbsp;₽</td><td>{cap} гостей</td><td>2 часа</td></tr>
-          <tr><td>Большой комплекс с чаном<span class="sub">Просторная парная, горячая уличная купель, сосны</span></td><td>{price_wd + 500:,}&nbsp;₽</td><td>{price_we + 500:,}&nbsp;₽</td><td>{cap} гостей</td><td>3 часа</td></tr>
-          <tr><td>Пакет «Таёжный вечер»<span class="sub">5 часов отдыха, мангал, чай, веник в подарок</span></td><td>{price_wd * 4:,}&nbsp;₽</td><td>{price_we * 4:,}&nbsp;₽</td><td>до {cap} гостей</td><td>5 часов</td></tr>
-        """
-        extra_services = f"""
-          <li><span>{chan_note}</span><span>{chan_price:,}&nbsp;₽ / топка</span></li>
-          <li><span>Свежий пихтовый или дубовый веник</span><span>от 400&nbsp;₽ / шт</span></li>
-          <li><span>Банный ритуал и таёжные запарки</span><span>2&nbsp;000&nbsp;₽</span></li>
-          <li><span>Дополнительный гость (с {cap+1}-го человека)</span><span>{extra_guest:,}&nbsp;₽ / за всё время</span></li>
-        """
-        included_services = """
-          <li><span>Зона барбекю, решётки, шампуры и посуда</span><span>0&nbsp;₽</span></li>
-          <li><span>Таёжный чай с сибирским мёдом</span><span>0&nbsp;₽</span></li>
-          <li><span>Охраняемая парковка на территории</span><span>0&nbsp;₽</span></li>
-          <li><span>Питьевая артезианская вода</span><span>0&nbsp;₽</span></li>
-        """
+    ptable_rows = f"""
+          <tr><td>{small_name}<span class="sub">{small_desc}</span></td><td>{small_wd:,}&nbsp;₽</td><td>{small_we:,}&nbsp;₽</td><td>{small_cap} гостей</td><td>{small_min}</td></tr>
+          <tr><td>{big_name}<span class="sub">{big_desc}</span></td><td>{big_wd:,}&nbsp;₽</td><td>{big_we:,}&nbsp;₽</td><td>до {big_max} гостей</td><td>{big_water}</td></tr>
+          <tr><td>{house_name}<span class="sub">{house_desc}</span></td><td>{house_wd:,}&nbsp;₽</td><td>{house_we:,}&nbsp;₽</td><td>до {big_max} гостей</td><td>{house_dur}</td></tr>
+    """
+
+    c_chan_note = "Горячая уличная купель" if len(chan_note) > 28 else chan_note
+    c_chan_price = chan_price_str if len(chan_price_str) <= 16 else "5 000 ₽ / топка"
+    c_extra_guest = extra_guest_str if len(extra_guest_str) <= 16 else f"{extra_guest:,} ₽ / чел"
+
+    extra_services = f"""
+          <li><span>{c_chan_note}</span><span>{c_chan_price}</span></li>
+          <li><span>Свежие таёжные веники</span><span>от 450&nbsp;₽ / шт</span></li>
+          <li><span>Банный ритуал и запарки</span><span>2&nbsp;000&nbsp;₽</span></li>
+          <li><span>Дополнительный гость</span><span>{c_extra_guest}</span></li>
+    """
+
+    included_services = "\n".join([f'          <li><span>{item}</span><span>0&nbsp;₽</span></li>' for item in included_list])
+
+    # Photo paths (relative to page)
+    hero_avif_srcset = f"{asset_prefix}img/venues/{slug}/hero-480.avif 480w, {asset_prefix}img/venues/{slug}/hero-720.avif 720w, {asset_prefix}img/venues/{slug}/hero-1200.avif 1200w"
+    hero_jpg_srcset = f"{asset_prefix}img/venues/{slug}/hero-480.jpg 480w, {asset_prefix}img/venues/{slug}/hero-720.jpg 720w, {asset_prefix}img/venues/{slug}/hero-1200.jpg 1200w"
+    hero_src = f"{asset_prefix}img/venues/{slug}/hero-720.jpg"
+
+    hall1_1_src = f"{asset_prefix}img/venues/{slug}/hall1_1-720.jpg"
+    hall1_1_srcset = f"{asset_prefix}img/venues/{slug}/hall1_1-480.jpg 480w, {asset_prefix}img/venues/{slug}/hall1_1-720.jpg 720w"
+    hall1_2_src = f"{asset_prefix}img/venues/{slug}/hall1_2-720.jpg"
+    hall1_2_srcset = f"{asset_prefix}img/venues/{slug}/hall1_2-480.jpg 480w, {asset_prefix}img/venues/{slug}/hall1_2-720.jpg 720w"
+    hall1_3_src = f"{asset_prefix}img/venues/{slug}/hall1_3-720.jpg"
+    hall1_3_srcset = f"{asset_prefix}img/venues/{slug}/hall1_3-480.jpg 480w, {asset_prefix}img/venues/{slug}/hall1_3-720.jpg 720w"
+
+    hall2_1_src = f"{asset_prefix}img/venues/{slug}/hall2_1-720.jpg"
+    hall2_1_srcset = f"{asset_prefix}img/venues/{slug}/hall2_1-480.jpg 480w, {asset_prefix}img/venues/{slug}/hall2_1-720.jpg 720w"
+    hall2_2_src = f"{asset_prefix}img/venues/{slug}/hall2_2-720.jpg"
+    hall2_2_srcset = f"{asset_prefix}img/venues/{slug}/hall2_2-480.jpg 480w, {asset_prefix}img/venues/{slug}/hall2_2-720.jpg 720w"
+    hall2_3_src = f"{asset_prefix}img/venues/{slug}/hall2_3-720.jpg"
+    hall2_3_srcset = f"{asset_prefix}img/venues/{slug}/hall2_3-480.jpg 480w, {asset_prefix}img/venues/{slug}/hall2_3-720.jpg 720w"
+
+    hall3_1_src = f"{asset_prefix}img/venues/{slug}/hall3_1-720.jpg"
+    hall3_1_srcset = f"{asset_prefix}img/venues/{slug}/hall3_1-480.jpg 480w, {asset_prefix}img/venues/{slug}/hall3_1-720.jpg 720w"
+    hall3_2_src = f"{asset_prefix}img/venues/{slug}/hall3_2-720.jpg"
+    hall3_2_srcset = f"{asset_prefix}img/venues/{slug}/hall3_2-480.jpg 480w, {asset_prefix}img/venues/{slug}/hall3_2-720.jpg 720w"
+    hall3_3_src = f"{asset_prefix}img/venues/{slug}/hall3_3-720.jpg"
+    hall3_3_srcset = f"{asset_prefix}img/venues/{slug}/hall3_3-480.jpg 480w, {asset_prefix}img/venues/{slug}/hall3_3-720.jpg 720w"
+
+    rituals_avif_srcset = f"{asset_prefix}img/venues/{slug}/rituals-480.avif 480w, {asset_prefix}img/venues/{slug}/rituals-800.avif 800w"
+    rituals_jpg_srcset = f"{asset_prefix}img/venues/{slug}/rituals-480.jpg 480w, {asset_prefix}img/venues/{slug}/rituals-800.jpg 800w"
+    rituals_src = f"{asset_prefix}img/venues/{slug}/rituals-800.jpg"
 
     meta_title = f"Банный комплекс «{name}» — баня на дровах и купели в Красноярске ({address})"
-    meta_desc = f"Банный комплекс «{name}» в Красноярске: русская парная на дровах, {chan_note.lower()}, зона барбекю. От {price_wd:,} ₽/час. {cap} гостей включено в цену! Рейтинг ★ 5.0."
+    meta_desc = f"Банный комплекс «{name}» в Красноярске: {small_name}, {big_name}, {chan_note.lower()}, зона барбекю. От {small_wd:,} ₽/час. {small_cap} гостей включено в цену! Рейтинг ★ 5.0."
     canonical_url = f"https://ti-kan.github.io/banya-base/b/{slug}/" if not is_root else "https://ti-kan.github.io/banya-base/"
+    og_image = f"https://ti-kan.github.io/banya-base/img/venues/{slug}/hero-1200.jpg"
 
     html = f"""<!doctype html>
 <html lang="ru" class="js">
@@ -286,7 +367,7 @@ def render_landing(venue, all_venues=None, is_root=False):
 <meta property="og:title" content="{meta_title}">
 <meta property="og:description" content="{meta_desc}">
 <meta property="og:url" content="{canonical_url}">
-<meta property="og:image" content="https://ti-kan.github.io/banya-base/img/hero-1200.jpg">
+<meta property="og:image" content="{og_image}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="ru_RU">
@@ -294,12 +375,12 @@ def render_landing(venue, all_venues=None, is_root=False):
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{meta_title}">
 <meta name="twitter:description" content="{meta_desc}">
-<meta name="twitter:image" content="https://ti-kan.github.io/banya-base/img/hero-1200.jpg">
+<meta name="twitter:image" content="{og_image}">
 <meta name="theme-color" content="#ffffff">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b0c0e'/%3E%3Cpath d='M8 23h16M10 23V14l6-5 6 5v9' stroke='%23cc3d0b' stroke-width='2.6' fill='none' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preload" href="{asset_prefix}fonts/oswald.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{asset_prefix}fonts/onest.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" as="image" type="image/avif" imagesrcset="{asset_prefix}img/hero-480.avif 480w, {asset_prefix}img/hero-720.avif 720w, {asset_prefix}img/hero-1200.avif 1200w" imagesizes="(min-width: 1024px) 700px, calc(100vw - 32px)" fetchpriority="high">
+<link rel="preload" as="image" type="image/avif" imagesrcset="{hero_avif_srcset}" imagesizes="(min-width: 1024px) 700px, calc(100vw - 32px)" fetchpriority="high">
 <script type="application/ld+json">
 {{
   "@context": "https://schema.org",
@@ -694,7 +775,8 @@ fieldset.q{{border:0;padding:0;margin:0}}
 .list{{list-style:none;margin:0;padding:0;display:grid;gap:10px;font-size:15px}}
 .list li{{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding-bottom:8px}}
 .list li:last-child{{border-bottom:0;padding-bottom:0}}
-.list li span:not(:first-child){{font-weight:600;white-space:nowrap}}
+.list li span:first-child{{min-width:0;word-break:break-word}}
+.list li span:not(:first-child){{font-weight:600;white-space:nowrap;flex-shrink:0}}
 @media (min-width:760px){{.two{{grid-template-columns:1fr 1fr}}}}
 
 /* традиции и ритуалы */
@@ -849,7 +931,7 @@ dialog.sheet[open]{{animation:up .32s var(--ease)}}
   .facts dd{{font-size:17px}}
   .hero-info .answer{{order:1;margin:0 0 32px;font-size:17px;line-height:1.55;color:var(--ink-2);max-width:42ch}}
   .slots{{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}}
-  .card{{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,440px);column-gap:48px;row-gap:26px;min-height:680px;align-items:start;padding:36px 40px}}
+  .card{{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,440px);column-gap:48px;row-gap:26px;min-height:760px;align-items:start;padding:36px 40px}}
   .card>.q{{grid-column:1}}
   .results{{grid-column:2;grid-row:1/span 5;position:sticky;top:160px;border-top:0;border-left:1px solid var(--line);padding:0 0 0 40px}}
   .master{{grid-template-columns:420px minmax(0,1fr);gap:64px}}
@@ -915,8 +997,8 @@ dialog.sheet[open]{{animation:up .32s var(--ease)}}
       <p class="hero-word" aria-hidden="true">{hw_spans}</p>
       <div class="frame" id="heroFrame">
         <picture>
-          <source type="image/avif" srcset="{asset_prefix}img/hero-480.avif 480w, {asset_prefix}img/hero-720.avif 720w, {asset_prefix}img/hero-1200.avif 1200w" sizes="(min-width: 1024px) 700px, calc(100vw - 32px)">
-          <img src="{asset_prefix}img/hero-720.jpg" srcset="{asset_prefix}img/hero-480.jpg 480w, {asset_prefix}img/hero-720.jpg 720w, {asset_prefix}img/hero-1200.jpg 1200w" sizes="(min-width: 1024px) 700px, calc(100vw - 32px)" width="720" height="518" alt="Банный комплекс {name}: сруб на дровах, горячая купель и зона барбекю" loading="eager" decoding="async" fetchpriority="high">
+          <source type="image/avif" srcset="{hero_avif_srcset}" sizes="(min-width: 1024px) 700px, calc(100vw - 32px)">
+          <img src="{hero_src}" srcset="{hero_jpg_srcset}" sizes="(min-width: 1024px) 700px, calc(100vw - 32px)" width="720" height="518" alt="Банный комплекс {name}: сруб на дровах, горячая купель и зона барбекю" loading="eager" decoding="async" fetchpriority="high">
         </picture>
 
         <div class="shade"></div>
@@ -1029,58 +1111,58 @@ dialog.sheet[open]{{animation:up .32s var(--ease)}}
     <div class="baths">
       <article class="bath reveal" id="bath-small">
         <div class="strip">
-          <figure><img src="{asset_prefix}img/malaya-720.jpg" srcset="{asset_prefix}img/malaya-480.jpg 480w, {asset_prefix}img/malaya-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" alt="Парная на дровах {name}"><figcaption>Парная</figcaption></figure>
-          <figure><img src="{asset_prefix}img/otdyh-720.jpg" srcset="{asset_prefix}img/otdyh-480.jpg 480w, {asset_prefix}img/otdyh-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" alt="Комната отдыха"><figcaption>Отдых</figcaption></figure>
-          <figure><img src="{asset_prefix}img/terrasa-720.jpg" srcset="{asset_prefix}img/terrasa-480.jpg 480w, {asset_prefix}img/terrasa-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" alt="Терраса с мангалом"><figcaption>Терраса</figcaption></figure>
+          <figure><img src="{hall1_1_src}" srcset="{hall1_1_srcset}" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" alt="Парная {name}"><figcaption>{hall1_cap1}</figcaption></figure>
+          <figure><img src="{hall1_2_src}" srcset="{hall1_2_srcset}" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" alt="Комната отдыха {name}"><figcaption>{hall1_cap2}</figcaption></figure>
+          <figure><img src="{hall1_3_src}" srcset="{hall1_3_srcset}" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" alt="Терраса {name}"><figcaption>{hall1_cap3}</figcaption></figure>
         </div>
         <div class="bath-b">
-          <h3>Сруб «{name}»</h3>
+          <h3>{small_name}</h3>
           <dl class="bfacts">
-            <div><dt>Будни</dt><dd><b>{price_wd:,}&nbsp;₽</b>/час</dd></div>
-            <div><dt>Выходные</dt><dd><b>{price_we:,}&nbsp;₽</b>/час</dd></div>
-            <div><dt>Вместимость</dt><dd>{cap} гостей в цене</dd></div>
-            <div><dt>Минимум</dt><dd>от 2 часов</dd></div>
+            <div><dt>Будни</dt><dd><b>{small_wd:,}&nbsp;₽</b>/час</dd></div>
+            <div><dt>Выходные</dt><dd><b>{small_we:,}&nbsp;₽</b>/час</dd></div>
+            <div><dt>Вместимость</dt><dd>{small_cap} гостей в цене</dd></div>
+            <div><dt>Минимум</dt><dd>{small_min}</dd></div>
           </dl>
-          <p class="incl">Парная на дровах, комната отдыха, душ, чайник, посуда, зона барбекю.</p>
-          <button class="btn btn-accent btn-wide" type="button" data-book="small">Забронировать сруб</button>
+          <p class="incl">{small_desc}</p>
+          <button class="btn btn-accent btn-wide" type="button" data-book="small">{small_btn}</button>
         </div>
       </article>
 
       <article class="bath reveal" id="bath-big">
         <div class="strip">
-          <figure><img src="{asset_prefix}img/chan-720.jpg" srcset="{asset_prefix}img/chan-480.jpg 480w, {asset_prefix}img/chan-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" alt="Горячий чан под открытым небом"><figcaption>Горячий чан</figcaption></figure>
-          <figure><img src="{asset_prefix}img/parnaya-b-720.jpg" srcset="{asset_prefix}img/parnaya-b-480.jpg 480w, {asset_prefix}img/parnaya-b-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" alt="Большая парная"><figcaption>Парная</figcaption></figure>
-          <figure><img src="{asset_prefix}img/srub-720.jpg" srcset="{asset_prefix}img/srub-480.jpg 480w, {asset_prefix}img/srub-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" alt="Сруб из кедра"><figcaption>Сруб</figcaption></figure>
+          <figure><img src="{hall2_1_src}" srcset="{hall2_1_srcset}" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" alt="Купель и зона отдыха {name}"><figcaption>{hall2_cap1}</figcaption></figure>
+          <figure><img src="{hall2_2_src}" srcset="{hall2_2_srcset}" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" alt="Большая парная {name}"><figcaption>{hall2_cap2}</figcaption></figure>
+          <figure><img src="{hall2_3_src}" srcset="{hall2_3_srcset}" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" alt="Банный комплекс {name}"><figcaption>{hall2_cap3}</figcaption></figure>
         </div>
         <div class="bath-b">
-          <h3>Большой сруб с чаном</h3>
+          <h3>{big_name}</h3>
           <dl class="bfacts">
-            <div><dt>Будни</dt><dd><b>{price_wd + 500:,}&nbsp;₽</b>/час</dd></div>
-            <div><dt>Выходные</dt><dd><b>{price_we + 500:,}&nbsp;₽</b>/час</dd></div>
-            <div><dt>Вместимость</dt><dd>{cap} гостей в цене (до {cap+7})</dd></div>
-            <div><dt>Купель</dt><dd>{chan_note}</dd></div>
+            <div><dt>Будни</dt><dd><b>{big_wd:,}&nbsp;₽</b>/час</dd></div>
+            <div><dt>Выходные</dt><dd><b>{big_we:,}&nbsp;₽</b>/час</dd></div>
+            <div><dt>Вместимость</dt><dd>{big_cap} гостей в цене (до {big_max})</dd></div>
+            <div><dt>Купель</dt><dd>{big_water}</dd></div>
           </dl>
-          <p class="incl">Кедровая парная, просторная трапезная, горячий уличный чан на дровах, мангал.</p>
-          <button class="btn btn-accent btn-wide" type="button" data-book="big">Забронировать с чаном</button>
+          <p class="incl">{big_desc}</p>
+          <button class="btn btn-accent btn-wide" type="button" data-book="big">{big_btn}</button>
         </div>
       </article>
 
       <article class="bath reveal" id="bath-house">
         <div class="strip">
-          <figure><img src="{asset_prefix}img/domik-720.jpg" srcset="{asset_prefix}img/domik-480.jpg 480w, {asset_prefix}img/domik-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" alt="Гостевой домик с баней"><figcaption>Домик</figcaption></figure>
-          <figure><img src="{asset_prefix}img/otdyh-720.jpg" srcset="{asset_prefix}img/otdyh-480.jpg 480w, {asset_prefix}img/otdyh-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" alt="Спальная зона"><figcaption>Спальня</figcaption></figure>
-          <figure><img src="{asset_prefix}img/terrasa-720.jpg" srcset="{asset_prefix}img/terrasa-480.jpg 480w, {asset_prefix}img/terrasa-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" alt="Мангальная зона"><figcaption>Мангал</figcaption></figure>
+          <figure><img src="{hall3_1_src}" srcset="{hall3_1_srcset}" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" alt="Чайная зона {name}"><figcaption>{hall3_cap1}</figcaption></figure>
+          <figure><img src="{hall3_2_src}" srcset="{hall3_2_srcset}" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" alt="Гостиная {name}"><figcaption>{hall3_cap2}</figcaption></figure>
+          <figure><img src="{hall3_3_src}" srcset="{hall3_3_srcset}" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" alt="Мангальная зона {name}"><figcaption>{hall3_cap3}</figcaption></figure>
         </div>
         <div class="bath-b">
-          <h3>Пакет «Таёжный вечер»</h3>
+          <h3>{house_name}</h3>
           <dl class="bfacts">
-            <div><dt>Будни</dt><dd><b>{price_wd * 4:,}&nbsp;₽</b>/пакет</dd></div>
-            <div><dt>Выходные</dt><dd><b>{price_we * 4:,}&nbsp;₽</b>/пакет</dd></div>
-            <div><dt>Длительность</dt><dd>5 часов отдыха</dd></div>
-            <div><dt>Включено</dt><dd>Мангал, чай, веник</dd></div>
+            <div><dt>Будни</dt><dd><b>{house_wd:,}&nbsp;₽</b>/пакет</dd></div>
+            <div><dt>Выходные</dt><dd><b>{house_we:,}&nbsp;₽</b>/пакет</dd></div>
+            <div><dt>Длительность</dt><dd>{house_dur}</dd></div>
+            <div><dt>Включено</dt><dd>{house_inc}</dd></div>
           </dl>
-          <p class="incl">Полные 5 часов аренды комплекса, мангальная зона, сибирский травяной чай, банный веник в подарок.</p>
-          <button class="btn btn-accent btn-wide" type="button" data-book="house">Заказать пакет 5 часов</button>
+          <p class="incl">{house_desc}</p>
+          <button class="btn btn-accent btn-wide" type="button" data-book="house">{house_btn}</button>
         </div>
       </article>
     </div>
@@ -1124,8 +1206,8 @@ dialog.sheet[open]{{animation:up .32s var(--ease)}}
     <div class="sh reveal"><span class="num" aria-hidden="true">05</span><div class="sh-t"><p class="eyebrow">Традиции и ритуалы</p><h2 id="h-master">{h_master_text}</h2><p class="lead">Свежие дубовые, берёзовые и пихтовые веники, горячая купель на таёжных травах и самовар с алтайским мёдом.</p></div></div>
     <div class="master reveal" id="ritualsCard">
       <picture>
-        <source type="image/avif" srcset="{asset_prefix}img/rituals-480.avif 480w, {asset_prefix}img/rituals-800.avif 800w" sizes="(min-width:1024px) 420px, (min-width:760px) 360px, calc(100vw - 32px)">
-        <img src="{asset_prefix}img/rituals-800.jpg" srcset="{asset_prefix}img/rituals-480.jpg 480w, {asset_prefix}img/rituals-800.jpg 800w" sizes="(min-width:1024px) 420px, (min-width:760px) 360px, calc(100vw - 32px)" width="800" height="600" alt="Банные ритуалы, веники и сибирский чан на травах">
+        <source type="image/avif" srcset="{rituals_avif_srcset}" sizes="(min-width:1024px) 420px, (min-width:760px) 360px, calc(100vw - 32px)">
+        <img src="{rituals_src}" srcset="{rituals_jpg_srcset}" sizes="(min-width:1024px) 420px, (min-width:760px) 360px, calc(100vw - 32px)" width="800" height="600" alt="Банные ритуалы, веники и сибирский чан в {name}">
       </picture>
       <div style="display:grid;gap:16px">
         <div class="exp">

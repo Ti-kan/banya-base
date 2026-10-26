@@ -47,7 +47,7 @@ def clean_banya_street(b):
     slug = b.get('slug', '')
     
     if slug == 'banya-solontsy':
-        return 'в Солонцах (ул. Осенняя)'
+        return 'в Солонцах, ул. Осенняя'
     
     raw = addr
     raw = re.sub(r'^Красноярский край,\s*', '', raw)
@@ -59,35 +59,35 @@ def clean_banya_street(b):
     raw = re.sub(r'^городской округ Дивногорск,\s*', '', raw)
     
     if 'Дрокино' in raw:
-        return 'в Дрокино (ул. Садовая, 33)'
+        return 'в Дрокино, ул. Садовая, 33'
     if 'Кузнецово' in raw or 'Таежная' in raw or 'Таёжная' in raw:
-        return 'в Кузнецово (Таёжная ул., 4)'
+        return 'в Кузнецово, Таёжная ул., 4'
     if 'Нанжуль' in raw:
-        return 'в Солонцах (мкр. Нанжуль, 10А)'
+        return 'в Солонцах, мкр. Нанжуль, 10А'
     if 'Калина' in raw:
-        return 'в Солонцах (СНТ Калина, 97)'
+        return 'в Солонцах, СНТ Калина, 97'
     if 'Солонцы' in raw and 'Сосновая' in raw:
-        return 'в Солонцах (Сосновая ул., 21)'
+        return 'в Солонцах, Сосновая ул., 21'
     if 'Солонцы' in raw and 'Осенняя' in raw:
-        return 'в Солонцах (ул. Осенняя)'
+        return 'в Солонцах, ул. Осенняя'
     if 'Манский' in raw:
         if 'Весёлый' in raw:
-            return 'в посёлке Манский (Весёлый пер., 1а)'
+            return 'в посёлке Манский, Весёлый пер., 1а'
         return 'в посёлке Манский'
     if 'Сосновоборск' in raw or 'Сосновоборская' in raw:
-        return 'в Сосновоборске (Сосновоборская ул., 36)'
+        return 'в Сосновоборске, Сосновоборская ул., 36'
     if 'Минино' in raw:
-        return 'в Минино (Восточная ул., 1)'
+        return 'в Минино, Восточная ул., 1'
     if 'Бугачево' in raw:
-        return 'в Бугачево (Молодёжная ул., 9)'
+        return 'в Бугачево, Молодёжная ул., 9'
     if 'Сухая Балка' in raw:
-        return 'в Сухой Балке (Ландмания, 1)'
+        return 'в Сухой Балке, Ландмания, 1'
     if 'Емельяново' in raw and 'Придорожная' in raw:
-        return 'в Емельяново (Придорожная ул., 2)'
+        return 'в Емельяново, Придорожная ул., 2'
     if 'Шафран-2' in raw:
-        return 'в СНТ «Шафран-2» (Солнечная ул., 1)'
+        return 'в СНТ «Шафран-2», Солнечная ул., 1'
     if 'Александрия' in raw:
-        return 'в КП «Александрия» (Орлиная ул., 22)'
+        return 'в КП «Александрия», Орлиная ул., 22'
     if 'Дивный бор' in raw or 'Дивный Бор' in raw:
         return 'в Дивном Бору'
     if 'Тихий Бор' in raw:
@@ -97,7 +97,7 @@ def clean_banya_street(b):
     if 'Здоровье' in raw:
         return 'в СО «Здоровье», 2'
     if 'Алюминий' in raw:
-        return 'в СНТ «Алюминий» (Мичуринская ул., 183)'
+        return 'в СНТ «Алюминий», Мичуринская ул., 183'
     if 'Демьяна Бедного' in raw:
         return 'на ул. Демьяна Бедного, 6'
     if 'Елены Стасовой' in raw:
@@ -154,6 +154,7 @@ def clean_banya_street(b):
     clean = raw.strip()
     if not (clean.startswith('на ') or clean.startswith('в ')):
         clean = 'на ' + clean
+    clean = clean.replace(' (', ', ').replace('(', '').replace(')', '')
     return clean
 
 def build_banya_messages(b):

@@ -161,7 +161,6 @@ def build_banya_messages(b):
     name_clean = clean_banya_name(b)
     street_short = clean_banya_street(b)
     slug = b['slug']
-    b_id = b.get('id', 1)
     pwd = b.get('price_wd', 2000)
     pwd_fmt = f"{pwd:,}".replace(",", " ")
     chan = b.get('chan', 0)
@@ -174,15 +173,12 @@ def build_banya_messages(b):
         
     url = f"https://ti-kan.github.io/banya-base/b/{slug}/"
     
-    greetings = ["Здравствуйте!", "Приветствую!", "Добрый день!"]
-    greeting = greetings[(b_id - 1) % len(greetings)]
-    
-    # Ultra-concise 1-paragraph message
+    # Exact human template without scraped brackets, no emojis, single message
     msg_single = (
-        f"{greeting} Увидели, что для вашей бани «{name_clean}» ({street_short}) можно сделать удобный современный сайт для гостей, и бесплатно собрали под вас готовый вариант:\n"
-        f"👉 {url}\n\n"
-        f"Мы уже внесли туда ваши условия (от {pwd_fmt} ₽/час {chan_info}), свободные окна и калькулятор, который сам делит сумму на компанию друзей. "
-        f"Сайт отдаём вам полностью бесплатно (можете сразу ставить в 2ГИС и Карты), а если захотите — подсветим, как к нему подключить авто-сохранение и дожим всех гостей, которые спросили цену, но не забронировали. "
+        f"Доброе утро! Увидели, что для вашей бани можно сделать удобный современный сайт для гостей, и бесплатно собрали под вас готовый вариант:\n"
+        f"{url}\n\n"
+        f"Уже подтянули туда ваши фото, условия, свободные окна и калькулятор расчёта на компанию. "
+        f"Сайт отдаём полностью бесплатно (можно сразу ставить в 2ГИС и Карты), плюс при желании поможем настроить так, чтобы гости, которые просто спросили цену, не терялись и доходили до брони. "
         f"Посмотрите с телефона — как вам?"
     )
     
@@ -192,7 +188,7 @@ def build_banya_messages(b):
         'pwd_formatted': pwd_fmt,
         'chan_info': chan_info,
         'url': url,
-        'greeting': greeting,
+        'greeting': "Доброе утро!",
         'msg_single': msg_single,
         'msg1': msg_single,
         'msg2': msg_single,
@@ -533,11 +529,7 @@ window.BATHS_DATA = __DATA_PLACEHOLDER__;
         var base = (baseInput.value || "https://ti-kan.github.io/banya-base").trim().replace(/\\/+$/, "");
         var currentUrl = base + "/b/" + slug + "/";
 
-        var text = "";
-        if(tplNum === "1") text = item.msg1;
-        else if(tplNum === "2") text = item.msg2.replace(/https:\/\/ti-kan\.github\.io\/banya-base\/b\/[^\/]+\//, currentUrl);
-        else if(tplNum === "3") text = item.msg3.replace(/https:\/\/ti-kan\.github\.io\/banya-base\/b\/[^\/]+\//, currentUrl);
-
+        var text = item.msg_single.replace(/https:\/\/ti-kan\.github\.io\/banya-base\/b\/[^\/]+\//, currentUrl);
         txtArea.value = text;
       });
     });
@@ -653,12 +645,11 @@ window.BATHS_DATA = __DATA_PLACEHOLDER__;
 
 def generate_markdown_cheat_sheet(baths):
     lines = [
-        "# ВТОРНИК: 50 БАННЫХ КОМПЛЕКСОВ КРАСНОЯРСКА — OUTREACH CHEAT-SHEET",
+        "# 50 БАННЫХ КОМПЛЕКСОВ КРАСНОЯРСКА — OUTREACH CHEAT-SHEET",
         "",
-        "> **Инструкция по рассылке во вторник:**",
-        "> 1. **Шаг 1 (Утро / Холодный контакт)**: отправляем короткий вход **без ссылок**, чтобы не ловить спам-блок от WhatsApp/Telegram.",
-        "> 2. **Шаг 2 (После ответа / Владение)**: как только ответили или подтвердили контакт — отправляем ссылку на персональный сайт с калькулятором на компанию.",
-        "> 3. **Вариант 3 (Короткий)**: для быстрых карточек в 2ГИС, Яндекс.Картах или соцсетях.",
+        "> **Инструкция по рассылке:**",
+        "> 1. **Сообщение владельцу**: 1 ультра-лаконичное сообщение со ссылкой на готовый персональный сайт.",
+        "> 2. **WhatsApp / Telegram**: прямые ссылки с предзаполненным текстом готовы в таблице и карточках.",
         "",
         "## СВОДНАЯ ТАБЛИЦА (50 КОМПЛЕКСОВ)",
         "",

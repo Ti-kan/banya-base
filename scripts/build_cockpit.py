@@ -157,7 +157,7 @@ def clean_banya_street(b):
     clean = clean.replace(' (', ', ').replace('(', '').replace(')', '')
     return clean
 
-def build_banya_messages(b):
+def build_banya_messages(b, idx=1):
     name_clean = clean_banya_name(b)
     street_short = clean_banya_street(b)
     slug = b['slug']
@@ -173,12 +173,18 @@ def build_banya_messages(b):
         
     url = f"https://ti-kan.github.io/banya-base/b/{slug}/"
     
-    # Exact human template without scraped brackets, no emojis, single message
+    # Rotate greeting strictly between 'Добрый день!' and 'Здравствуйте!'
+    greetings = ["Добрый день!", "Здравствуйте!"]
+    b_id = b.get('id', idx)
+    greeting = greetings[(b_id - 1) % len(greetings)]
+
+    # New human anti-slop message format
     msg_single = (
-        f"Доброе утро! Увидели, что для вашей бани можно сделать удобный современный сайт для гостей, и бесплатно собрали под вас готовый вариант:\n"
+        f"{greeting} Увидели, что для вашей бани можно сделать удобный современный сайт, и собрали под вас готовый вариант:\n"
         f"{url}\n\n"
-        f"Уже подтянули туда ваши фото, условия, свободные окна и калькулятор расчёта на компанию. "
-        f"Сайт отдаём полностью бесплатно (можно сразу ставить в 2ГИС и Карты), плюс при желании поможем настроить так, чтобы гости, которые просто спросили цену, не терялись и доходили до брони. "
+        f"Уже перенесли туда ваши фотографии, залы, условия отдыха и добавили калькулятор, который удобно считает стоимость на компанию друзей. "
+        f"Сам сайт отдаём вам бесплатно — можете спокойно забрать его и поставить в 2ГИС или Карты. "
+        f"А если захотите, подскажем, как через него не терять гостей, которые просто спросили цену и ушли думать. "
         f"Посмотрите с телефона — как вам?"
     )
     
@@ -188,7 +194,7 @@ def build_banya_messages(b):
         'pwd_formatted': pwd_fmt,
         'chan_info': chan_info,
         'url': url,
-        'greeting': "Доброе утро!",
+        'greeting': greeting,
         'msg_single': msg_single,
         'msg1': msg_single,
         'msg2': msg_single,
@@ -697,8 +703,8 @@ def main():
         
     print(f"Loaded {len(baths)} baths from {DATA_PATH}")
     
-    for b in baths:
-        info = build_banya_messages(b)
+    for i, b in enumerate(baths, 1):
+        info = build_banya_messages(b, i)
         b.update(info)
         
     # Write enriched baths-krasnoyarsk.json

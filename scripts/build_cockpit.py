@@ -157,6 +157,11 @@ def clean_banya_street(b):
     clean = clean.replace(' (', ', ').replace('(', '').replace(')', '')
     return clean
 
+DELIVERED_SLUGS = {
+    "par-ok", "medvezhka", "kedrovy-log", "tridevyatoe-tsarstvo", "banya-house", "terem",
+    "elki-i-volki", "par-house", "green-rancho", "a-frame", "medvezhya-berloga", "barhatny-sezon"
+}
+
 def build_banya_messages(b, idx=1):
     name_clean = clean_banya_name(b)
     street_short = clean_banya_street(b)
@@ -178,6 +183,9 @@ def build_banya_messages(b, idx=1):
     b_id = b.get('id', idx)
     greeting = greetings[(b_id - 1) % len(greetings)]
 
+    delivered = slug in DELIVERED_SLUGS
+    delivery_status = "✅ Отправлено" if delivered else "🔥 Не доставлено"
+
     # New human anti-slop message format
     msg_single = (
         f"{greeting} Увидели, что для вашей бани можно сделать удобный современный сайт, и собрали под вас готовый вариант:\n"
@@ -195,6 +203,8 @@ def build_banya_messages(b, idx=1):
         'chan_info': chan_info,
         'url': url,
         'greeting': greeting,
+        'delivered': delivered,
+        'delivery_status': delivery_status,
         'msg_single': msg_single,
         'msg1': msg_single,
         'msg2': msg_single,
@@ -332,6 +342,17 @@ h1{font:700 clamp(26px,3.5vw,40px)/1.15 var(--display);text-transform:uppercase;
 
 .toast{position:fixed;bottom:24px;right:24px;background:#fff;color:var(--night);padding:12px 20px;border-radius:999px;font:700 13px/1 var(--sans);z-index:99;box-shadow:0 12px 30px rgba(0,0,0,.5);opacity:0;transform:translateY(20px);pointer-events:none;transition:all .25s}
 .toast.show{opacity:1;transform:translateY(0)}
+
+.badge-delivered{background:rgba(16,185,129,.22);color:#10b981;border:1px solid rgba(16,185,129,.55);font-weight:700}
+.badge-pending{background:rgba(204,61,11,.2);color:#ff7a4d;border:1px solid rgba(204,61,11,.5);font-weight:700}
+.card.card-delivered{border-color:rgba(16,185,129,.45)}
+.card.card-pending{border-color:rgba(204,61,11,.3)}
+.tab.tab-remaining{background:rgba(204,61,11,.16);color:#ff7a4d;border-color:rgba(204,61,11,.5);font-weight:700}
+.tab.tab-remaining:hover{background:var(--accent);color:#fff}
+.tab.tab-remaining.on{background:var(--accent);color:#fff;border-color:var(--accent);box-shadow:0 4px 16px var(--accent-glow)}
+.tab.tab-delivered{background:rgba(16,185,129,.14);color:#10b981;border-color:rgba(16,185,129,.45);font-weight:700}
+.tab.tab-delivered:hover{background:var(--green);color:#fff}
+.tab.tab-delivered.on{background:var(--green);color:#fff;border-color:var(--green);box-shadow:0 4px 16px rgba(16,185,129,.35)}
 </style>
 </head>
 <body>
@@ -340,8 +361,8 @@ h1{font:700 clamp(26px,3.5vw,40px)/1.15 var(--display);text-transform:uppercase;
   <div class="hero-box">
     <h1>50 Банных комплексов Красноярска — Outreach Cockpit</h1>
     <p class="lead">
-      Персонализированная рассылка на вторник: проверенные B2B-шаблоны без спам-блокировок.
-      В карточке каждой бани доступен предпросмотр любого из 3 вариантов, редактируемый текст перед отправкой и сохранение статуса в <code>localStorage</code>.
+      Персонализированная рассылка по банным комплексам Красноярска.
+      12 бань уже получили персональный сайт, 38 оставшихся готовы к отправке через WhatsApp и Telegram в 1 клик.
     </p>
 
     <!-- Outreach Progress Stats -->
@@ -351,16 +372,16 @@ h1{font:700 clamp(26px,3.5vw,40px)/1.15 var(--display);text-transform:uppercase;
         <div class="stat-lbl">Всего комплексов</div>
       </div>
       <div class="stat">
-        <div class="stat-val champagne" id="statStep1">0 / 50</div>
-        <div class="stat-lbl">Шаг 1: Контакт</div>
+        <div class="stat-val green" id="statDelivered">12</div>
+        <div class="stat-lbl">✅ Успешно доставлено</div>
       </div>
       <div class="stat">
-        <div class="stat-val accent" id="statSite">0 / 50</div>
-        <div class="stat-lbl">Шаг 2: Отправлен сайт</div>
+        <div class="stat-val accent" id="statRemaining">38</div>
+        <div class="stat-lbl">🔥 Оставшиеся бани</div>
       </div>
       <div class="stat">
-        <div class="stat-val green" id="statReplied">0 / 50</div>
-        <div class="stat-lbl">Ответили на диалог</div>
+        <div class="stat-val champagne" id="statReplied">0 / 50</div>
+        <div class="stat-lbl">💬 Получено ответов</div>
       </div>
     </div>
 
@@ -372,11 +393,9 @@ h1{font:700 clamp(26px,3.5vw,40px)/1.15 var(--display);text-transform:uppercase;
 
     <div class="controls">
       <div class="filter-tabs" id="filterTabs">
-        <button class="tab on" type="button" data-filter="all">Все 50</button>
-        <button class="tab" type="button" data-filter="unprocessed">⏳ Не начато</button>
-        <button class="tab" type="button" data-filter="step1">💬 Шаг 1 отправлен</button>
-        <button class="tab" type="button" data-filter="site">🚀 Сайт отправлен</button>
-        <button class="tab" type="button" data-filter="replied">✅ Ответили</button>
+        <button class="tab tab-remaining on" type="button" data-filter="remaining">🔥 Оставшиеся 38 бань (Не доставлено)</button>
+        <button class="tab tab-delivered" type="button" data-filter="delivered">✅ Отправлено (12 бань)</button>
+        <button class="tab" type="button" data-filter="all">Все 50 бань</button>
       </div>
 
       <div class="search-wrap">
@@ -436,25 +455,25 @@ window.BATHS_DATA = __DATA_PLACEHOLDER__;
   }
 
   function updateStats(){
-    var step1Count = 0;
-    var siteCount = 0;
+    var deliveredCount = 0;
+    var remainingCount = 0;
     var repliedCount = 0;
 
     allData.forEach(function(b){
+      if(b.delivered) deliveredCount++;
+      else remainingCount++;
       var crm = getCrm(b.slug);
-      if(crm.step1) step1Count++;
-      if(crm.site) siteCount++;
       if(crm.replied) repliedCount++;
     });
 
     document.getElementById("statTotal").textContent = allData.length;
-    document.getElementById("statStep1").textContent = step1Count + " / " + allData.length;
-    document.getElementById("statSite").textContent = siteCount + " / " + allData.length;
+    document.getElementById("statDelivered").textContent = deliveredCount;
+    document.getElementById("statRemaining").textContent = remainingCount;
     document.getElementById("statReplied").textContent = repliedCount + " / " + allData.length;
   }
 
   function render(list){
-    var base = (baseInput.value || "https://ti-kan.github.io/banya-base").trim().replace(/\\/+$/, "");
+    var base = (baseInput.value || "https://ti-kan.github.io/banya-base").trim().replace(/\/+$/, "");
 
     grid.innerHTML = list.map(function(b){
       var staticUrl = base + "/b/" + b.slug + "/";
@@ -464,17 +483,24 @@ window.BATHS_DATA = __DATA_PLACEHOLDER__;
 
       var crm = getCrm(b.slug);
       var cardStatusClass = crm.replied ? "status-replied" : (crm.site ? "status-site" : (crm.step1 ? "status-step1" : ""));
+      var cardDeliveredClass = b.delivered ? "card-delivered" : "card-pending";
+      var statusBadge = b.delivered 
+        ? '<span class="badge badge-delivered">✅ Отправлено</span>' 
+        : '<span class="badge badge-pending">🔥 Не доставлено</span>';
 
       // Clean messenger targets
-      var waPhone = (b.whatsapp || "").replace(/\\D/g, "");
+      var waPhone = (b.whatsapp || "").replace(/\D/g, "");
       if(waPhone.length === 11 && waPhone.startsWith("8")) waPhone = "7" + waPhone.slice(1);
       
       var tgHandle = (b.telegram || "").replace(/^@/, "");
 
-      return '<div class="card ' + cardStatusClass + '" id="card-' + b.slug + '" data-slug="' + b.slug + '">' +
+      return '<div class="card ' + cardStatusClass + ' ' + cardDeliveredClass + '" id="card-' + b.slug + '" data-slug="' + b.slug + '">' +
         '<div class="card-top">' +
           '<span class="rank">#' + b.id + ' · ' + b.slug + '</span>' +
-          '<span class="badge ' + badgeClass + '">' + badgeLabel + '</span>' +
+          '<div style="display:flex;gap:6px;align-items:center;">' +
+            statusBadge +
+            '<span class="badge ' + badgeClass + '">' + badgeLabel + '</span>' +
+          '</div>' +
         '</div>' +
         '<div class="name">' + b.name_clean + '</div>' +
         '<div class="addr">📍 ' + b.street_short + '</div>' +
@@ -494,8 +520,8 @@ window.BATHS_DATA = __DATA_PLACEHOLDER__;
           '<textarea class="msg-textarea" id="txt-' + b.slug + '" rows="7">' + b.msg1 + '</textarea>' +
           '<div class="send-actions">' +
             '<button class="btn btn-copy-msg" type="button" data-copy-for="' + b.slug + '">📋 Копировать</button>' +
-            '<button class="btn btn-wa" type="button" data-wa-for="' + b.slug + '" data-wa-phone="' + waPhone + '">💬 WhatsApp</button>' +
-            '<button class="btn btn-tg" type="button" data-tg-for="' + b.slug + '" data-tg-target="' + tgHandle + '">✈️ Telegram</button>' +
+            '<button class="btn btn-wa" type="button" data-wa-for="' + b.slug + '" data-wa-phone="' + waPhone + '">💬 Открыть WhatsApp</button>' +
+            '<button class="btn btn-tg" type="button" data-tg-for="' + b.slug + '" data-tg-target="' + tgHandle + '" data-tg-phone="' + waPhone + '">✈️ Открыть Telegram</button>' +
           '</div>' +
           '<div class="crm-row">' +
             '<label class="crm-label"><input type="checkbox" data-crm-type="step1" data-slug="' + b.slug + '" ' + (crm.step1 ? "checked" : "") + '> Шаг 1</label>' +
@@ -568,14 +594,16 @@ window.BATHS_DATA = __DATA_PLACEHOLDER__;
       btn.addEventListener("click", function(){
         var slug = btn.getAttribute("data-tg-for");
         var target = btn.getAttribute("data-tg-target");
+        var phone = btn.getAttribute("data-tg-phone");
         var txtArea = document.getElementById("txt-" + slug);
         var text = txtArea ? txtArea.value : "";
         var link = "";
-        if(target.match(/^\\+?\\d+$/)){
-          var num = target.replace(/^\\+/, "");
-          link = "https://t.me/+" + num + "?text=" + encodeURIComponent(text);
-        } else {
+        if(target && !target.match(/^\d+$/)){
           link = "https://t.me/" + target + "?text=" + encodeURIComponent(text);
+        } else if(phone){
+          link = "https://t.me/+" + phone + "?text=" + encodeURIComponent(text);
+        } else {
+          link = "https://t.me";
         }
         window.open(link, "_blank");
       });
@@ -606,6 +634,8 @@ window.BATHS_DATA = __DATA_PLACEHOLDER__;
     var filtered = allData.filter(function(b){
       var crm = getCrm(b.slug);
 
+      if(activeFilter === "remaining" && b.delivered) return false;
+      if(activeFilter === "delivered" && !b.delivered) return false;
       if(activeFilter === "unprocessed" && (crm.step1 || crm.site || crm.replied)) return false;
       if(activeFilter === "step1" && !crm.step1) return false;
       if(activeFilter === "site" && !crm.site) return false;
@@ -623,8 +653,9 @@ window.BATHS_DATA = __DATA_PLACEHOLDER__;
     render(filtered);
   }
 
-  // Initial render
-  render(allData);
+  // Initial filter defaults to "remaining" (38 bathhouses)
+  var activeFilter = "remaining";
+  filterAndSearch();
 
   document.querySelectorAll("#filterTabs .tab").forEach(function(t){
     t.addEventListener("click", function(){
@@ -650,31 +681,46 @@ window.BATHS_DATA = __DATA_PLACEHOLDER__;
 """
 
 def generate_markdown_cheat_sheet(baths):
+    remaining_baths = [b for b in baths if not b.get('delivered', False)]
+    delivered_baths = [b for b in baths if b.get('delivered', False)]
+
     lines = [
         "# 50 БАННЫХ КОМПЛЕКСОВ КРАСНОЯРСКА — OUTREACH CHEAT-SHEET",
         "",
-        "> **Инструкция по рассылке:**",
-        "> 1. **Сообщение владельцу**: 1 ультра-лаконичное сообщение со ссылкой на готовый персональный сайт.",
-        "> 2. **WhatsApp / Telegram**: прямые ссылки с предзаполненным текстом готовы в таблице и карточках.",
+        f"> **Статус кампании:** Всего 50 бань | ✅ Доставлено: {len(delivered_baths)} | 🔥 Ожидают отправки: {len(remaining_baths)}",
+        "> 1. **Прямая отправка в 1 клик**: кликайте по ссылкам WhatsApp или Telegram для мгновенного перехода с предзаполненным текстом.",
+        "> 2. **Формат сообщения**: 1 ультра-лаконичный абзац с прямой ссылкой без скобок и эмодзи.",
         "",
-        "## СВОДНАЯ ТАБЛИЦА (50 КОМПЛЕКСОВ)",
+        f"## 🔥 ОСТАВШИЕСЯ {len(remaining_baths)} БАНЬ (ТРЕБУЮТ ОТПРАВКИ)",
         "",
-        "| № | Название | Адрес | Телефон | WhatsApp | Готовый сайт |",
-        "|---|---|---|---|---|---|"
+        "| № | Название | Адрес | Телефон | WhatsApp (1-клик) | Telegram | Готовый сайт |",
+        "|---|---|---|---|---|---|---|"
     ]
     
-    for b in baths:
+    for b in remaining_baths:
         wa_phone = re.sub(r'\D', '', b.get('whatsapp', ''))
         if len(wa_phone) == 11 and wa_phone.startswith('8'):
             wa_phone = '7' + wa_phone[1:]
-        wa_link = f"https://wa.me/{wa_phone}" if wa_phone else "—"
+        from urllib.parse import quote
+        encoded_msg = quote(b['msg_single'])
+        wa_link = f"https://wa.me/{wa_phone}?text={encoded_msg}" if wa_phone else "—"
+        tg_raw = (b.get('telegram') or '').replace('@', '').strip()
+        tg_link = f"https://t.me/{tg_raw}?text={encoded_msg}" if (tg_raw and not tg_raw.isdigit()) else (f"https://t.me/+{wa_phone}?text={encoded_msg}" if wa_phone else "—")
         url = f"https://ti-kan.github.io/banya-base/b/{b['slug']}/"
-        lines.append(f"| {b['id']} | **{b['name_clean']}** | {b['street_short']} | `{b.get('phone_display', '')}` | [Написать]({wa_link}) | [{b['slug']}]({url}) |")
-        
+        lines.append(f"| {b['id']} | **{b['name_clean']}** | {b['street_short']} | `{b.get('phone_display', '')}` | [💬 Открыть WA]({wa_link}) | [✈️ Написать в TG]({tg_link}) | [{b['slug']}]({url}) |")
+
     lines.append("\n---\n")
-    lines.append("## ПЕРСОНАЛЬНЫЕ СООБЩЕНИЯ ДЛЯ КАЖДОЙ БАНИ\n")
+    lines.append(f"## ✅ УСПЕШНО ДОСТАВЛЕННЫЕ {len(delivered_baths)} БАНЬ\n")
+    lines.append("| № | Название | Адрес | Телефон | Канал | Статус | Сайт |")
+    lines.append("|---|---|---|---|---|---|---|")
+    for b in delivered_baths:
+        url = f"https://ti-kan.github.io/banya-base/b/{b['slug']}/"
+        lines.append(f"| {b['id']} | **{b['name_clean']}** | {b['street_short']} | `{b.get('phone_display', '')}` | Telegram | ✅ Доставлено | [{b['slug']}]({url}) |")
+
+    lines.append("\n---\n")
+    lines.append(f"## ТЕКСТЫ СООБЩЕНИЙ ДЛЯ ОСТАВШИХСЯ {len(remaining_baths)} БАНЬ\n")
     
-    for b in baths:
+    for b in remaining_baths:
         lines.append(f"### #{b['id']} · {b['name_clean']} ({b['slug']})")
         lines.append(f"- **Локация:** {b['street_short']}")
         lines.append(f"- **Телефон:** `{b.get('phone_display', '')}`")
@@ -684,12 +730,14 @@ def generate_markdown_cheat_sheet(baths):
         if len(wa_phone) == 11 and wa_phone.startswith('8'):
             wa_phone = '7' + wa_phone[1:]
         if wa_phone:
-            lines.append(f"- **WhatsApp:** https://wa.me/{wa_phone}")
+            from urllib.parse import quote
+            enc = quote(b['msg_single'])
+            lines.append(f"- **WhatsApp (1 клик с текстом):** https://wa.me/{wa_phone}?text={enc}")
         if b.get('telegram'):
             tg = b['telegram'].replace('@', '')
             lines.append(f"- **Telegram:** https://t.me/{tg}")
             
-        lines.append("\n**Сообщение владельцу (1 лаконичный абзац + ссылка на сайт):**")
+        lines.append("\n**Текст сообщения:**")
         lines.append("```text")
         lines.append(b['msg_single'])
         lines.append("```")

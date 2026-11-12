@@ -782,9 +782,9 @@ dialog.sheet[open]{animation:up .32s var(--ease)}
         <div class="bath-b">
           <h3>Комплекс с ледяная купель</h3>
           <dl class="bfacts">
-            <div><dt>Будни</dt><dd><b>2,100&nbsp;₽</b>/час</dd></div>
-            <div><dt>Выходные</dt><dd><b>2,700&nbsp;₽</b>/час</dd></div>
-            <div><dt>Вместимость</dt><dd>10 гостей в цене (до 14)</dd></div>
+            <div><dt>Будни</dt><dd><b>2,000&nbsp;₽</b>/час</dd></div>
+            <div><dt>Выходные</dt><dd><b>2,600&nbsp;₽</b>/час</dd></div>
+            <div><dt>Вместимость</dt><dd>8 гостей в цене (до 12)</dd></div>
             <div><dt>Купель</dt><dd>Ледяная купель</dd></div>
           </dl>
           <p class="incl">Просторная парная, ледяная купель, большая гостиная, мангальная зона, караоке.</p>
@@ -804,9 +804,9 @@ dialog.sheet[open]{animation:up .32s var(--ease)}
             <div><dt>Будни</dt><dd><b>6,000&nbsp;₽</b>/пакет</dd></div>
             <div><dt>Выходные</dt><dd><b>8,000&nbsp;₽</b>/пакет</dd></div>
             <div><dt>Длительность</dt><dd>5 часов отдыха</dd></div>
-            <div><dt>Включено</dt><dd>Мангал, чай, веник</dd></div>
+            <div><dt>Включено</dt><dd>Мангал, травяной чай, веник в подарок</dd></div>
           </dl>
-          <p class="incl">5 часов отдыха: растопленная парная, мангальная зона, сибирский травяной чай, веник в подарок.</p>
+          <p class="incl">5 часов комфортного банного отдыха: растопленная парная, мангал, самовар, веник.</p>
           <button class="btn btn-accent btn-wide" type="button" data-book="house">Выбрать таёжный пакет</button>
         </div>
       </article>
@@ -825,8 +825,8 @@ dialog.sheet[open]{animation:up .32s var(--ease)}
         <tbody>
 
           <tr><td>Сруб «Green rancho» на дровах<span class="sub">Парная на берёзовых дровах, комната отдыха, обливное ведро, зона барбекю, чайник.</span></td><td>1,500&nbsp;₽</td><td>2,000&nbsp;₽</td><td>6 гостей</td><td>от 2 часов</td></tr>
-          <tr><td>Комплекс с ледяная купель<span class="sub">Просторная парная, ледяная купель, большая гостиная, мангальная зона, караоке.</span></td><td>2,100&nbsp;₽</td><td>2,700&nbsp;₽</td><td>до 14 гостей</td><td>Ледяная купель</td></tr>
-          <tr><td>Пакет «Таёжный отдых в Green rancho»<span class="sub">5 часов отдыха: растопленная парная, мангальная зона, сибирский травяной чай, веник в подарок.</span></td><td>6,000&nbsp;₽</td><td>8,000&nbsp;₽</td><td>до 14 гостей</td><td>5 часов отдыха</td></tr>
+          <tr><td>Комплекс с ледяная купель<span class="sub">Просторная парная, ледяная купель, большая гостиная, мангальная зона, караоке.</span></td><td>2,000&nbsp;₽</td><td>2,600&nbsp;₽</td><td>до 12 гостей</td><td>Ледяная купель</td></tr>
+          <tr><td>Пакет «Таёжный отдых в Green rancho»<span class="sub">5 часов комфортного банного отдыха: растопленная парная, мангал, самовар, веник.</span></td><td>6,000&nbsp;₽</td><td>8,000&nbsp;₽</td><td>до 12 гостей</td><td>5 часов отдыха</td></tr>
     
         </tbody>
       </table>
@@ -837,7 +837,7 @@ dialog.sheet[open]{animation:up .32s var(--ease)}
         <h3>Дополнительные услуги</h3>
         <ul class="list">
 
-          <li><span>Ледяная купель</span><span>2 500 ₽ / сеанс</span></li>
+          <li><span>Ледяная купель</span><span>3 000 ₽ / топка</span></li>
           <li><span>Свежие таёжные веники</span><span>от 450&nbsp;₽ / шт</span></li>
           <li><span>Банный ритуал и запарки</span><span>2&nbsp;000&nbsp;₽</span></li>
           <li><span>Дополнительный гость</span><span>350 ₽ / чел</span></li>
@@ -1340,7 +1340,7 @@ var WA="https://wa.me/79029828003";
 window.TG=TG;
 window.BRAND=BRAND_NAME;
 
-var BATHS={"small": {"name": "Сруб «Green rancho» на дровах", "img": "venues/green-rancho/hall1_1", "cap": 6, "max": 10, "min": 2, "wd": 1500, "we": 2000, "guest": 350, "chan": false, "capText": "6 в цене, до 10"}, "big": {"name": "Комплекс с ледяная купель", "img": "venues/green-rancho/hall2_1", "cap": 10, "max": 14, "min": 3, "wd": 2100, "we": 2700, "guest": 350, "chan": true, "capText": "10 в цене, до 14"}, "house": {"name": "Пакет «Таёжный отдых в Green rancho»", "img": "venues/green-rancho/hall3_1", "cap": 6, "max": 6, "night": true, "wd": 6000, "we": 8000, "chan": false, "capText": "до 6 гостей, 5 ч"}};
+var BATHS={"small": {"name": "Сруб «Green rancho» на дровах", "img": "venues/green-rancho/hall1_1", "cap": 6, "max": 10, "min": 2, "wd": 1500, "we": 2000, "guest": 350, "chan": false, "capText": "6 в цене, до 10"}, "big": {"name": "Комплекс с ледяная купель", "img": "venues/green-rancho/hall2_1", "cap": 8, "max": 12, "min": 3, "wd": 2000, "we": 2600, "guest": 350, "chan": true, "capText": "8 в цене, до 12"}, "house": {"name": "Пакет «Таёжный отдых в Green rancho»", "img": "venues/green-rancho/hall3_1", "cap": 8, "max": 12, "night": true, "wd": 6000, "we": 8000, "guest": 350, "chan": false, "capText": "до 8 гостей, 5 ч"}};
 var CHAN=5000, RITUALS_PRICE=2000;
 var DEMO=true;
 var UPDATED="2026-10-23 10:00";

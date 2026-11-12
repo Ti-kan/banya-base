@@ -782,9 +782,9 @@ dialog.sheet[open]{animation:up .32s var(--ease)}
         <div class="bath-b">
           <h3>Комплекс с тёплый бассейн</h3>
           <dl class="bfacts">
-            <div><dt>Будни</dt><dd><b>3,400&nbsp;₽</b>/час</dd></div>
-            <div><dt>Выходные</dt><dd><b>4,000&nbsp;₽</b>/час</dd></div>
-            <div><dt>Вместимость</dt><dd>12 гостей в цене (до 16)</dd></div>
+            <div><dt>Будни</dt><dd><b>3,300&nbsp;₽</b>/час</dd></div>
+            <div><dt>Выходные</dt><dd><b>3,900&nbsp;₽</b>/час</dd></div>
+            <div><dt>Вместимость</dt><dd>10 гостей в цене (до 14)</dd></div>
             <div><dt>Купель</dt><dd>Тёплый бассейн</dd></div>
           </dl>
           <p class="incl">Просторная парная, тёплый бассейн, большая гостиная, мангальная зона, караоке.</p>
@@ -804,9 +804,9 @@ dialog.sheet[open]{animation:up .32s var(--ease)}
             <div><dt>Будни</dt><dd><b>11,200&nbsp;₽</b>/пакет</dd></div>
             <div><dt>Выходные</dt><dd><b>13,200&nbsp;₽</b>/пакет</dd></div>
             <div><dt>Длительность</dt><dd>5 часов отдыха</dd></div>
-            <div><dt>Включено</dt><dd>Мангал, чай, веник</dd></div>
+            <div><dt>Включено</dt><dd>Мангал, травяной чай, веник в подарок</dd></div>
           </dl>
-          <p class="incl">5 часов отдыха: растопленная парная, мангальная зона, сибирский травяной чай, веник в подарок.</p>
+          <p class="incl">5 часов комфортного банного отдыха: растопленная парная, мангал, самовар, веник.</p>
           <button class="btn btn-accent btn-wide" type="button" data-book="house">Выбрать таёжный пакет</button>
         </div>
       </article>
@@ -825,8 +825,8 @@ dialog.sheet[open]{animation:up .32s var(--ease)}
         <tbody>
 
           <tr><td>Сруб «Адмиральская усадьба» на дровах<span class="sub">Парная на берёзовых дровах, комната отдыха, обливное ведро, зона барбекю, чайник.</span></td><td>2,800&nbsp;₽</td><td>3,300&nbsp;₽</td><td>8 гостей</td><td>от 2 часов</td></tr>
-          <tr><td>Комплекс с тёплый бассейн<span class="sub">Просторная парная, тёплый бассейн, большая гостиная, мангальная зона, караоке.</span></td><td>3,400&nbsp;₽</td><td>4,000&nbsp;₽</td><td>до 16 гостей</td><td>Тёплый бассейн</td></tr>
-          <tr><td>Пакет «Таёжный отдых в Адмиральская усадьба»<span class="sub">5 часов отдыха: растопленная парная, мангальная зона, сибирский травяной чай, веник в подарок.</span></td><td>11,200&nbsp;₽</td><td>13,200&nbsp;₽</td><td>до 16 гостей</td><td>5 часов отдыха</td></tr>
+          <tr><td>Комплекс с тёплый бассейн<span class="sub">Просторная парная, тёплый бассейн, большая гостиная, мангальная зона, караоке.</span></td><td>3,300&nbsp;₽</td><td>3,900&nbsp;₽</td><td>до 14 гостей</td><td>Тёплый бассейн</td></tr>
+          <tr><td>Пакет «Таёжный отдых в Адмиральская усадьба»<span class="sub">5 часов комфортного банного отдыха: растопленная парная, мангал, самовар, веник.</span></td><td>11,200&nbsp;₽</td><td>13,200&nbsp;₽</td><td>до 14 гостей</td><td>5 часов отдыха</td></tr>
     
         </tbody>
       </table>
@@ -837,7 +837,7 @@ dialog.sheet[open]{animation:up .32s var(--ease)}
         <h3>Дополнительные услуги</h3>
         <ul class="list">
 
-          <li><span>Тёплый бассейн</span><span>2 500 ₽ / сеанс</span></li>
+          <li><span>Тёплый бассейн</span><span>5 000 ₽ / топка</span></li>
           <li><span>Свежие таёжные веники</span><span>от 450&nbsp;₽ / шт</span></li>
           <li><span>Банный ритуал и запарки</span><span>2&nbsp;000&nbsp;₽</span></li>
           <li><span>Дополнительный гость</span><span>350 ₽ / чел</span></li>
@@ -1340,7 +1340,7 @@ var WA="https://wa.me/79535842950";
 window.TG=TG;
 window.BRAND=BRAND_NAME;
 
-var BATHS={"small": {"name": "Сруб «Адмиральская усадьба» на дровах", "img": "venues/admiralskaya-usadba/hall1_1", "cap": 8, "max": 12, "min": 2, "wd": 2800, "we": 3300, "guest": 350, "chan": false, "capText": "8 в цене, до 12"}, "big": {"name": "Комплекс с тёплый бассейн", "img": "venues/admiralskaya-usadba/hall2_1", "cap": 12, "max": 16, "min": 3, "wd": 3400, "we": 4000, "guest": 350, "chan": true, "capText": "12 в цене, до 16"}, "house": {"name": "Пакет «Таёжный отдых в Адмиральская усадьба»", "img": "venues/admiralskaya-usadba/hall3_1", "cap": 6, "max": 6, "night": true, "wd": 11200, "we": 13200, "chan": false, "capText": "до 6 гостей, 5 ч"}};
+var BATHS={"small": {"name": "Сруб «Адмиральская усадьба» на дровах", "img": "venues/admiralskaya-usadba/hall1_1", "cap": 8, "max": 12, "min": 2, "wd": 2800, "we": 3300, "guest": 350, "chan": false, "capText": "8 в цене, до 12"}, "big": {"name": "Комплекс с тёплый бассейн", "img": "venues/admiralskaya-usadba/hall2_1", "cap": 10, "max": 14, "min": 3, "wd": 3300, "we": 3900, "guest": 350, "chan": false, "capText": "10 в цене, до 14"}, "house": {"name": "Пакет «Таёжный отдых в Адмиральская усадьба»", "img": "venues/admiralskaya-usadba/hall3_1", "cap": 10, "max": 14, "night": true, "wd": 11200, "we": 13200, "guest": 350, "chan": false, "capText": "до 10 гостей, 5 ч"}};
 var CHAN=3500, RITUALS_PRICE=2000;
 var DEMO=true;
 var UPDATED="2026-10-23 10:00";

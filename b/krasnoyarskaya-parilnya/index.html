@@ -782,9 +782,9 @@ dialog.sheet[open]{animation:up .32s var(--ease)}
         <div class="bath-b">
           <h3>Комплекс с горячий чан на дровах</h3>
           <dl class="bfacts">
-            <div><dt>Будни</dt><dd><b>2,600&nbsp;₽</b>/час</dd></div>
-            <div><dt>Выходные</dt><dd><b>3,700&nbsp;₽</b>/час</dd></div>
-            <div><dt>Вместимость</dt><dd>16 гостей в цене (до 20)</dd></div>
+            <div><dt>Будни</dt><dd><b>2,500&nbsp;₽</b>/час</dd></div>
+            <div><dt>Выходные</dt><dd><b>3,600&nbsp;₽</b>/час</dd></div>
+            <div><dt>Вместимость</dt><dd>14 гостей в цене (до 18)</dd></div>
             <div><dt>Купель</dt><dd>Горячий чан на дровах</dd></div>
           </dl>
           <p class="incl">Просторная парная, горячий чан на дровах, большая гостиная, мангальная зона, караоке.</p>
@@ -804,9 +804,9 @@ dialog.sheet[open]{animation:up .32s var(--ease)}
             <div><dt>Будни</dt><dd><b>8,000&nbsp;₽</b>/пакет</dd></div>
             <div><dt>Выходные</dt><dd><b>12,000&nbsp;₽</b>/пакет</dd></div>
             <div><dt>Длительность</dt><dd>5 часов отдыха</dd></div>
-            <div><dt>Включено</dt><dd>Мангал, чай, веник</dd></div>
+            <div><dt>Включено</dt><dd>Мангал, травяной чай, веник в подарок</dd></div>
           </dl>
-          <p class="incl">5 часов отдыха: растопленная парная, мангальная зона, сибирский травяной чай, веник в подарок.</p>
+          <p class="incl">5 часов комфортного банного отдыха: растопленная парная, мангал, самовар, веник.</p>
           <button class="btn btn-accent btn-wide" type="button" data-book="house">Выбрать таёжный пакет</button>
         </div>
       </article>
@@ -825,8 +825,8 @@ dialog.sheet[open]{animation:up .32s var(--ease)}
         <tbody>
 
           <tr><td>Сруб «Красноярская парильня» на дровах<span class="sub">Парная на берёзовых дровах, комната отдыха, обливное ведро, зона барбекю, чайник.</span></td><td>2,000&nbsp;₽</td><td>3,000&nbsp;₽</td><td>12 гостей</td><td>от 2 часов</td></tr>
-          <tr><td>Комплекс с горячий чан на дровах<span class="sub">Просторная парная, горячий чан на дровах, большая гостиная, мангальная зона, караоке.</span></td><td>2,600&nbsp;₽</td><td>3,700&nbsp;₽</td><td>до 20 гостей</td><td>Горячий чан на дровах</td></tr>
-          <tr><td>Пакет «Таёжный отдых в Красноярская парильня»<span class="sub">5 часов отдыха: растопленная парная, мангальная зона, сибирский травяной чай, веник в подарок.</span></td><td>8,000&nbsp;₽</td><td>12,000&nbsp;₽</td><td>до 20 гостей</td><td>5 часов отдыха</td></tr>
+          <tr><td>Комплекс с горячий чан на дровах<span class="sub">Просторная парная, горячий чан на дровах, большая гостиная, мангальная зона, караоке.</span></td><td>2,500&nbsp;₽</td><td>3,600&nbsp;₽</td><td>до 18 гостей</td><td>Горячий чан на дровах</td></tr>
+          <tr><td>Пакет «Таёжный отдых в Красноярская парильня»<span class="sub">5 часов комфортного банного отдыха: растопленная парная, мангал, самовар, веник.</span></td><td>8,000&nbsp;₽</td><td>12,000&nbsp;₽</td><td>до 18 гостей</td><td>5 часов отдыха</td></tr>
     
         </tbody>
       </table>
@@ -1340,7 +1340,7 @@ var WA="https://wa.me/79233546915";
 window.TG=TG;
 window.BRAND=BRAND_NAME;
 
-var BATHS={"small": {"name": "Сруб «Красноярская парильня» на дровах", "img": "venues/krasnoyarskaya-parilnya/hall1_1", "cap": 12, "max": 16, "min": 2, "wd": 2000, "we": 3000, "guest": 350, "chan": false, "capText": "12 в цене, до 16"}, "big": {"name": "Комплекс с горячий чан на дровах", "img": "venues/krasnoyarskaya-parilnya/hall2_1", "cap": 16, "max": 20, "min": 3, "wd": 2600, "we": 3700, "guest": 350, "chan": true, "capText": "16 в цене, до 20"}, "house": {"name": "Пакет «Таёжный отдых в Красноярская парильня»", "img": "venues/krasnoyarskaya-parilnya/hall3_1", "cap": 6, "max": 6, "night": true, "wd": 8000, "we": 12000, "chan": false, "capText": "до 6 гостей, 5 ч"}};
+var BATHS={"small": {"name": "Сруб «Красноярская парильня» на дровах", "img": "venues/krasnoyarskaya-parilnya/hall1_1", "cap": 12, "max": 16, "min": 2, "wd": 2000, "we": 3000, "guest": 350, "chan": false, "capText": "12 в цене, до 16"}, "big": {"name": "Комплекс с горячий чан на дровах", "img": "venues/krasnoyarskaya-parilnya/hall2_1", "cap": 14, "max": 18, "min": 3, "wd": 2500, "we": 3600, "guest": 350, "chan": true, "capText": "14 в цене, до 18"}, "house": {"name": "Пакет «Таёжный отдых в Красноярская парильня»", "img": "venues/krasnoyarskaya-parilnya/hall3_1", "cap": 14, "max": 18, "night": true, "wd": 8000, "we": 12000, "guest": 350, "chan": false, "capText": "до 14 гостей, 5 ч"}};
 var CHAN=3500, RITUALS_PRICE=2000;
 var DEMO=true;
 var UPDATED="2026-10-23 10:00";

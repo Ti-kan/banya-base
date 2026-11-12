@@ -181,22 +181,40 @@ def render_landing(venue, all_venues=None, is_root=False):
         big_btn = hall2.get("btn_text", "Забронировать с чаном")
 
         house_name = "Пакет «Таёжный вечер (5 часов)»" if slug == "taiga-82" else hall3.get("title", f"Пакет «Таёжный отдых в {name}»")
-        house_cap = 6
-        house_max = 6
+        house_cap = 6 if slug == "taiga-82" else hall3.get("cap", 6)
+        house_max = 6 if slug == "taiga-82" else hall3.get("cap_max", house_cap)
         house_wd = 11000 if slug == "taiga-82" else hall3.get("price_wd", small_wd * 4)
         house_we = 15000 if slug == "taiga-82" else hall3.get("price_we", small_we * 4)
-        house_dur = "5 часов отдыха"
-        house_inc = "Мангал, чай, веник"
-        house_desc = "5 часов отдыха: растопленная парная, мангальная зона, сибирский травяной чай, веник в подарок."
+        house_dur = hall3.get("duration", "5 часов отдыха")
+        house_inc = hall3.get("included", "Мангал, чай, веник")
+        house_desc = hall3.get("desc", "5 часов отдыха: растопленная парная, мангальная зона, сибирский травяной чай, веник в подарок.")
         house_btn = "Заказать пакет 5 часов" if slug == "taiga-82" else hall3.get("btn_text", "Выбрать таёжный пакет")
 
         chan_note = "Горячая купель на дровах" if slug == "taiga-82" else c_data.get("chan_note", big_water)
         chan_price_str = "5 000 ₽ / топка" if slug == "taiga-82" else c_data.get("chan_price", "3 000 ₽ / топка")
-        chan_val = 5000 if slug == "taiga-82" else (3000 if "3" in chan_price_str else 4000)
+        if slug == "taiga-82":
+            chan_val = 5000
+        elif "включ" in str(chan_price_str).lower() or str(chan_price_str).strip().startswith("0"):
+            chan_val = 0
+        elif "3" in str(chan_price_str):
+            chan_val = 3000
+        elif "2" in str(chan_price_str):
+            chan_val = 2000
+        else:
+            chan_val = 4000
+
         brooms_note = c_data.get("brooms_note", "Свежие таёжные веники (от 450 ₽)")
         master_note = c_data.get("master_note", "Банный ритуал и парение от пармейстера (2 000 ₽)")
         extra_guest_str = "1 000 ₽ / за всё время" if slug == "taiga-82" else c_data.get("extra_guest", "350 ₽ / час")
-        extra_guest = 1000 if slug == "taiga-82" else (500 if "500" in extra_guest_str else 350)
+        if "1 000" in str(extra_guest_str) or "1000" in str(extra_guest_str):
+            extra_guest = 1000
+        elif "500" in str(extra_guest_str):
+            extra_guest = 500
+        elif "300" in str(extra_guest_str):
+            extra_guest = 300
+        else:
+            extra_guest = 350
+
         included_list = c_data.get("included_list", [
             "Зона барбекю, решётки, шампуры и посуда",
             "Таёжный чай с сибирским мёдом",
@@ -266,7 +284,7 @@ def render_landing(venue, all_venues=None, is_root=False):
             "img": f"venues/{slug}/hall2_1",
             "cap": big_cap,
             "max": big_max,
-            "min": 3,
+            "min": 2 if slug == "par-house" else 3,
             "wd": big_wd,
             "we": big_we,
             "guest": extra_guest,
@@ -278,11 +296,12 @@ def render_landing(venue, all_venues=None, is_root=False):
             "img": f"venues/{slug}/hall3_1",
             "cap": house_cap,
             "max": house_max,
-            "night": True,
+            "night": False if slug == "par-house" else True,
             "wd": house_wd,
             "we": house_we,
+            "guest": extra_guest,
             "chan": False,
-            "capText": f"до {house_cap} гостей, 5 ч"
+            "capText": f"{house_cap} в цене, до {house_max}" if slug == "par-house" else f"до {house_cap} гостей, 5 ч"
         }
     }, ensure_ascii=False)
 

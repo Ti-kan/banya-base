@@ -3,3 +3,4 @@ out/
 __pycache__/
 *.pyc
 scripts/scraped_raw/
+scraped_raw

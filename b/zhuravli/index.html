@@ -782,9 +782,9 @@ dialog.sheet[open]{animation:up .32s var(--ease)}
         <div class="bath-b">
           <h3>Комплекс с горячий чан на дровах</h3>
           <dl class="bfacts">
-            <div><dt>Будни</dt><dd><b>2,800&nbsp;₽</b>/час</dd></div>
-            <div><dt>Выходные</dt><dd><b>3,500&nbsp;₽</b>/час</dd></div>
-            <div><dt>Вместимость</dt><dd>11 гостей в цене (до 15)</dd></div>
+            <div><dt>Будни</dt><dd><b>2,700&nbsp;₽</b>/час</dd></div>
+            <div><dt>Выходные</dt><dd><b>3,400&nbsp;₽</b>/час</dd></div>
+            <div><dt>Вместимость</dt><dd>9 гостей в цене (до 13)</dd></div>
             <div><dt>Купель</dt><dd>Горячий чан на дровах</dd></div>
           </dl>
           <p class="incl">Просторная парная, горячий чан на дровах, большая гостиная, мангальная зона, караоке.</p>
@@ -804,9 +804,9 @@ dialog.sheet[open]{animation:up .32s var(--ease)}
             <div><dt>Будни</dt><dd><b>8,800&nbsp;₽</b>/пакет</dd></div>
             <div><dt>Выходные</dt><dd><b>11,200&nbsp;₽</b>/пакет</dd></div>
             <div><dt>Длительность</dt><dd>5 часов отдыха</dd></div>
-            <div><dt>Включено</dt><dd>Мангал, чай, веник</dd></div>
+            <div><dt>Включено</dt><dd>Мангал, травяной чай, веник в подарок</dd></div>
           </dl>
-          <p class="incl">5 часов отдыха: растопленная парная, мангальная зона, сибирский травяной чай, веник в подарок.</p>
+          <p class="incl">5 часов комфортного банного отдыха: растопленная парная, мангал, самовар, веник.</p>
           <button class="btn btn-accent btn-wide" type="button" data-book="house">Выбрать таёжный пакет</button>
         </div>
       </article>
@@ -825,8 +825,8 @@ dialog.sheet[open]{animation:up .32s var(--ease)}
         <tbody>
 
           <tr><td>Сруб «Журавли» на дровах<span class="sub">Парная на берёзовых дровах, комната отдыха, обливное ведро, зона барбекю, чайник.</span></td><td>2,200&nbsp;₽</td><td>2,800&nbsp;₽</td><td>7 гостей</td><td>от 2 часов</td></tr>
-          <tr><td>Комплекс с горячий чан на дровах<span class="sub">Просторная парная, горячий чан на дровах, большая гостиная, мангальная зона, караоке.</span></td><td>2,800&nbsp;₽</td><td>3,500&nbsp;₽</td><td>до 15 гостей</td><td>Горячий чан на дровах</td></tr>
-          <tr><td>Пакет «Таёжный отдых в Журавли»<span class="sub">5 часов отдыха: растопленная парная, мангальная зона, сибирский травяной чай, веник в подарок.</span></td><td>8,800&nbsp;₽</td><td>11,200&nbsp;₽</td><td>до 15 гостей</td><td>5 часов отдыха</td></tr>
+          <tr><td>Комплекс с горячий чан на дровах<span class="sub">Просторная парная, горячий чан на дровах, большая гостиная, мангальная зона, караоке.</span></td><td>2,700&nbsp;₽</td><td>3,400&nbsp;₽</td><td>до 13 гостей</td><td>Горячий чан на дровах</td></tr>
+          <tr><td>Пакет «Таёжный отдых в Журавли»<span class="sub">5 часов комфортного банного отдыха: растопленная парная, мангал, самовар, веник.</span></td><td>8,800&nbsp;₽</td><td>11,200&nbsp;₽</td><td>до 13 гостей</td><td>5 часов отдыха</td></tr>
     
         </tbody>
       </table>
@@ -1340,7 +1340,7 @@ var WA="https://wa.me/79607553417";
 window.TG=TG;
 window.BRAND=BRAND_NAME;
 
-var BATHS={"small": {"name": "Сруб «Журавли» на дровах", "img": "venues/zhuravli/hall1_1", "cap": 7, "max": 11, "min": 2, "wd": 2200, "we": 2800, "guest": 350, "chan": false, "capText": "7 в цене, до 11"}, "big": {"name": "Комплекс с горячий чан на дровах", "img": "venues/zhuravli/hall2_1", "cap": 11, "max": 15, "min": 3, "wd": 2800, "we": 3500, "guest": 350, "chan": true, "capText": "11 в цене, до 15"}, "house": {"name": "Пакет «Таёжный отдых в Журавли»", "img": "venues/zhuravli/hall3_1", "cap": 6, "max": 6, "night": true, "wd": 8800, "we": 11200, "chan": false, "capText": "до 6 гостей, 5 ч"}};
+var BATHS={"small": {"name": "Сруб «Журавли» на дровах", "img": "venues/zhuravli/hall1_1", "cap": 7, "max": 11, "min": 2, "wd": 2200, "we": 2800, "guest": 350, "chan": false, "capText": "7 в цене, до 11"}, "big": {"name": "Комплекс с горячий чан на дровах", "img": "venues/zhuravli/hall2_1", "cap": 9, "max": 13, "min": 3, "wd": 2700, "we": 3400, "guest": 350, "chan": true, "capText": "9 в цене, до 13"}, "house": {"name": "Пакет «Таёжный отдых в Журавли»", "img": "venues/zhuravli/hall3_1", "cap": 9, "max": 13, "night": true, "wd": 8800, "we": 11200, "guest": 350, "chan": false, "capText": "до 9 гостей, 5 ч"}};
 var CHAN=3500, RITUALS_PRICE=2000;
 var DEMO=true;
 var UPDATED="2026-10-23 10:00";

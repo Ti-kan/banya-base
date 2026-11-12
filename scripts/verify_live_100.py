@@ -1,58 +1,55 @@
-#!/usr/bin/env python3
-"""
-verify_live_100.py
-Verifies live HTTP 200 responses on GitHub Pages (ti-kan.github.io/banya-base)
-for Par House, Batch 1 sample, and Batch 2 sample.
-"""
-
 import urllib.request
-import time
+import json
 import sys
+import time
 
-URLS = [
-    ("Root Landing", "https://ti-kan.github.io/banya-base/"),
-    ("Par House (FIX)", "https://ti-kan.github.io/banya-base/b/par-house/"),
-    ("Par House Hero JPG", "https://ti-kan.github.io/banya-base/img/venues/par-house/hero-1200.jpg"),
-    ("Par House Hero AVIF", "https://ti-kan.github.io/banya-base/img/venues/par-house/hero-1200.avif"),
-    ("Batch 1 - Sudar", "https://ti-kan.github.io/banya-base/b/sudar/"),
-    ("Batch 1 - Kedrovy Log", "https://ti-kan.github.io/banya-base/b/kedrovy-log/"),
-    ("Batch 1 - Medvezhka", "https://ti-kan.github.io/banya-base/b/medvezhka/"),
-    ("Batch 1 - Banya Pobezhimova", "https://ti-kan.github.io/banya-base/b/banya-pobezhimova/"),
-    ("Batch 2 - Sauna Na Vilskogo", "https://ti-kan.github.io/banya-base/b/sauna-na-vilskogo/"),
-    ("Batch 2 - Skyotel", "https://ti-kan.github.io/banya-base/b/skyotel/"),
-    ("Batch 2 - Enigma", "https://ti-kan.github.io/banya-base/b/enigma/"),
-    ("Batch 2 - Viktoriya", "https://ti-kan.github.io/banya-base/b/viktoriya/"),
-    ("Batch 2 - Sibirskiy Variant", "https://ti-kan.github.io/banya-base/b/sibirskiy-variant/"),
-    ("Batch 2 Hero JPG", "https://ti-kan.github.io/banya-base/img/venues/sauna-na-vilskogo/hero-1200.jpg"),
-]
+def check_url(url):
+    try:
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            return resp.status, len(resp.read())
+    except Exception as e:
+        return None, str(e)
 
-HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
-}
+def main():
+    with open('/Users/takanov/banya-base/banya_custom_data_100.json') as f:
+        venues = json.load(f)
 
-def verify_all():
-    print("=== Checking Live GitHub Pages URLs ===")
-    results = []
-    all_ok = True
+    print(f"Loaded {len(venues)} venues for live verification.")
     
-    for name, url in URLS:
-        req = urllib.request.Request(url, headers=HEADERS)
-        try:
-            with urllib.request.urlopen(req, timeout=12) as response:
-                status = response.status
-                sz = len(response.read())
-                print(f"  [HTTP {status}] ({sz:6d} bytes) - {name}: {url}")
-                results.append((name, url, status, sz, "OK"))
-        except Exception as e:
-            print(f"  [ERROR] {name}: {url} -> {e}")
-            results.append((name, url, 0, 0, str(e)))
-            all_ok = False
-            
-    return all_ok, results
+    # Check sample of Batch 1 and Batch 2
+    test_slugs = [
+        'par-house',          # Par House critical fix
+        'sudar',              # Batch 1 premium
+        'kedrovy-log',        # Batch 1 premium
+        'medvezhka',          # Batch 1
+        'banya-pobezhimova',  # Batch 1 uniqueness fix
+        'sauna-na-vilskogo',  # Batch 2 start
+        'skyotel',            # Batch 2
+        'enigma',             # Batch 2
+        'strekoza',           # Batch 2
+        'dzhem',              # Batch 2 end
+    ]
 
-if __name__ == "__main__":
-    ok, res = verify_all()
-    if ok:
-        print("\nAll tested live endpoints responded HTTP 200 OK!")
+    print("\n--- Verifying Live Pages on GitHub Pages ---")
+    base_url = "https://ti-kan.github.io/banya-base/b"
+    
+    all_ok = True
+    for slug in test_slugs:
+        url = f"{base_url}/{slug}/"
+        hero_url = f"https://ti-kan.github.io/banya-base/img/venues/{slug}/hero-720.jpg"
+        
+        status_html, size_html = check_url(url)
+        status_img, size_img = check_url(hero_url)
+        
+        print(f"[{status_html}] HTML: {url} ({size_html} bytes) | [{status_img}] HERO: {hero_url} ({size_img} bytes)")
+        if status_html != 200 or status_img != 200:
+            all_ok = False
+
+    if all_ok:
+        print("\nALL SAMPLE LIVE ENDPOINTS RESOLVE HTTP 200!")
     else:
-        print("\nSome live endpoints not yet active (GitHub Pages build takes ~30-60s after git push).")
+        print("\nSome endpoints not yet 200 (GitHub Pages deployment in progress).")
+
+if __name__ == '__main__':
+    main()

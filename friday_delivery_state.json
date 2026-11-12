@@ -1,0 +1,13 @@
+{
+  "par_house_status": {
+    "status": "pending",
+    "target": "@par_house_24 (ID: 5700412476)"
+  },
+  "current_wave": 1,
+  "sent_in_current_wave": 0,
+  "total_delivered": 0,
+  "total_skipped": 0,
+  "venues": {},
+  "created_at": "2026-11-13T00:49:17",
+  "updated_at": "2026-11-13T00:49:17"
+}

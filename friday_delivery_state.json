@@ -7,8 +7,8 @@
   },
   "current_wave": 2,
   "sent_in_current_wave": 1,
-  "total_delivered": 15,
-  "total_skipped": 1,
+  "total_delivered": 11,
+  "total_skipped": 2,
   "venues": {
     "chaga": {
       "status": "delivered",
@@ -88,24 +88,6 @@
       "recipient": "ID: 5063163476 (EcoSPA)",
       "url": "https://ti-kan.github.io/banya-base/b/ecospa/"
     },
-    "kurazh": {
-      "status": "delivered",
-      "timestamp": "2026-11-13T13:24:23.796010",
-      "msg_id": 797,
-      "sender": "Vitaly",
-      "sender_phone": "+79935397911",
-      "recipient": "@valera4141",
-      "url": "https://ti-kan.github.io/banya-base/b/kurazh/"
-    },
-    "novaya-zhizn": {
-      "status": "delivered",
-      "timestamp": "2026-11-13T13:25:04.528549",
-      "msg_id": 4336,
-      "sender": "Diana",
-      "sender_phone": "+79954919110",
-      "recipient": "@new_life_besedka24",
-      "url": "https://ti-kan.github.io/banya-base/b/novaya-zhizn/"
-    },
     "russkie-bani-na-drovah": {
       "status": "delivered",
       "timestamp": "2026-11-13T13:27:33.412728",
@@ -115,30 +97,17 @@
       "recipient": "@Lingvoregina",
       "url": "https://ti-kan.github.io/banya-base/b/russkie-bani-na-drovah/"
     },
-    "s-legkim-parom": {
-      "status": "delivered",
-      "timestamp": "2026-11-13T13:28:39.183586",
-      "msg_id": 798,
-      "sender": "Vitaly",
-      "sender_phone": "+79935397911",
-      "recipient": "ID: 7779240113 (С Легким Паром)",
-      "url": "https://ti-kan.github.io/banya-base/b/s-legkim-parom/"
-    },
-    "banya-solontsy": {
-      "status": "delivered",
-      "timestamp": "2026-11-13T13:28:56.628045",
-      "msg_id": 4337,
-      "sender": "Diana",
-      "sender_phone": "+79954919110",
-      "recipient": "@House_bath",
-      "url": "https://ti-kan.github.io/banya-base/b/banya-solontsy/"
-    },
     "dom-na-vysote": {
       "status": "skipped_peer_flood",
       "timestamp": "2026-11-13T13:34:56.740805",
       "details": "The account is limited (spam-reported) and cannot message non-contacts; account-wide with no defined duration, so retrying will not help. Check @SpamBot (caused by SendMessageRequest)"
+    },
+    "kurazh": {
+      "status": "skipped_peer_flood",
+      "timestamp": "2026-11-13T13:39:15.116893",
+      "details": "The account is limited (spam-reported) and cannot message non-contacts; account-wide with no defined duration, so retrying will not help. Check @SpamBot (caused by SendMessageRequest)"
     }
   },
   "created_at": "2026-11-13T00:49:17",
-  "updated_at": "2026-11-13T13:34:56.740823"
+  "updated_at": "2026-11-13T13:39:15.116909"
 }

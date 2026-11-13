@@ -7,8 +7,8 @@
   },
   "current_wave": 2,
   "sent_in_current_wave": 1,
-  "total_delivered": 13,
-  "total_skipped": 0,
+  "total_delivered": 15,
+  "total_skipped": 1,
   "venues": {
     "chaga": {
       "status": "delivered",
@@ -114,8 +114,31 @@
       "sender_phone": "+995571777465",
       "recipient": "@Lingvoregina",
       "url": "https://ti-kan.github.io/banya-base/b/russkie-bani-na-drovah/"
+    },
+    "s-legkim-parom": {
+      "status": "delivered",
+      "timestamp": "2026-11-13T13:28:39.183586",
+      "msg_id": 798,
+      "sender": "Vitaly",
+      "sender_phone": "+79935397911",
+      "recipient": "ID: 7779240113 (С Легким Паром)",
+      "url": "https://ti-kan.github.io/banya-base/b/s-legkim-parom/"
+    },
+    "banya-solontsy": {
+      "status": "delivered",
+      "timestamp": "2026-11-13T13:28:56.628045",
+      "msg_id": 4337,
+      "sender": "Diana",
+      "sender_phone": "+79954919110",
+      "recipient": "@House_bath",
+      "url": "https://ti-kan.github.io/banya-base/b/banya-solontsy/"
+    },
+    "dom-na-vysote": {
+      "status": "skipped_peer_flood",
+      "timestamp": "2026-11-13T13:34:56.740805",
+      "details": "The account is limited (spam-reported) and cannot message non-contacts; account-wide with no defined duration, so retrying will not help. Check @SpamBot (caused by SendMessageRequest)"
     }
   },
   "created_at": "2026-11-13T00:49:17",
-  "updated_at": "2026-11-13T13:27:33.412749"
+  "updated_at": "2026-11-13T13:34:56.740823"
 }

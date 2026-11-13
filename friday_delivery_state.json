@@ -1,13 +1,153 @@
 {
   "par_house_status": {
-    "status": "pending",
-    "target": "@par_house_24 (ID: 5700412476)"
+    "status": "delivered",
+    "timestamp": "2026-11-13T05:30:11.296187",
+    "msg_id": 383,
+    "recipient": "@par_house_24 (ID: 5700412476)"
   },
-  "current_wave": 1,
-  "sent_in_current_wave": 0,
-  "total_delivered": 0,
+  "current_wave": 2,
+  "sent_in_current_wave": 1,
+  "total_delivered": 8,
   "total_skipped": 0,
-  "venues": {},
+  "venues": {
+    "kurazh": {
+      "status": "unresolvable",
+      "error": "No user has \"kurazh_krsk\" as username",
+      "timestamp": "2026-11-13T05:34:53.117543"
+    },
+    "novaya-zhizn": {
+      "status": "unresolvable",
+      "error": "No user has \"lezgin242\" as username",
+      "timestamp": "2026-11-13T05:34:54.022382"
+    },
+    "chaga": {
+      "status": "delivered",
+      "timestamp": "2026-11-13T05:35:07.642475",
+      "msg_id": 384,
+      "recipient": "@Bany_Chaga",
+      "wave": 1,
+      "priority_group": "A"
+    },
+    "hut-house": {
+      "status": "delivered",
+      "timestamp": "2026-11-13T05:39:45.107118",
+      "msg_id": 385,
+      "recipient": "@hut_house999",
+      "wave": 1,
+      "priority_group": "A"
+    },
+    "sibirskaya-zabava": {
+      "status": "delivered",
+      "timestamp": "2026-11-13T05:44:07.786516",
+      "msg_id": 387,
+      "recipient": "@sib_zabava",
+      "wave": 1,
+      "priority_group": "A"
+    },
+    "breza": {
+      "status": "delivered",
+      "timestamp": "2026-11-13T05:48:28.993068",
+      "msg_id": 388,
+      "recipient": "@breza_banya",
+      "wave": 1,
+      "priority_group": "A"
+    },
+    "joy-in-home": {
+      "status": "delivered",
+      "timestamp": "2026-11-13T05:52:27.213546",
+      "msg_id": 389,
+      "recipient": "@joy_in_home",
+      "wave": 1,
+      "priority_group": "A"
+    },
+    "green-hall": {
+      "status": "delivered",
+      "timestamp": "2026-11-13T06:27:39.510841",
+      "msg_id": 391,
+      "recipient": "ID: 426576467 (Михаил)",
+      "wave": 2,
+      "priority_group": "A"
+    },
+    "s-legkim-parom": {
+      "status": "unresolvable",
+      "error": "No user has \"slegkimparom_krsk\" as username",
+      "timestamp": "2026-11-13T06:32:00.171126"
+    },
+    "banya-solontsy": {
+      "status": "unresolvable",
+      "error": "No user has \"banyasolontsy_krsk\" as username",
+      "timestamp": "2026-11-13T06:32:00.855516"
+    },
+    "dom-na-vysote": {
+      "status": "unresolvable",
+      "error": "No user has \"domnavysote_krsk\" as username",
+      "timestamp": "2026-11-13T06:32:01.731535"
+    },
+    "banya-pobezhimova": {
+      "status": "unresolvable",
+      "error": "No user has \"banyapobezhimova_krsk\" as username",
+      "timestamp": "2026-11-13T06:32:02.458324"
+    },
+    "family-par": {
+      "status": "unresolvable",
+      "error": "No user has \"familypar_krsk\" as username",
+      "timestamp": "2026-11-13T06:32:03.133664"
+    },
+    "barbaris": {
+      "status": "unresolvable",
+      "error": "No user has \"barbaris_krsk\" as username",
+      "timestamp": "2026-11-13T06:32:03.783473"
+    },
+    "grenlandiya": {
+      "status": "unresolvable",
+      "error": "No user has \"grenlandiya_krsk\" as username",
+      "timestamp": "2026-11-13T06:32:04.563486"
+    },
+    "banya-na-sopke": {
+      "status": "unresolvable",
+      "error": "No user has \"banyanasopke_krsk\" as username",
+      "timestamp": "2026-11-13T06:32:05.227247"
+    },
+    "dlya-svoih": {
+      "status": "unresolvable",
+      "error": "No user has \"dlyasvoih_krsk\" as username",
+      "timestamp": "2026-11-13T06:32:05.897110"
+    },
+    "manskiy-klyuch": {
+      "status": "unresolvable",
+      "error": "No user has \"manskiyklyuch_krsk\" as username",
+      "timestamp": "2026-11-13T06:32:06.619067"
+    },
+    "landmaniya": {
+      "status": "unresolvable",
+      "error": "No user has \"landmaniya_krsk\" as username",
+      "timestamp": "2026-11-13T06:32:07.408113"
+    },
+    "sudar": {
+      "status": "skipped_peer_flood",
+      "timestamp": "2026-11-13T10:17:56.671497",
+      "reason": "PeerFlood on non-contact"
+    },
+    "grelka": {
+      "status": "skipped_peer_flood",
+      "timestamp": "2026-11-13T10:49:44.000000",
+      "reason": "PeerFlood on non-contact"
+    },
+    "yurta-banya": {
+      "status": "delivered",
+      "timestamp": "2026-11-13T10:55:38.422946",
+      "msg_id": 406,
+      "recipient": "@Yurta_Bania",
+      "priority_group": "A"
+    },
+    "zhuravli": {
+      "status": "delivered",
+      "timestamp": "2026-11-13T10:59:15.006564",
+      "msg_id": 407,
+      "recipient": "ID: 1539855495 (Журавли)",
+      "priority_group": "A"
+    }
+  },
   "created_at": "2026-11-13T00:49:17",
-  "updated_at": "2026-11-13T00:49:17"
+  "updated_at": "2026-11-13T10:59:15.006577"
 }

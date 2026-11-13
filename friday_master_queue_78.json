@@ -330,6 +330,36 @@
     "batch_source": "batch1"
   },
   {
+    "slug": "zhuravli",
+    "name": "Журавли",
+    "priority_group": "A",
+    "target_type": "username",
+    "target_value": "zhuravli_krsk",
+    "tg_username": "zhuravli_krsk",
+    "phone": "+79607553417",
+    "tg_user_id": 1539855495,
+    "target_desc": "@zhuravli_krsk (ID: 1539855495)",
+    "site_url": "https://ti-kan.github.io/banya-base/b/zhuravli/",
+    "price_wd": 2200,
+    "price_we": 2800,
+    "batch_source": "batch1"
+  },
+  {
+    "slug": "vtoroe-dyhanie",
+    "name": "Второе Дыхание",
+    "priority_group": "A",
+    "target_type": "username",
+    "target_value": "banya_vtoroe_dyhanie24_admin",
+    "tg_username": "banya_vtoroe_dyhanie24_admin",
+    "phone": "+79659057965",
+    "tg_user_id": 8245659021,
+    "target_desc": "@banya_vtoroe_dyhanie24_admin (ID: 8245659021)",
+    "site_url": "https://ti-kan.github.io/banya-base/b/vtoroe-dyhanie/",
+    "price_wd": 2000,
+    "price_we": 2300,
+    "batch_source": "batch2"
+  },
+  {
     "slug": "bazaiha-river",
     "name": "Базаиха river",
     "priority_group": "A",
@@ -390,21 +420,6 @@
     "batch_source": "batch1"
   },
   {
-    "slug": "zhuravli",
-    "name": "Журавли",
-    "priority_group": "A",
-    "target_type": "username",
-    "target_value": "zhuravli_krsk",
-    "tg_username": "zhuravli_krsk",
-    "phone": "+79607553417",
-    "tg_user_id": 1539855495,
-    "target_desc": "@zhuravli_krsk (ID: 1539855495)",
-    "site_url": "https://ti-kan.github.io/banya-base/b/zhuravli/",
-    "price_wd": 2200,
-    "price_we": 2800,
-    "batch_source": "batch1"
-  },
-  {
     "slug": "angkor",
     "name": "Ангкор",
     "priority_group": "A",
@@ -432,21 +447,6 @@
     "site_url": "https://ti-kan.github.io/banya-base/b/chernomor/",
     "price_wd": 2000,
     "price_we": 2500,
-    "batch_source": "batch2"
-  },
-  {
-    "slug": "vtoroe-dyhanie",
-    "name": "Второе Дыхание",
-    "priority_group": "A",
-    "target_type": "username",
-    "target_value": "banya_vtoroe_dyhanie24_admin",
-    "tg_username": "banya_vtoroe_dyhanie24_admin",
-    "phone": "+79659057965",
-    "tg_user_id": 8245659021,
-    "target_desc": "@banya_vtoroe_dyhanie24_admin (ID: 8245659021)",
-    "site_url": "https://ti-kan.github.io/banya-base/b/vtoroe-dyhanie/",
-    "price_wd": 2000,
-    "price_we": 2300,
     "batch_source": "batch2"
   },
   {

@@ -86,8 +86,8 @@ h1,h2,h3{margin:0;font-weight:600}
 .hero.on .word-inner, .hero.on .w-in, .hero.in .word-inner, .hero.in .w-in{opacity:1;transform:none}
 
 /* кнопки */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 24px;border-radius:999px;border:0;font:600 16px/1.1 var(--sans);cursor:pointer;white-space:nowrap;transition:background-color .2s,transform .2s var(--ease),box-shadow .2s;-webkit-tap-highlight-color:transparent;will-change:transform}
-.btn:active{transform:scale(.97)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 24px;border-radius:999px;border:0;font:600 15px/1.2 var(--sans);cursor:pointer;white-space:nowrap;transition:background-color .15s,transform .12s cubic-bezier(.16,1,.3,1),box-shadow .15s;-webkit-tap-highlight-color:transparent;will-change:transform;letter-spacing:0.01em}
+.btn:active{transform:scale(.96);opacity:.92}
 .btn svg{width:20px;height:20px;flex:none}
 .btn-accent{background:var(--accent);color:#fff;box-shadow:0 10px 30px -10px rgba(204,61,11,.75)}
 .btn-accent:hover{background:var(--accent-hover)}
@@ -142,7 +142,7 @@ h1,h2,h3{margin:0;font-weight:600}
 .hero .frame::after{display:none !important}
 .frame .shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55),transparent 45%);pointer-events:none}
 .frame .cta{position:absolute;left:12px;right:12px;bottom:12px;z-index:4;display:flex;gap:10px;align-items:center;background:#fff;border-radius:999px;padding:6px;box-shadow:0 18px 40px -16px rgba(0,0,0,.45)}
-.frame .cta .btn{min-height:46px;padding:0 18px;flex:none}
+.frame .cta .btn{min-height:48px;padding:0 22px;font-size:15px;font-weight:600;flex:none;letter-spacing:.01em}
 .frame .cta p{font-size:13px;line-height:1.25;color:var(--ink-2);padding-right:10px}
 
 #steam{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;opacity:0;transition:opacity 1.6s ease}
@@ -378,7 +378,7 @@ fieldset.q{border:0;padding:0;margin:0}
 @media (min-width: 900px){.baths{grid-template-columns:repeat(3,1fr)}}
 .bath{position:relative;background:#16181E !important;border-radius:28px !important;overflow:hidden;padding:16px 16px 22px !important;border:1px solid rgba(255,255,255,0.12) !important;box-shadow:0 16px 40px rgba(0,0,0,0.5) !important;display:flex !important;flex-direction:column !important;transition:border-color .3s var(--ease),box-shadow .3s var(--ease),transform .3s var(--ease)}
 .bath-b{display:flex !important;flex-direction:column !important;flex:1 1 auto;padding-top:14px}
-.bath-b .btn{margin-top:auto !important;width:100% !important}
+.bath-b .btn{margin-top:auto !important;width:100% !important;min-height:52px;font-size:15px;font-weight:600;letter-spacing:.01em}
 .bath::before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(600px circle at var(--mx,50%) var(--my,50%),rgba(255,122,77,0.14),transparent 65%);opacity:0;pointer-events:none;transition:opacity .35s var(--ease)}
 @media (hover:hover){
   .bath:hover::before{opacity:1}
@@ -487,7 +487,7 @@ footer .word::before{content:attr(data-w)}
 
 /* нижние кнопки */
 .dock{position:fixed;left:0;right:0;bottom:0;z-index:60;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px var(--gr) calc(10px + env(safe-area-inset-bottom,0px)) var(--gl);background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 -1px 0 var(--line)}
-.dock .btn{min-height:52px;padding:0 12px}
+.dock .btn{min-height:52px;padding:0 16px;font-size:15px;font-weight:700;letter-spacing:.01em;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.08)}
 @media (min-width:900px){.dock{display:none}body{padding-bottom:0}}
 .cookie{position:fixed;left:12px;right:12px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:61;background:var(--ink);color:#e9eaec;border-radius:20px;padding:10px 10px 10px 16px;font-size:13px;display:flex;gap:10px;align-items:center;justify-content:space-between;max-width:520px;margin:0 auto}
 .cookie a{color:#fff;text-decoration:underline}
@@ -654,7 +654,7 @@ dialog.sheet[open]{animation:up .32s var(--ease)}
     <div class="hero-info">
       <h1 id="h1"><span class="word-wrap w-mask"><span class="word-inner w-in" style="--w-idx:0;--wi:0">Баня</span></span> <span class="word-wrap w-mask"><span class="word-inner w-in" style="--w-idx:1;--wi:1">на</span></span> <span class="word-wrap w-mask"><span class="word-inner w-in" style="--w-idx:2;--wi:2">дровах</span></span> <span class="word-wrap w-mask"><span class="word-inner w-in" style="--w-idx:3;--wi:3">с</span></span> <span class="word-wrap w-mask"><span class="word-inner w-in" style="--w-idx:4;--wi:4">купелями</span></span> <span class="word-wrap w-mask"><span class="word-inner w-in" style="--w-idx:5;--wi:5">и</span></span> <span class="word-wrap w-mask"><span class="word-inner w-in" style="--w-idx:6;--wi:6">зоной</span></span> <span class="word-wrap w-mask"><span class="word-inner w-in" style="--w-idx:7;--wi:7">барбекю</span></span></h1>
       <dl class="facts dl">
-        <div><dt>Цена</dt><dd id="heroPrice">от 3,000&nbsp;₽ в час · 8 гостей в цене</dd></div>
+        <div><dt>Цена</dt><dd id="heroPrice">от 3,000&nbsp;₽/час (будни) / 4,500&nbsp;₽/час (вых) · Чан включён</dd></div>
         <div><dt>Рейтинг в 2ГИС</dt><dd id="heroRating"><a href="https://2gis.ru/krasnoyarsk/firm/70000001057699334" target="_blank" rel="noopener"><span class="star" aria-hidden="true">★</span>5.0 · 53 отзыва</a></dd></div>
         <div><dt>Адрес</dt><dd><span class="addr-copy" id="brandAddress" data-copy-addr="Красноярск, 4-я Линейная улица, 62" title="Нажмите, чтобы скопировать">Красноярск, 4-я Линейная улица, 62</span></dd></div>
         <div><dt>Запись по телефону</dt><dd><a href="tel:+79130313831" data-goal="call">+7 (913) 031-38-31</a></dd></div>
@@ -761,7 +761,7 @@ dialog.sheet[open]{animation:up .32s var(--ease)}
           <figure><img src="../../img/venues/par-house/hall1_3-720.jpg" srcset="../../img/venues/par-house/hall1_3-480.jpg 480w, ../../img/venues/par-house/hall1_3-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" alt="Терраса Par House"><figcaption>Мангальная зона</figcaption></figure>
         </div>
         <div class="bath-b">
-          <h3>Баня на дровах (до 17:00)</h3>
+          <h3>Баня на дровах (Пн–Чт до 17:00)</h3>
           <dl class="bfacts">
             <div><dt>Будни</dt><dd><b>3,000&nbsp;₽</b>/час</dd></div>
             <div><dt>Выходные</dt><dd><b>4,500&nbsp;₽</b>/час</dd></div>
@@ -780,7 +780,7 @@ dialog.sheet[open]{animation:up .32s var(--ease)}
           <figure><img src="../../img/venues/par-house/hall2_3-720.jpg" srcset="../../img/venues/par-house/hall2_3-480.jpg 480w, ../../img/venues/par-house/hall2_3-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" alt="Банный комплекс Par House"><figcaption>Трапезная</figcaption></figure>
         </div>
         <div class="bath-b">
-          <h3>Баня на дровах (после 17:00)</h3>
+          <h3>Баня на дровах (Пн–Чт после 17:00)</h3>
           <dl class="bfacts">
             <div><dt>Будни</dt><dd><b>3,000&nbsp;₽</b>/час</dd></div>
             <div><dt>Выходные</dt><dd><b>4,500&nbsp;₽</b>/час</dd></div>
@@ -799,10 +799,10 @@ dialog.sheet[open]{animation:up .32s var(--ease)}
           <figure><img src="../../img/venues/par-house/hall3_3-720.jpg" srcset="../../img/venues/par-house/hall3_3-480.jpg 480w, ../../img/venues/par-house/hall3_3-720.jpg 720w" sizes="(min-width: 900px) 30vw, 84vw" width="720" height="540" alt="Мангальная зона Par House"><figcaption>Чан на дровах</figcaption></figure>
         </div>
         <div class="bath-b">
-          <h3>Выходные и праздничные дни</h3>
+          <h3>Пятница, выходные и праздничные дни</h3>
           <dl class="bfacts">
-            <div><dt>Будни</dt><dd><b>4,500&nbsp;₽</b>/пакет</dd></div>
-            <div><dt>Выходные</dt><dd><b>4,500&nbsp;₽</b>/пакет</dd></div>
+            <div><dt>Будни</dt><dd><b>4,500&nbsp;₽</b>/час</dd></div>
+            <div><dt>Выходные</dt><dd><b>4,500&nbsp;₽</b>/час</dd></div>
             <div><dt>Длительность</dt><dd>от 2 часов</dd></div>
             <div><dt>Включено</dt><dd>Горячий чан на дровах включён</dd></div>
           </dl>
@@ -1339,7 +1339,7 @@ var WA="https://wa.me/79130313831";
 window.TG=TG;
 window.BRAND=BRAND_NAME;
 
-var BATHS={"small": {"name": "Баня на дровах (до 17:00)", "img": "venues/par-house/hall1_1", "cap": 8, "max": 12, "min": 2, "wd": 3000, "we": 4500, "guest": 1000, "chan": false, "capText": "8 в цене, до 12"}, "big": {"name": "Баня на дровах (после 17:00)", "img": "venues/par-house/hall2_1", "cap": 8, "max": 12, "min": 2, "wd": 3000, "we": 4500, "guest": 1000, "chan": false, "capText": "8 в цене, до 12"}, "house": {"name": "Выходные и праздничные дни", "img": "venues/par-house/hall3_1", "cap": 8, "max": 12, "night": false, "wd": 4500, "we": 4500, "guest": 1000, "chan": false, "capText": "8 в цене, до 12"}};
+var BATHS={"small": {"name": "Баня на дровах (Пн–Чт до 17:00)", "img": "venues/par-house/hall1_1", "cap": 8, "max": 12, "min": 2, "wd": 3000, "we": 4500, "guest": 1000, "chan": false, "capText": "8 в цене, до 12"}, "big": {"name": "Баня на дровах (Пн–Чт после 17:00)", "img": "venues/par-house/hall2_1", "cap": 8, "max": 12, "min": 2, "wd": 4000, "we": 4500, "guest": 1000, "chan": false, "capText": "8 в цене, до 12 (+1000 ₽)"}, "house": {"name": "Пятница, выходные и праздники", "img": "venues/par-house/hall3_1", "cap": 8, "max": 12, "night": false, "wd": 4500, "we": 4500, "guest": 1000, "chan": false, "capText": "8 в цене, до 12"}};
 var CHAN=0, RITUALS_PRICE=2000;
 var DEMO=true;
 var UPDATED="2026-10-23 10:00";
